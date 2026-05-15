@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VIT-AP Deep Learning Complete Answers</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:40px;
+    line-height:1.7;
+    background:#f4f4f4;
+}
+.container{
+    background:white;
+    padding:40px;
+    border-radius:10px;
+}
+h1{
+    color:#0d47a1;
+    text-align:center;
+}
+h2{
+    color:#1565c0;
+    border-bottom:2px solid #1565c0;
+    padding-bottom:5px;
+}
+h3{
+    color:#1e88e5;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin:15px 0;
+}
+th, td{
+    border:1px solid black;
+    padding:8px;
+}
+pre{
+    background:#eeeeee;
+    padding:10px;
+    border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>VIT-AP Deep Learning Complete Answer Bank</h1>
+
+<h2>CAT-1 February 2026 – Set 3</h2>
+
+<h3>Q1(a) Dot Product</h3>
+<p><b>Definition:</b> Dot product is the multiplication of corresponding elements followed by summation.</p>
+
+<p><b>Formula:</b></p>
+<pre>A · B = ΣAiBi</pre>
+
+<p><b>Given:</b></p>
+<pre>
+x = 12
+
+A =
+[[91,12],
+ [210,56],
+ [101,87]]
+</pre>
+
+<p>Scalar multiplication:</p>
+
+<pre>
+12 × A =
+[[1092,144],
+ [2520,672],
+ [1212,1044]]
+</pre>
+
+<h3>Q1(b) Hadamard Product</h3>
+
+<p><b>Definition:</b> Hadamard product means element-wise multiplication.</p>
+
+<pre>
+C = [9 6]
+
+D =
+[[8 5],
+ [14 12],
+ [4 11]]
+</pre>
+
+<p><b>Answer:</b></p>
+
+<pre>
+[[72,30],
+ [126,72],
+ [36,66]]
+</pre>
+
+<h3>Q2(a) Gradient Descent</h3>
+
+<p><b>Definition:</b> Gradient Descent minimizes the loss function by updating weights opposite to gradient direction.</p>
+
+<p><b>Formula:</b></p>
+
+<pre>
+w(new)=w(old)-η(dL/dw)
+</pre>
+
+<p><b>Steps:</b></p>
+
+<ol>
+<li>Initialize weights</li>
+<li>Perform forward propagation</li>
+<li>Calculate error</li>
+<li>Compute gradients</li>
+<li>Update weights</li>
+<li>Repeat until convergence</li>
+</ol>
+
+<h3>Q2(b) Types of Gradient Descent</h3>
+
+<table>
+<tr>
+<th>Type</th>
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+
+<tr>
+<td>Batch GD</td>
+<td>Stable convergence</td>
+<td>Slow for large data</td>
+</tr>
+
+<tr>
+<td>SGD</td>
+<td>Fast updates</td>
+<td>Noisy convergence</td>
+</tr>
+
+<tr>
+<td>Mini-batch GD</td>
+<td>Efficient and practical</td>
+<td>Requires tuning</td>
+</tr>
+
+</table>
+
+<h3>Q3(a) ANN Parameters</h3>
+
+<pre>
+Input image = 28×28 = 784
+
+Layer 1:
+(784×5)+5
+=3925
+
+Layer 2:
+(5×10)+10
+=60
+
+Layer 3:
+(10×10)+10
+=110
+
+Output:
+(10×10)+10
+=110
+
+Total Parameters:
+4205
+</pre>
+
+<h3>Q3(b) Perceptron vs MLP</h3>
+
+<table>
+<tr>
+<th>Perceptron</th>
+<th>MLP</th>
+</tr>
+
+<tr>
+<td>Single layer</td>
+<td>Multiple layers</td>
+</tr>
+
+<tr>
+<td>Linear problems</td>
+<td>Nonlinear problems</td>
+</tr>
+
+<tr>
+<td>No hidden layer</td>
+<td>Hidden layers present</td>
+</tr>
+
+</table>
+
+<h2>CAT-2 March 2026 – Set 4</h2>
+
+<h3>Q1(a) Regularization</h3>
+
+<p><b>Definition:</b> Regularization prevents overfitting by adding penalty terms.</p>
+
+<h4>L1 Regularization</h4>
+
+<pre>
+Loss = Original Loss + λΣ|w|
+</pre>
+
+<ul>
+<li>Feature selection</li>
+<li>Sparse weights</li>
+</ul>
+
+<h4>L2 Regularization</h4>
+
+<pre>
+Loss = Original Loss + λΣw²
+</pre>
+
+<ul>
+<li>Prevents large weights</li>
+<li>Stable learning</li>
+</ul>
+
+<h3>Q1(b) Data Augmentation</h3>
+
+<ul>
+<li>Rotation</li>
+<li>Flipping</li>
+<li>Cropping</li>
+<li>Zooming</li>
+<li>Noise addition</li>
+</ul>
+
+<h3>Q2 CNN Numerical</h3>
+
+<pre>
+Input = 200×200×1
+
+Conv1 Output:
+200×200×16
+
+Pooling:
+100×100×16
+
+Conv2:
+98×98×32
+
+Conv3:
+98×98×64
+
+Pooling:
+49×49×64
+</pre>
+
+<p><b>Trainable Parameters:</b></p>
+
+<pre>
+Conv1:
+(5×5×1+1)×16 = 416
+
+Conv2:
+(3×3×16+1)×32 = 4640
+
+Conv3:
+(3×3×32+1)×64 = 18496
+
+Total = 23552
+</pre>
+
+<h3>Q3(a) Transfer Learning</h3>
+
+<table>
+<tr>
+<th>Feature Extraction</th>
+<th>Fine Tuning</th>
+</tr>
+
+<tr>
+<td>Freeze pretrained layers</td>
+<td>Retrain layers</td>
+</tr>
+
+<tr>
+<td>Less computation</td>
+<td>Higher computation</td>
+</tr>
+
+<tr>
+<td>Small datasets</td>
+<td>Large datasets</td>
+</tr>
+
+</table>
+
+<h3>Q3(b) Batch Normalization</h3>
+
+<pre>
+x̂=(x−μ)/√(σ²+ε)
+
+y=γx̂+β
+</pre>
+
+<ul>
+<li>Faster convergence</li>
+<li>Stable training</li>
+<li>Allows larger learning rates</li>
+</ul>
+
+<h3>Q4 RNN</h3>
+
+<pre>
+ht=tanh(Wxhxt+Whhht−1)
+
+yt=softmax(Whyht)
+</pre>
+
+<p>RNN stores temporal information using recurrent connections.</p>
+
+<h2>FAT May 2026</h2>
+
+<h3>Q1(a) Scaling Matrix Using Hadamard Product</h3>
+
+<p><b>Formula:</b></p>
+
+<pre>
+B = A / 255
+</pre>
+
+<p>Used for normalization of image pixels into 0–1 range.</p>
+
+<h3>Q1(b) Orthogonal Matrix</h3>
+
+<p>A matrix is orthogonal if:</p>
+
+<pre>
+AᵀA = I
+
+A⁻¹ = Aᵀ
+</pre>
+
+<h3>Q2 Weather Prediction</h3>
+
+<h4>Linear Regression</h4>
+
+<pre>
+Rainfall =
+w1(Time)+w2(Temp)+w3(Humidity)+b
+</pre>
+
+<h4>Logistic Regression</h4>
+
+<pre>
+σ(z)=1/(1+e−z)
+</pre>
+
+<p>If probability > 0.5 → Rain</p>
+
+<h3>Q3 Backpropagation</h3>
+
+<ol>
+<li>Forward propagation</li>
+<li>Calculate error</li>
+<li>Backward propagation</li>
+<li>Update weights</li>
+</ol>
+
+<p><b>Error Formula:</b></p>
+
+<pre>
+E = 1/2 Σ(y−ŷ)²
+</pre>
+
+<h3>Q4 Adam Optimizer</h3>
+
+<pre>
+mt=β1mt−1+(1−β1)gt
+
+vt=β2vt−1+(1−β2)gt²
+
+θ=θ−αm̂t/(√v̂t+ε)
+</pre>
+
+<h3>Q5 Inception Block</h3>
+
+<pre>
+Output Depth:
+64+128+32+32
+=256
+
+Output Size:
+28×28×256
+</pre>
+
+<h3>Q6 Convolution Numerical</h3>
+
+<p><b>Output Formula:</b></p>
+
+<pre>
+((N−F+2P)/S)+1
+</pre>
+
+<p><b>Leaky ReLU:</b></p>
+
+<pre>
+f(x)=x if x>0
+αx if x<0
+</pre>
+
+<h2>Additional Important Theory Questions</h2>
+
+<h3>LSTM</h3>
+
+<pre>
+Forget Gate:
+ft=σ(Wf[ht−1,xt]+bf)
+
+Input Gate:
+it=σ(Wi[ht−1,xt]+bi)
+
+Cell State:
+Ct=ftCt−1+itC̃t
+
+Output:
+ht=ot tanh(Ct)
+</pre>
+
+<h3>GRU</h3>
+
+<ul>
+<li>Update Gate</li>
+<li>Reset Gate</li>
+<li>Faster than LSTM</li>
+</ul>
+
+<h3>Attention Mechanism</h3>
+
+<ol>
+<li>Alignment score</li>
+<li>Softmax</li>
+<li>Attention weights</li>
+<li>Context vector</li>
+</ol>
+
+<h3>YOLO</h3>
+
+<ul>
+<li>Single-stage detector</li>
+<li>Real-time object detection</li>
+<li>Predicts boxes and classes together</li>
+</ul>
+
+<h3>GAN</h3>
+
+<ul>
+<li>Generator creates fake images</li>
+<li>Discriminator identifies fake images</li>
+<li>Both compete during training</li>
+</ul>
+
+<h3>VAE</h3>
+
+<ul>
+<li>Encoder maps to latent space</li>
+<li>Decoder reconstructs image</li>
+<li>Used for image generation</li>
+</ul>
+
+<h2>Important Formulas</h2>
+
+<pre>
+Convolution Output:
+((N−F+2P)/S)+1
+
+CNN Parameters:
+(F×F×Cin+1)×Cout
+
+Dense Parameters:
+(Input×Output)+Bias
+
+Gradient Descent:
+w=w−η(dL/dw)
+
+Sigmoid:
+1/(1+e−x)
+
+ReLU:
+max(0,x)
+</pre>
+
+</div>
+
+</body>
+</html>

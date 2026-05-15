@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Deep Learning Exam Answers</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    line-height:1.6;
+    margin:40px;
+    background:#f5f5f5;
+}
+.container{
+    background:white;
+    padding:30px;
+    border-radius:10px;
+}
+h1,h2,h3{
+    color:#1a237e;
+}
+pre{
+    background:#f0f0f0;
+    padding:10px;
+    border-radius:6px;
+    overflow-x:auto;
+}
+table{
+    border-collapse:collapse;
+    width:100%;
+    margin:10px 0;
+}
+th,td{
+    border:1px solid #333;
+    padding:8px;
+}
+code{
+    background:#eee;
+    padding:2px 4px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Deep Learning – Detailed Exam Answers</h1>
+
+<h2>Q1. Regularization, L1 and L2</h2>
+<p><b>Regularization</b> is a technique used to reduce overfitting in machine learning and deep learning models.
+It improves the generalization ability of the model by adding a penalty term to the loss function.</p>
+
+<h3>L1 Regularization</h3>
+<p>L1 regularization adds the absolute values of weights to the loss function.</p>
+<p><b>Formula:</b></p>
+<p>L = Loss + λ Σ|w|</p>
+
+<p>Characteristics:</p>
+<ul>
+<li>Pushes many weights exactly to zero.</li>
+<li>Produces sparse models.</li>
+<li>Acts as a feature selector.</li>
+<li>Useful when many irrelevant features exist.</li>
+</ul>
+
+<h3>L2 Regularization</h3>
+<p>L2 regularization adds squared weights to the loss function.</p>
+<p><b>Formula:</b></p>
+<p>L = Loss + λ Σw²</p>
+
+<ul>
+<li>Reduces magnitude of weights.</li>
+<li>Prevents very large weights.</li>
+<li>Improves stability.</li>
+<li>Does not force weights to exactly zero.</li>
+</ul>
+
+<h3>Why L1 Works as Feature Selector</h3>
+<p>Because the penalty uses absolute values, optimization pushes unimportant weights to exactly zero.
+Features with zero weights contribute nothing to prediction, effectively removing them.</p>
+
+<h3>Comparison</h3>
+<table>
+<tr><th>Aspect</th><th>L1</th><th>L2</th></tr>
+<tr><td>Penalty</td><td>|w|</td><td>w²</td></tr>
+<tr><td>Sparsity</td><td>High</td><td>Low</td></tr>
+<tr><td>Feature Selection</td><td>Yes</td><td>No</td></tr>
+<tr><td>Stability</td><td>Moderate</td><td>High</td></tr>
+</table>
+
+<hr>
+
+<h2>Q2. CNN Parameter Calculation</h2>
+
+<h3>Given Architecture</h3>
+<ul>
+<li>Input = 128 × 128 × 3</li>
+<li>Conv1: 3×3, 32 filters</li>
+<li>Pool1: 2×2</li>
+<li>Conv2: 3×3, 64 filters</li>
+<li>Pool2: 2×2</li>
+<li>FC1: 256 neurons</li>
+<li>FC2: 128 neurons</li>
+</ul>
+
+<h3>Formula for Convolution Parameters</h3>
+<p>Parameters = (Kernel Height × Kernel Width × Input Channels + 1 bias) × Number of Filters</p>
+
+<h3>Conv1 Parameters</h3>
+<p>(3×3×3 + 1) × 32 = (27 + 1) × 32 = 896</p>
+
+<h3>Conv2 Parameters</h3>
+<p>(3×3×32 + 1) × 64 = (288 + 1) × 64 = 18,496</p>
+
+<h3>Pooling Layers</h3>
+<p>Pooling layers do not contain trainable parameters.</p>
+
+<h3>Fully Connected Layer</h3>
+<p>Flatten size depends on feature map dimensions after pooling.</p>
+
+<h3>Total Parameters</h3>
+<p>Total = Sum of all convolution and FC parameters.</p>
+
+<hr>
+
+<h2>Transfer Learning</h2>
+
+<h3>Definition</h3>
+<p>Transfer learning means using a pre-trained model trained on a large dataset and adapting it to a new task.</p>
+
+<h3>Steps</h3>
+<ol>
+<li>Load pre-trained model.</li>
+<li>Freeze early layers.</li>
+<li>Replace output layer.</li>
+<li>Train on new dataset.</li>
+<li>Fine-tune if needed.</li>
+</ol>
+
+<h3>Advantages</h3>
+<ul>
+<li>Faster training</li>
+<li>Higher accuracy</li>
+<li>Works well with small datasets</li>
+<li>Reduces computational cost</li>
+</ul>
+
+<hr>
+
+<h2>Batch Normalization</h2>
+
+<h3>Definition</h3>
+<p>Batch normalization normalizes activations in each mini-batch.</p>
+
+<h3>Formula</h3>
+<p>x̂ = (x − μ) / √(σ² + ε)</p>
+
+<p>Then:</p>
+<p>y = γx̂ + β</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Faster convergence</li>
+<li>Reduces internal covariate shift</li>
+<li>Allows larger learning rates</li>
+<li>Acts as regularizer</li>
+</ul>
+
+<hr>
+
+<h2>RNN – Forward Propagation</h2>
+
+<h3>RNN Equation</h3>
+<p>h<sub>t</sub> = tanh(Wxh x<sub>t</sub> + Whh h<sub>t−1</sub>)</p>
+
+<p>Output:</p>
+<p>y<sub>t</sub> = softmax(Why h<sub>t</sub>)</p>
+
+<h3>Steps</h3>
+<ol>
+<li>Initialize hidden state h0.</li>
+<li>Multiply input with Wxh.</li>
+<li>Add recurrent contribution Whh·h(t−1).</li>
+<li>Apply tanh activation.</li>
+<li>Generate output using softmax.</li>
+</ol>
+
+<hr>
+
+<h2>BPTT – Backpropagation Through Time</h2>
+
+<h3>Definition</h3>
+<p>BPTT is the training algorithm used for RNNs.</p>
+
+<h3>Working</h3>
+<ol>
+<li>Unroll RNN through time.</li>
+<li>Compute forward pass.</li>
+<li>Calculate total loss.</li>
+<li>Propagate gradients backward through time.</li>
+<li>Update weights using gradient descent.</li>
+</ol>
+
+<h3>Challenges</h3>
+<ul>
+<li>Vanishing gradients</li>
+<li>Exploding gradients</li>
+<li>High computational complexity</li>
+<li>Long training time</li>
+</ul>
+
+<h3>Solutions</h3>
+<ul>
+<li>LSTM</li>
+<li>GRU</li>
+<li>Gradient clipping</li>
+<li>Attention mechanism</li>
+</ul>
+
+<hr>
+
+<h2>LSTM Detailed Answer</h2>
+
+<h3>Why LSTM?</h3>
+<p>Traditional RNNs fail to capture long-term dependencies due to vanishing gradients.
+LSTM introduces gates and memory cells.</p>
+
+<h3>Forget Gate</h3>
+<p>f<sub>t</sub> = σ(Wf[h(t−1), xt] + bf)</p>
+
+<h3>Input Gate</h3>
+<p>i<sub>t</sub> = σ(Wi[h(t−1), xt] + bi)</p>
+
+<h3>Candidate Cell State</h3>
+<p>C̃<sub>t</sub> = tanh(Wc[h(t−1), xt] + bc)</p>
+
+<h3>Cell State</h3>
+<p>C<sub>t</sub> = f<sub>t</sub>C(t−1) + i<sub>t</sub>C̃<sub>t</sub></p>
+
+<h3>Output Gate</h3>
+<p>o<sub>t</sub> = σ(Wo[h(t−1), xt] + bo)</p>
+
+<h3>Hidden State</h3>
+<p>h<sub>t</sub> = o<sub>t</sub> tanh(C<sub>t</sub>)</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Captures long-term dependencies</li>
+<li>Solves vanishing gradient problem</li>
+<li>Maintains memory for long sequences</li>
+</ul>
+
+<hr>
+
+<h2>GRU – Gated Recurrent Unit</h2>
+
+<h3>Definition</h3>
+<p>GRU is a simplified version of LSTM with fewer gates.</p>
+
+<h3>Update Gate</h3>
+<p>z<sub>t</sub> = σ(Wz[h(t−1), xt])</p>
+
+<h3>Reset Gate</h3>
+<p>r<sub>t</sub> = σ(Wr[h(t−1), xt])</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Faster than LSTM</li>
+<li>Fewer parameters</li>
+<li>Efficient training</li>
+</ul>
+
+<hr>
+
+<h2>Attention Mechanism</h2>
+
+<h3>Need for Attention</h3>
+<p>Encoder-decoder models compress all information into one vector, causing information loss.
+Attention allows the decoder to focus on important input words.</p>
+
+<h3>Bahdanau Attention Steps</h3>
+<ol>
+<li>Compute alignment scores.</li>
+<li>Apply softmax.</li>
+<li>Generate attention weights.</li>
+<li>Compute context vector.</li>
+<li>Generate output.</li>
+</ol>
+
+<h3>Advantages</h3>
+<ul>
+<li>Handles long sequences</li>
+<li>Improves translation quality</li>
+<li>Focuses on important regions</li>
+</ul>
+
+<hr>
+
+<h2>YOLO Object Detection</h2>
+
+<h3>Definition</h3>
+<p>YOLO (You Only Look Once) is a single-stage object detector.</p>
+
+<h3>Working</h3>
+<ol>
+<li>Divide image into grid cells.</li>
+<li>Predict bounding boxes.</li>
+<li>Predict confidence scores.</li>
+<li>Predict class probabilities.</li>
+<li>Apply Non-Max Suppression.</li>
+</ol>
+
+<h3>Advantages</h3>
+<ul>
+<li>Very fast</li>
+<li>Real-time detection</li>
+<li>Single forward pass</li>
+</ul>
+
+<hr>
+
+<h2>GAN – Generative Adversarial Networks</h2>
+
+<h3>Definition</h3>
+<p>GAN contains two networks:</p>
+<ul>
+<li>Generator</li>
+<li>Discriminator</li>
+</ul>
+
+<h3>How GAN Works</h3>
+<ol>
+<li>Generator creates fake images.</li>
+<li>Discriminator checks real or fake.</li>
+<li>Both compete during training.</li>
+<li>Generator improves progressively.</li>
+</ol>
+
+<h3>Improving GAN Performance</h3>
+<ul>
+<li>Use large dataset</li>
+<li>Data augmentation</li>
+<li>Batch normalization</li>
+<li>Feature matching</li>
+<li>Wasserstein loss</li>
+<li>Conditional GAN</li>
+</ul>
+
+<hr>
+
+<h2>VAE – Variational Autoencoder</h2>
+
+<h3>Definition</h3>
+<p>VAE learns probability distributions for generating new samples.</p>
+
+<h3>Causes of Blurry Images</h3>
+<ul>
+<li>KL divergence dominance</li>
+<li>Weak decoder</li>
+<li>Poor latent representation</li>
+</ul>
+
+<h3>Solutions</h3>
+<ul>
+<li>β-VAE tuning</li>
+<li>Stronger decoder</li>
+<li>Perceptual loss</li>
+<li>Adversarial training</li>
+</ul>
+
+<hr>
+
+<h2>Gradient Descent</h2>
+
+<h3>Definition</h3>
+<p>Gradient Descent minimizes loss by moving weights opposite to gradient direction.</p>
+
+<h3>Update Rule</h3>
+<p>w = w − η(dL/dw)</p>
+
+<h3>Types</h3>
+<table>
+<tr><th>Type</th><th>Description</th></tr>
+<tr><td>Batch GD</td><td>Uses entire dataset</td></tr>
+<tr><td>Stochastic GD</td><td>Uses one sample</td></tr>
+<tr><td>Mini-batch GD</td><td>Uses small batches</td></tr>
+</table>
+
+<hr>
+
+<h2>Adam Optimizer</h2>
+
+<h3>Definition</h3>
+<p>Adam combines Momentum and RMSProp.</p>
+
+<h3>First Moment</h3>
+<p>m<sub>t</sub> = β1m(t−1) + (1−β1)gt</p>
+
+<h3>Second Moment</h3>
+<p>v<sub>t</sub> = β2v(t−1) + (1−β2)g²t</p>
+
+<h3>Bias Correction</h3>
+<p>m̂<sub>t</sub> = mt/(1−β1t)</p>
+<p>v̂<sub>t</sub> = vt/(1−β2t)</p>
+
+<h3>Parameter Update</h3>
+<p>θ = θ − α m̂t / (√v̂t + ε)</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Fast convergence</li>
+<li>Adaptive learning rate</li>
+<li>Works well on sparse gradients</li>
+</ul>
+
+<hr>
+
+<h2>Inception Block – GoogLeNet</h2>
+
+<h3>Concept</h3>
+<p>Inception block performs multiple convolutions in parallel.</p>
+
+<h3>Parallel Paths</h3>
+<ul>
+<li>1×1 convolution</li>
+<li>3×3 convolution</li>
+<li>5×5 convolution</li>
+<li>Max pooling</li>
+</ul>
+
+<h3>Advantages</h3>
+<ul>
+<li>Captures multi-scale features</li>
+<li>Reduces computation using 1×1 conv</li>
+<li>Improves accuracy</li>
+</ul>
+
+<hr>
+
+<h2>Dropout and Early Stopping</h2>
+
+<h3>Dropout</h3>
+<p>Randomly disables neurons during training.</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Reduces overfitting</li>
+<li>Improves generalization</li>
+</ul>
+
+<h3>Early Stopping</h3>
+<p>Stops training when validation loss starts increasing.</p>
+
+<h3>Advantages</h3>
+<ul>
+<li>Prevents overfitting</li>
+<li>Saves training time</li>
+</ul>
+
+<hr>
+
+<h2>Data Augmentation</h2>
+
+<h3>Definition</h3>
+<p>Artificially increases dataset size using transformations.</p>
+
+<h3>Techniques</h3>
+<ul>
+<li>Rotation</li>
+<li>Flipping</li>
+<li>Cropping</li>
+<li>Scaling</li>
+<li>Noise addition</li>
+</ul>
+
+<hr>
+
+<h2>Activation Functions</h2>
+
+<table>
+<tr><th>Activation</th><th>Range</th><th>Advantages</th></tr>
+<tr><td>Sigmoid</td><td>0 to 1</td><td>Probability output</td></tr>
+<tr><td>Tanh</td><td>-1 to 1</td><td>Zero centered</td></tr>
+<tr><td>ReLU</td><td>0 to ∞</td><td>Fast training</td></tr>
+<tr><td>Leaky ReLU</td><td>-∞ to ∞</td><td>Prevents dying ReLU</td></tr>
+</table>
+
+<hr>
+
+<h2>Perceptron vs Multi-layer Neural Network</h2>
+
+<table>
+<tr><th>Perceptron</th><th>MLP</th></tr>
+<tr><td>Single layer</td><td>Multiple layers</td></tr>
+<tr><td>Linear problems only</td><td>Nonlinear problems</td></tr>
+<tr><td>Simple architecture</td><td>Complex architecture</td></tr>
+<tr><td>No hidden layer</td><td>Contains hidden layers</td></tr>
+</table>
+
+<hr>
+
+<h2>CNN Basics</h2>
+
+<h3>Convolution Formula</h3>
+<p>Output Size = ((N − F + 2P)/S) + 1</p>
+
+<h3>Pooling</h3>
+<p>Reduces spatial dimensions and computation.</p>
+
+<h3>Advantages of CNN</h3>
+<ul>
+<li>Automatic feature extraction</li>
+<li>Translation invariance</li>
+<li>High image accuracy</li>
+</ul>
+
+<hr>
+
+<h2>Feature Extraction vs Fine Tuning</h2>
+
+<table>
+<tr><th>Feature Extraction</th><th>Fine Tuning</th></tr>
+<tr><td>Freeze pretrained layers</td><td>Train pretrained layers</td></tr>
+<tr><td>Less computation</td><td>Higher computation</td></tr>
+<tr><td>Small datasets</td><td>Large datasets</td></tr>
+<tr><td>Fast training</td><td>Better task adaptation</td></tr>
+</table>
+
+<hr>
+
+<h2>Conclusion</h2>
+
+<p>
+These answers cover major Deep Learning concepts including CNN, RNN, LSTM, GAN, VAE,
+Transfer Learning, Optimization, Regularization, Attention Mechanisms, YOLO, and Gradient Descent.
+The explanations include theory, formulas, advantages, disadvantages, and comparison points suitable
+for university 10-mark answers.
+</p>
+
+</div>
+</body>
+</html>

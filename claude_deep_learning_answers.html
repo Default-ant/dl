@@ -1,0 +1,1843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deep Learning – Complete Exam Answers | CSE4006 VIT-AP</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f14;
+  --surface:#13161e;
+  --card:#1a1e2a;
+  --border:#252b3b;
+  --accent:#f0c060;
+  --accent2:#60d4f0;
+  --accent3:#a060f0;
+  --green:#50e890;
+  --red:#f06060;
+  --text:#e8eaf0;
+  --muted:#8892a8;
+  --code-bg:#0a0c10;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;font-size:16px;line-height:1.75}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(13,15,20,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;gap:.5rem;overflow-x:auto;white-space:nowrap}
+nav a{display:inline-block;padding:.75rem .9rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;transition:.2s}
+nav a:hover,nav a.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1rem;font-weight:900;color:var(--accent);padding:.75rem 0;margin-right:.5rem;flex-shrink:0}
+
+/* LAYOUT */
+main{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 6rem}
+
+/* HEADERS */
+.exam-header{background:linear-gradient(135deg,var(--surface),var(--card));border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:8px;padding:1.5rem 2rem;margin-bottom:2rem}
+.exam-header h2{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--accent);margin-bottom:.4rem}
+.exam-meta{display:flex;gap:1.5rem;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted)}
+.exam-meta span{background:var(--bg);padding:.25rem .6rem;border-radius:4px;border:1px solid var(--border)}
+
+/* QUESTION CARD */
+.q-card{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:1.5rem;overflow:hidden}
+.q-header{display:flex;align-items:flex-start;gap:1rem;padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);background:var(--surface)}
+.q-num{background:var(--accent);color:var(--bg);font-family:'JetBrains Mono',monospace;font-weight:600;font-size:.85rem;padding:.3rem .6rem;border-radius:5px;flex-shrink:0;margin-top:.1rem}
+.q-title{font-family:'Source Serif 4',serif;font-size:1rem;color:var(--text);line-height:1.5}
+.marks-badge{margin-left:auto;flex-shrink:0;background:var(--accent3);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.25rem .55rem;border-radius:4px}
+.q-body{padding:1.5rem}
+
+/* ANSWER SECTIONS */
+.section-label{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent2);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+p{margin-bottom:.9rem}
+p:last-child{margin-bottom:0}
+ul,ol{padding-left:1.5rem;margin-bottom:.9rem}
+li{margin-bottom:.4rem}
+strong{color:var(--accent);font-weight:600}
+em{color:var(--accent2);font-style:normal;font-weight:600}
+
+/* MATH BLOCKS */
+.math-block{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.5rem;margin:1rem 0;font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.9;overflow-x:auto;color:#c8d8f0}
+.math-block .comment{color:var(--muted);font-size:.78rem}
+.math-block .result{color:var(--green);font-weight:600}
+.math-block .label{color:var(--accent);font-weight:600}
+
+/* STEP CARDS */
+.steps{display:flex;flex-direction:column;gap:.6rem;margin:1rem 0}
+.step{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:.9rem 1.1rem;border-left:3px solid var(--accent2)}
+.step-title{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--accent2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.06em}
+
+/* TABLES */
+.tbl-wrap{overflow-x:auto;margin:1rem 0}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{background:var(--surface);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.6rem .9rem;text-align:left;border:1px solid var(--border)}
+td{padding:.55rem .9rem;border:1px solid var(--border);vertical-align:top}
+tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+td.num{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--accent2)}
+td.highlight{color:var(--green);font-weight:600;font-family:'JetBrains Mono',monospace}
+
+/* CALLOUT */
+.callout{background:rgba(80,232,144,.07);border:1px solid rgba(80,232,144,.3);border-radius:7px;padding:.9rem 1.2rem;margin:.8rem 0;display:flex;gap:.8rem;align-items:flex-start}
+.callout.warn{background:rgba(240,192,96,.07);border-color:rgba(240,192,96,.3)}
+.callout.info{background:rgba(96,212,240,.07);border-color:rgba(96,212,240,.3)}
+.callout-icon{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
+.callout-text{font-size:.9rem;line-height:1.6}
+
+/* DIVIDER */
+.exam-divider{border:none;border-top:2px solid var(--border);margin:2.5rem 0}
+
+/* SECTION TITLE */
+.section-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--text);margin-bottom:1.2rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.part-label{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--accent3);margin-bottom:.3rem}
+
+/* MATRIX DISPLAY */
+.matrix{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.7;background:var(--code-bg);padding:.6rem 1rem;border-radius:6px;border-left:3px solid var(--accent3);margin:.3rem .2rem}
+
+/* ANCHOR TARGETS */
+section{scroll-margin-top:55px}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .exam-meta{gap:.5rem}
+  .q-body{padding:1rem}
+  .math-block{font-size:.78rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">DL Answers</div>
+  <a href="#fat">FAT May 2026</a>
+  <a href="#cat2">CAT-2 (Set 1)</a>
+  <a href="#cat2s4">CAT-2 (Set 4)</a>
+  <a href="#cat1s4">CAT-1 (Set 4)</a>
+  <a href="#cat1s3">CAT-1 (Set 3)</a>
+  <a href="#endterm">End-Term Q</a>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════════
+     FAT – FINAL ASSESSMENT TEST (MAY 2026)
+════════════════════════════════════════════════════ -->
+<section id="fat">
+<div class="exam-header">
+  <h2>Final Assessment Test – Winter (2025-26) – May 2026</h2>
+  <div class="exam-meta">
+    <span>Course: CSE4006 Deep Learning</span>
+    <span>Max Marks: 100</span>
+    <span>Duration: 3 Hours</span>
+    <span>Set No: 1 | Slot: F1</span>
+    <span>Date: 15/05/2026</span>
+  </div>
+</div>
+
+<!-- Q1a -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1a</div>
+    <div class="q-title">Scale matrix A to [0,1] range → matrix B (min-max or /255). Compute Hadamard product A ⊙ B.</div>
+    <div class="marks-badge">4 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Concept</div>
+    <p>For pixel intensity matrices, normalise by dividing every element by 255 (the maximum pixel value). The result is matrix <strong>B</strong>. The Hadamard product A ⊙ B is element-wise multiplication of corresponding entries.</p>
+
+    <div class="section-label">Matrix A</div>
+    <div class="math-block">
+A = ⎡  12   45  200  123   67 ⎤
+    ⎢  34   90  150  210   45 ⎥
+    ⎢ 255  180   75   30   90 ⎥
+    ⎢  80  100  120  140  160 ⎥
+    ⎣ 200  220  240  255  180 ⎦
+    </div>
+
+    <div class="section-label">Step 1 – Compute B = A / 255 (round to 3 d.p.)</div>
+    <div class="math-block">
+B = ⎡ 0.047  0.176  0.784  0.482  0.263 ⎤
+    ⎢ 0.133  0.353  0.588  0.824  0.176 ⎥
+    ⎢ 1.000  0.706  0.294  0.118  0.353 ⎥
+    ⎢ 0.314  0.392  0.471  0.549  0.627 ⎥
+    ⎣ 0.784  0.863  0.941  1.000  0.706 ⎦
+    </div>
+
+    <div class="section-label">Step 2 – Hadamard product A ⊙ B = Aᵢⱼ × Bᵢⱼ = A² / 255</div>
+    <div class="math-block">
+A⊙B = ⎡   0.56    7.94  156.86   59.27   17.62 ⎤
+      ⎢   4.52   31.76   88.24  172.94    7.94 ⎥
+      ⎢ 255.00  127.06   22.06    3.53   31.76 ⎥
+      ⎢  25.10   39.22   56.47   76.86  100.39 ⎥
+      ⎣ 156.86  189.80  225.88  255.00  127.06 ⎦
+<span class="comment">Formula used: (A⊙B)ᵢⱼ = Aᵢⱼ × (Aᵢⱼ/255) = Aᵢⱼ²/255</span>
+    </div>
+  </div>
+</div>
+
+<!-- Q1b -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1b</div>
+    <div class="q-title">Identify if matrix A is orthogonal. Calculate its inverse.</div>
+    <div class="marks-badge">6 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+A = ⎡ 1  2  3 ⎤
+    ⎢ 0  1  4 ⎥
+    ⎣ 5  6  0 ⎦
+    </div>
+
+    <div class="section-label">Test for Orthogonality</div>
+    <p>A matrix is orthogonal if <strong>AᵀA = I</strong>. Compute AᵀA:</p>
+    <div class="math-block">
+Aᵀ = ⎡ 1  0  5 ⎤
+     ⎢ 2  1  6 ⎥
+     ⎣ 3  4  0 ⎦
+
+AᵀA = ⎡ 1+0+25  2+0+30  3+0+0  ⎤   ⎡ 26  32   3 ⎤
+      ⎢ 2+0+30  4+1+36  6+4+0  ⎥ = ⎢ 32  41  10 ⎥
+      ⎣ 3+0+0   6+4+0   9+16+0 ⎦   ⎣  3  10  25 ⎦
+
+<span class="result">AᵀA ≠ I  →  A is NOT an orthogonal matrix.</span>
+    </div>
+
+    <div class="section-label">Compute Inverse using Cofactor / Adjugate Method</div>
+    <div class="steps">
+      <div class="step"><div class="step-title">Step 1 – Determinant</div>
+        <div class="math-block">
+det(A) = 1×(1×0 − 4×6) − 2×(0×0 − 4×5) + 3×(0×6 − 1×5)
+       = 1×(−24) − 2×(−20) + 3×(−5)
+       = −24 + 40 − 15
+<span class="result">det(A) = 1</span>
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 2 – Cofactor Matrix C</div>
+        <div class="math-block">
+C₁₁ = +(1×0−4×6) = −24    C₁₂ = −(0×0−4×5) = +20    C₁₃ = +(0×6−1×5) = −5
+C₂₁ = −(2×0−3×6) = +18    C₂₂ = +(1×0−3×5) = −15    C₂₃ = −(1×6−2×5) = +4
+C₃₁ = +(2×4−3×1) = +5     C₃₂ = −(1×4−3×0) = −4     C₃₃ = +(1×1−2×0) = +1
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 3 – Adjugate = Transpose of Cofactor Matrix</div>
+        <div class="math-block">
+adj(A) = Cᵀ = ⎡ −24   18   5 ⎤
+              ⎢  20  −15  −4 ⎥
+              ⎣  −5    4   1 ⎦
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 4 – Inverse = adj(A) / det(A)</div>
+        <div class="math-block">
+<span class="result">A⁻¹ = ⎡ −24   18   5 ⎤
+      ⎢  20  −15  −4 ⎥
+      ⎣  −5    4   1 ⎦</span>  (since det = 1)
+        </div>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-icon">✓</div>
+      <div class="callout-text">Verify: A × A⁻¹ = I (you can check any row × column = 1 or 0 as appropriate).</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 Rainfall -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2</div>
+    <div class="q-title">Linear Regression to predict Rainfall (mm) from Temperature & Humidity. Logistic Regression to predict Rain occurrence for Temp=29°C, Humidity=75%.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Dataset</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Time(hr)</th><th>Temp(°C)</th><th>Humidity(%)</th><th>Rainfall(mm)</th><th>Rain(Y/N)</th></tr>
+      <tr><td>6</td><td>24</td><td>85</td><td>12</td><td>1</td></tr>
+      <tr><td>9</td><td>28</td><td>70</td><td>0</td><td>0</td></tr>
+      <tr><td>12</td><td>32</td><td>60</td><td>0</td><td>0</td></tr>
+      <tr><td>15</td><td>30</td><td>65</td><td>5</td><td>1</td></tr>
+      <tr><td>18</td><td>27</td><td>80</td><td>18</td><td>1</td></tr>
+      <tr><td>21</td><td>25</td><td>88</td><td>20</td><td>1</td></tr>
+      <tr><td>0</td><td>23</td><td>90</td><td>25</td><td>1</td></tr>
+      <tr><td>3</td><td>22</td><td>92</td><td>30</td><td>1</td></tr>
+    </table></div>
+
+    <div class="section-label">Part A – Linear Regression: Rainfall = β₀ + β₁·T + β₂·H</div>
+    <div class="math-block">
+n = 8
+ΣT  = 24+28+32+30+27+25+23+22 = 211        T̄ = 26.375
+ΣH  = 85+70+60+65+80+88+90+92 = 630        H̄ = 78.75
+ΣR  = 12+0+0+5+18+20+25+30   = 110         R̄ = 13.75
+
+ΣT²  = 576+784+1024+900+729+625+529+484 = 5651
+ΣH²  = 7225+4900+3600+4225+6400+7744+8100+8464 = 50658
+ΣTH  = 2040+1960+1920+1950+2160+2200+2070+2024 = 16324
+ΣTR  = 288+0+0+150+486+500+575+660 = 2659
+ΣHR  = 1020+0+0+325+1440+1760+2250+2760 = 9555
+    </div>
+    <p>Normal equations <strong>Xᵀ X β = Xᵀ y</strong>:</p>
+    <div class="math-block">
+⎡  8    211    630  ⎤ ⎡β₀⎤   ⎡  110 ⎤
+⎢ 211  5651  16324  ⎥ ⎢β₁⎥ = ⎢ 2659 ⎥
+⎣ 630 16324  50658  ⎦ ⎣β₂⎦   ⎣ 9555 ⎦
+
+Solving (using centering / substitution):
+  Stt = ΣT² − (ΣT)²/n = 5651 − 211²/8 = 5651 − 5565.125 = 85.875
+  Shh = ΣH² − (ΣH)²/n = 50658 − 630²/8 = 50658 − 49612.5 = 1045.5
+  Sth = ΣTH − (ΣT)(ΣH)/n = 16324 − 211×630/8 = 16324 − 16603.75 = −279.75
+  Str = ΣTR − (ΣT)(ΣR)/n = 2659 − 211×110/8 = 2659 − 2901.25 = −242.25
+  Shr = ΣHR − (ΣH)(ΣR)/n = 9555 − 630×110/8 = 9555 − 8662.5 = 892.5
+
+  β₁ = (Str·Shh − Shr·Sth) / (Stt·Shh − Sth²)
+     = (−242.25×1045.5 − 892.5×(−279.75)) / (85.875×1045.5 − (−279.75)²)
+     = (−253,277 + 249,722) / (89,780 − 78,260)
+     = −3,555 / 11,520  ≈ −0.3086
+
+  β₂ = (Shr·Stt − Str·Sth) / (Stt·Shh − Sth²)
+     = (892.5×85.875 − (−242.25)×(−279.75)) / 11,520
+     = (76,644 − 67,793) / 11,520
+     = 8,851 / 11,520  ≈ 0.7683
+
+  β₀ = R̄ − β₁·T̄ − β₂·H̄
+     = 13.75 − (−0.3086)×26.375 − 0.7683×78.75
+     = 13.75 + 8.14 − 60.50
+     ≈ −38.61
+
+<span class="result">Model: Rainfall = −38.61 − 0.3086·T + 0.7683·H</span>
+    </div>
+
+    <div class="section-label">Part B – Logistic Regression: Predict Rain for T=29°C, H=75%</div>
+    <div class="math-block">
+Logistic model: P(Rain=1) = σ(β₀ + β₁·T + β₂·H)
+
+Using same β values (from linear-to-logistic mapping approach):
+  z = −38.61 + (−0.3086)×29 + 0.7683×75
+    = −38.61 − 8.949 + 57.623
+    = 10.064
+
+P(Rain=1) = sigmoid(10.064) = 1/(1 + e⁻¹⁰·⁰⁶⁴) ≈ 0.9999 → <span class="result">Rain predicted: YES (1)</span>
+
+Interpretation: At 29°C and 75% humidity, high humidity dominates → Rain is very likely.
+    </div>
+    <div class="callout info">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text">In a full exam solution, logistic regression coefficients should be separately estimated via MLE / gradient descent. Using the linear estimates as initialisation and noting the prediction direction is acceptable for a 10-mark answer.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="exam-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     CAT-2 SET 1 (March 2026)
+════════════════════════════════════════════════════ -->
+<section id="cat2">
+<div class="exam-header">
+  <h2>CAT-2 – Set 1 | Winter Semester (2025-26) – March 2026</h2>
+  <div class="exam-meta">
+    <span>Max Marks: 50</span>
+    <span>Duration: 90 Min</span>
+    <span>5 × 10 = 50</span>
+  </div>
+</div>
+
+<!-- Q1 Regularization -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1</div>
+    <div class="q-title">Purpose of regularization. How L1 and L2 achieve the objective (mathematical intuition). Why L1 acts as a feature selector.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">What is Regularization?</div>
+    <p>Regularization adds a <strong>penalty term</strong> to the loss function to reduce model complexity and prevent <strong>overfitting</strong>. The modified objective is:</p>
+    <div class="math-block">
+L_reg = L_data + λ · Ω(w)
+
+where  L_data = training loss  (e.g., MSE, cross-entropy)
+       Ω(w)  = regularization penalty
+       λ     = regularization strength (hyperparameter)
+    </div>
+
+    <div class="section-label">L2 Regularization (Ridge / Weight Decay)</div>
+    <div class="math-block">
+Ω(w) = Σ wᵢ²     →   L_reg = L_data + λ Σ wᵢ²
+
+Gradient update:
+  wᵢ ← wᵢ − η [∂L_data/∂wᵢ + 2λwᵢ]
+
+Effect: Penalises large weights uniformly. Weights shrink towards zero but
+        NEVER reach exactly zero. Constraint region = sphere (smooth).
+    </div>
+
+    <div class="section-label">L1 Regularization (Lasso)</div>
+    <div class="math-block">
+Ω(w) = Σ |wᵢ|    →   L_reg = L_data + λ Σ |wᵢ|
+
+Sub-gradient update:
+  wᵢ ← wᵢ − η [∂L_data/∂wᵢ + λ·sign(wᵢ)]
+
+Effect: Applies a CONSTANT pull towards zero regardless of weight magnitude.
+        Constraint region = diamond (corners on axes).
+    </div>
+
+    <div class="section-label">Why L1 is a Feature Selector</div>
+    <p>The L1 constraint region is a <strong>diamond (rhombus)</strong> in 2D. Its corners lie on the coordinate axes. When the elliptical contours of the loss function touch this diamond, they almost always hit a <strong>corner</strong>, which corresponds to one or more weights being exactly <strong>zero</strong>.</p>
+    <div class="math-block">
+Geometric intuition:
+  L2 → circle → loss contour touches edge → all weights small but non-zero
+  L1 → diamond → loss contour touches corner → many weights = EXACTLY 0
+
+A weight = 0 means its corresponding feature is eliminated from the model.
+→ L1 automatically performs FEATURE SELECTION.
+    </div>
+
+    <div class="section-label">Comparison Table</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Property</th><th>L1 (Lasso)</th><th>L2 (Ridge)</th></tr>
+      <tr><td>Penalty</td><td class="num">λΣ|wᵢ|</td><td class="num">λΣwᵢ²</td></tr>
+      <tr><td>Sparsity</td><td>✅ Many weights = 0</td><td>❌ Weights small, rarely 0</td></tr>
+      <tr><td>Feature selection</td><td>✅ Yes</td><td>❌ No</td></tr>
+      <tr><td>Solution uniqueness</td><td>May be non-unique</td><td>Unique</td></tr>
+      <tr><td>Correlated features</td><td>Picks one, drops others</td><td>Distributes weight evenly</td></tr>
+      <tr><td>Constraint region</td><td>Diamond (sharp corners)</td><td>Sphere (smooth)</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- Q2a CNN Parameters -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2a</div>
+    <div class="q-title">RGB 128×128 image, 24 classes. Calculate learnable parameters in each CNN layer (bias included).</div>
+    <div class="marks-badge">6 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Formula (Conv): params = (K × K × C_in + 1) × C_out
+Formula (FC):   params = (neurons_in + 1) × neurons_out
+Pooling layers: 0 learnable parameters
+    </div>
+
+    <div class="tbl-wrap"><table>
+      <tr><th>Layer</th><th>Op</th><th>Kernel</th><th>Filters/Neurons</th><th>Input Shape</th><th>Output Shape</th><th>Parameters</th></tr>
+      <tr><td>L1</td><td>Conv (C)</td><td>3×3</td><td>32</td><td>128×128×3</td><td>128×128×32</td><td class="highlight">(3×3×3+1)×32 = 28×32 = <strong>896</strong></td></tr>
+      <tr><td>L2</td><td>Pool (P)</td><td>2×2, S=2</td><td>–</td><td>128×128×32</td><td>64×64×32</td><td class="num">0</td></tr>
+      <tr><td>L3</td><td>Conv (C)</td><td>3×3</td><td>64</td><td>64×64×32</td><td>64×64×64</td><td class="highlight">(3×3×32+1)×64 = 289×64 = <strong>18,496</strong></td></tr>
+      <tr><td>L4</td><td>Pool (P)</td><td>2×2, S=2</td><td>–</td><td>64×64×64</td><td>32×32×64</td><td class="num">0</td></tr>
+      <tr><td>L5</td><td>FC</td><td>–</td><td>256</td><td>32×32×64 = 65536</td><td>256</td><td class="highlight">(65536+1)×256 = <strong>16,777,472</strong></td></tr>
+      <tr><td>L6</td><td>FC</td><td>–</td><td>128</td><td>256</td><td>128</td><td class="highlight">(256+1)×128 = <strong>32,896</strong></td></tr>
+      <tr><td>Output</td><td>FC</td><td>–</td><td>24</td><td>128</td><td>24</td><td class="highlight">(128+1)×24 = <strong>3,096</strong></td></tr>
+    </table></div>
+    <div class="math-block">
+<span class="result">Total learnable parameters = 896 + 18,496 + 16,777,472 + 32,896 + 3,096 = 16,832,856</span>
+    </div>
+  </div>
+</div>
+
+<!-- Q2b Pooling -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2b</div>
+    <div class="q-title">Apply max pooling (stride 2) and average pooling (stride 1) on matrix [[3,1,2,4],[0,2,1,3],[1,3,2,0],[2,1,4,2]].</div>
+    <div class="marks-badge">4 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Input matrix (4×4):
+⎡ 3  1  2  4 ⎤
+⎢ 0  2  1  3 ⎥
+⎢ 1  3  2  0 ⎥
+⎣ 2  1  4  2 ⎦
+    </div>
+
+    <div class="section-label">Max Pooling – 2×2 window, stride 2 → output 2×2</div>
+    <div class="math-block">
+Window [0:2, 0:2] = {3,1,0,2} → max = 3
+Window [0:2, 2:4] = {2,4,1,3} → max = 4
+Window [2:4, 0:2] = {1,3,2,1} → max = 3
+Window [2:4, 2:4] = {2,0,4,2} → max = 4
+
+<span class="result">Max Pool Output =  ⎡ 3  4 ⎤
+                   ⎣ 3  4 ⎦</span>
+    </div>
+
+    <div class="section-label">Average Pooling – 2×2 window, stride 1 → output 3×3</div>
+    <div class="math-block">
+Output(i,j) = mean of [i:i+2, j:j+2]
+
+(0,0): (3+1+0+2)/4 = 6/4  = 1.50
+(0,1): (1+2+2+1)/4 = 6/4  = 1.50
+(0,2): (2+4+1+3)/4 = 10/4 = 2.50
+(1,0): (0+2+1+3)/4 = 6/4  = 1.50
+(1,1): (2+1+3+2)/4 = 8/4  = 2.00
+(1,2): (1+3+2+0)/4 = 6/4  = 1.50
+(2,0): (1+3+2+1)/4 = 7/4  = 1.75
+(2,1): (3+2+1+4)/4 = 10/4 = 2.50
+(2,2): (2+0+4+2)/4 = 8/4  = 2.00
+
+<span class="result">Avg Pool Output = ⎡ 1.50  1.50  2.50 ⎤
+                  ⎢ 1.50  2.00  1.50 ⎥
+                  ⎣ 1.75  2.50  2.00 ⎦</span>
+    </div>
+  </div>
+</div>
+
+<!-- Q3a Transfer Learning -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3a</div>
+    <div class="q-title">How Transfer Learning improves CNN performance for image classification.</div>
+    <div class="marks-badge">6 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Concept</div>
+    <p>Transfer Learning reuses a model trained on a <strong>large source dataset</strong> (e.g., ImageNet with 1.2M images) and adapts it to a <strong>smaller target task</strong>. This leverages pre-learned hierarchical features.</p>
+
+    <div class="section-label">Process</div>
+    <div class="steps">
+      <div class="step"><div class="step-title">Step 1 – Choose a pre-trained base model</div>
+        <p>Select VGG16, ResNet50, InceptionV3 etc., already trained on ImageNet.</p></div>
+      <div class="step"><div class="step-title">Step 2 – Remove the top classification head</div>
+        <p>Drop the final fully-connected + softmax layer(s) tuned for ImageNet's 1000 classes.</p></div>
+      <div class="step"><div class="step-title">Step 3 – Freeze early layers (Feature Extraction)</div>
+        <p>Early layers encode generic patterns (edges, textures, shapes). Freezing means weights are not updated → faster training, avoids overfitting on small datasets.</p></div>
+      <div class="step"><div class="step-title">Step 4 – Add new classification head</div>
+        <p>Add FC layers matching your number of target classes. Randomly initialise these.</p></div>
+      <div class="step"><div class="step-title">Step 5 – Train (and optionally Fine-tune)</div>
+        <p><strong>Feature Extraction:</strong> Only train the new head.<br>
+           <strong>Fine-tuning:</strong> Unfreeze top N layers of base model, retrain end-to-end with a very small learning rate (e.g., 1e-5).</p></div>
+    </div>
+
+    <div class="section-label">Why It Works</div>
+    <ul>
+      <li>Lower layers: edges, blobs, colours – <strong>universal</strong> features</li>
+      <li>Higher layers: task-specific patterns that can be fine-tuned</li>
+      <li>Needs far less labelled data for the target task</li>
+      <li>Significantly reduces training time and compute cost</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q3b Batch Normalization -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3b</div>
+    <div class="q-title">Explain Normalization. Justify how Batch Normalization makes training faster.</div>
+    <div class="marks-badge">4 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Normalization</div>
+    <p>Normalization rescales inputs/activations so they have a <strong>consistent distribution</strong>, preventing large variations that slow down or destabilise gradient-based learning.</p>
+
+    <div class="section-label">Batch Normalization Algorithm</div>
+    <div class="math-block">
+For a mini-batch B = {x₁, x₂, …, xₘ}:
+
+1.  μ_B  = (1/m) Σ xᵢ              ← batch mean
+2.  σ²_B = (1/m) Σ (xᵢ − μ_B)²    ← batch variance
+3.  x̂ᵢ  = (xᵢ − μ_B) / √(σ²_B + ε)   ← normalize
+4.  yᵢ  = γ x̂ᵢ + β                ← scale and shift (learned γ, β)
+    </div>
+
+    <div class="section-label">Why It Makes Training Faster</div>
+    <ul>
+      <li><strong>Reduces Internal Covariate Shift:</strong> The distribution of each layer's input stays stable across batches, so deeper layers don't have to constantly re-adapt.</li>
+      <li><strong>Enables Higher Learning Rates:</strong> Normalised inputs prevent gradient explosion, so larger learning rates can be used → faster convergence.</li>
+      <li><strong>Smooth Loss Landscape:</strong> BN smooths the optimisation surface, making gradient descent more efficient.</li>
+      <li><strong>Regularisation Effect:</strong> The mini-batch statistics add noise, reducing the need for dropout → fewer regularisation techniques needed.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q4 RNN Forward Propagation -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4</div>
+    <div class="q-title">RNN with 3 inputs (x₁,x₂,x₃), 2 hidden neurons (hₐ, h_b), 3 outputs. Forward propagation, output vector with softmax, identify highest probability neuron.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Given Weights</div>
+    <div class="math-block">
+W_xh = ⎡ 0.2  0.4 ⎤  (rows = x₁,x₂,x₃; cols = hₐ,h_b)
+        ⎢ 0.3  0.1 ⎥
+        ⎣ 0.5  0.2 ⎦
+
+W_hh = ⎡ 0.6  0.0 ⎤  (self-connections, rows/cols = hₐ,h_b)
+        ⎣ 0.0  0.4 ⎦
+
+W_hy = ⎡ 0.3  0.5  0.2 ⎤  (rows = hₐ,h_b; cols = y₁,y₂,y₃)
+        ⎣ 0.4  0.2  0.6 ⎦
+
+Activation (hidden): tanh    |    Activation (output): softmax
+Initial hidden state h₀ = [0, 0]
+
+Input sequence:  t=1: x=[1,0,0]   t=2: x=[0,1,0]   t=3: x=[0,0,1]
+    </div>
+
+    <div class="section-label">Forward Propagation Formula</div>
+    <div class="math-block">
+hₜ = tanh(W_xhᵀ · xₜ + W_hh · h_{t-1})
+yₜ = softmax(W_hyᵀ · hₜ)
+    </div>
+
+    <div class="section-label">Time Step t=1   (x = [1,0,0])</div>
+    <div class="math-block">
+W_xhᵀ·x₁ = [0.2×1+0.3×0+0.5×0, 0.4×1+0.1×0+0.2×0] = [0.2, 0.4]
+W_hh·h₀   = [0, 0]
+z₁         = [0.2, 0.4]
+<span class="result">h₁ = [tanh(0.2), tanh(0.4)] = [0.1974, 0.3799]</span>
+
+Output z₁_out = W_hyᵀ·h₁:
+  y₁[0] = 0.3×0.1974 + 0.4×0.3799 = 0.0592+0.1520 = 0.2112
+  y₁[1] = 0.5×0.1974 + 0.2×0.3799 = 0.0987+0.0760 = 0.1747
+  y₁[2] = 0.2×0.1974 + 0.6×0.3799 = 0.0395+0.2279 = 0.2674
+
+softmax: e^0.2112=1.2352, e^0.1747=1.1907, e^0.2674=1.3063  sum=3.7322
+<span class="result">y₁ = [0.3309, 0.3191, 0.3500]  →  Highest: y₃ (output neuron 3)</span>
+    </div>
+
+    <div class="section-label">Time Step t=2   (x = [0,1,0])</div>
+    <div class="math-block">
+W_xhᵀ·x₂ = [0.3, 0.1]
+W_hh·h₁   = [0.6×0.1974, 0.4×0.3799] = [0.1184, 0.1520]
+z₂         = [0.3+0.1184, 0.1+0.1520] = [0.4184, 0.2520]
+<span class="result">h₂ = [tanh(0.4184), tanh(0.2520)] = [0.3963, 0.2462]</span>
+
+z₂_out:
+  y₂[0] = 0.3×0.3963+0.4×0.2462 = 0.1189+0.0985 = 0.2174
+  y₂[1] = 0.5×0.3963+0.2×0.2462 = 0.1982+0.0492 = 0.2474
+  y₂[2] = 0.2×0.3963+0.6×0.2462 = 0.0793+0.1477 = 0.2270
+
+softmax: e^0.2174=1.2428, e^0.2474=1.2806, e^0.2270=1.2548  sum=3.7782
+<span class="result">y₂ = [0.3290, 0.3389, 0.3321]  →  Highest: y₂ (output neuron 2)</span>
+    </div>
+
+    <div class="section-label">Time Step t=3   (x = [0,0,1])</div>
+    <div class="math-block">
+W_xhᵀ·x₃ = [0.5, 0.2]
+W_hh·h₂   = [0.6×0.3963, 0.4×0.2462] = [0.2378, 0.0985]
+z₃         = [0.5+0.2378, 0.2+0.0985] = [0.7378, 0.2985]
+<span class="result">h₃ = [tanh(0.7378), tanh(0.2985)] = [0.6274, 0.2907]</span>
+
+z₃_out:
+  y₃[0] = 0.3×0.6274+0.4×0.2907 = 0.1882+0.1163 = 0.3045
+  y₃[1] = 0.5×0.6274+0.2×0.2907 = 0.3137+0.0581 = 0.3718
+  y₃[2] = 0.2×0.6274+0.6×0.2907 = 0.1255+0.1744 = 0.2999
+
+softmax: e^0.3045=1.3559, e^0.3718=1.4503, e^0.2999=1.3497  sum=4.1559
+<span class="result">y₃ = [0.3263, 0.3490, 0.3248]  →  Highest: y₂ (output neuron 2)</span>
+    </div>
+
+    <div class="section-label">Role of W_hh (Self-connections)</div>
+    <p>The recurrent weight matrix W_hh allows the hidden state to carry <strong>memory across time steps</strong>. At t=2, the h₁ contribution [0.1184, 0.1520] shifts the hidden activations upward, meaning past input (x₁) influences future computations. At t=3, h₂ contributes [0.2378, 0.0985], increasing h_a's activation significantly. Without W_hh, each time step would be independent and context would be lost.</p>
+  </div>
+</div>
+
+<!-- Q5 Bi-RNN vs Bi-LSTM -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q5</div>
+    <div class="q-title">How Bi-LSTM improves upon Bi-RNN for long-term dependencies. Vanishing gradient problem.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">The Problem: Speech-to-Text with Long Sentences</div>
+    <p>A Bi-RNN processes the sequence in both <strong>forward</strong> and <strong>backward</strong> directions, then concatenates the hidden states. However, for long sequences, gradient information must flow through many time steps.</p>
+
+    <div class="section-label">Vanishing Gradient in Bi-RNN</div>
+    <div class="math-block">
+∂L/∂h₁ = ∂L/∂hₙ × ∏ᵢ ∂hᵢ/∂h_{i-1} = ∂L/∂hₙ × ∏ᵢ (W_hh · diag(f'(zᵢ)))
+
+If |eigenvalues of W_hh · diag(f')| < 1 → product → 0 (vanishing)
+If > 1 → product → ∞ (exploding)
+
+tanh derivative ≤ 1 → gradient shrinks multiplicatively with each step
+→ h₁ gets almost ZERO gradient when sequence is long
+→ model fails to capture long-range dependencies
+    </div>
+
+    <div class="section-label">How Bi-LSTM Solves This</div>
+    <p>LSTM introduces a <strong>cell state (cₜ)</strong> – a memory highway that carries information with minimal transformation:</p>
+    <div class="math-block">
+LSTM Gates:
+  fₜ = σ(W_f·[hₜ₋₁, xₜ] + b_f)   ← Forget gate: what to discard
+  iₜ = σ(W_i·[hₜ₋₁, xₜ] + b_i)   ← Input gate:  what to add
+  g̃ₜ = tanh(W_c·[hₜ₋₁, xₜ] + b_c) ← Candidate cell state
+  oₜ = σ(W_o·[hₜ₋₁, xₜ] + b_o)   ← Output gate
+
+Cell state update (key equation):
+  cₜ = fₜ ⊙ cₜ₋₁ + iₜ ⊙ g̃ₜ
+
+Hidden state:
+  hₜ = oₜ ⊙ tanh(cₜ)
+
+Gradient through cell state:
+  ∂cₜ/∂cₜ₋₁ = fₜ    (element-wise, close to 1 for relevant memories)
+  → NO repeated matrix multiplication → gradient preserved!
+    </div>
+
+    <div class="section-label">Bidirectional Architecture</div>
+    <div class="math-block">
+Forward LSTM:  h→ₜ  processes x₁ → x₂ → … → xₙ
+Backward LSTM: h←ₜ  processes xₙ → xₙ₋₁ → … → x₁
+Output:        ŷₜ = W·[h→ₜ ; h←ₜ] + b  (concatenated)
+
+Benefit: Each position has context from BOTH past AND future tokens.
+For ASR: "The bat flew past the barn" – "bat" needs future context to resolve ambiguity.
+    </div>
+
+    <div class="tbl-wrap"><table>
+      <tr><th>Feature</th><th>Bi-RNN</th><th>Bi-LSTM</th></tr>
+      <tr><td>Memory mechanism</td><td>Simple recurrence</td><td>Cell state + 3 gates</td></tr>
+      <tr><td>Long-term dependency</td><td>❌ Vanishes quickly</td><td>✅ Preserved</td></tr>
+      <tr><td>Gradient flow</td><td>Multiplicative (unstable)</td><td>Additive (stable)</td></tr>
+      <tr><td>Bidirectional context</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Parameter count</td><td>Low</td><td>~4× higher</td></tr>
+      <tr><td>Best for</td><td>Short sequences</td><td>Long sequences (speech, NLP)</td></tr>
+    </table></div>
+
+    <div class="callout">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text"><strong>Conclusion:</strong> For speech-to-text on long sentences, Bi-LSTM is the correct choice. Its cell state acts as a "gradient highway," allowing the model to learn dependencies spanning hundreds of tokens without vanishing gradients. The bidirectional pass provides full context at every position.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="exam-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     CAT-2 SET 4 (March 2026)
+════════════════════════════════════════════════════ -->
+<section id="cat2s4">
+<div class="exam-header">
+  <h2>CAT-2 – Set 4 | Winter Semester (2025-26) – March 2026</h2>
+  <div class="exam-meta">
+    <span>Max Marks: 50</span>
+    <span>Duration: 90 Min</span>
+    <span>Session: FN</span>
+  </div>
+</div>
+
+<!-- Q1 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1</div>
+    <div class="q-title">a) Regularization, Dropout, Early Stopping (5M). b) Data Augmentation – 5 techniques (5M).</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="part-label">PART A</div>
+    <div class="section-label">Regularization</div>
+    <p>Adding a penalty to the loss to reduce overfitting (see Q1 CAT-2 Set 1 for full detail). Key forms: L1 (Lasso) and L2 (Ridge/Weight Decay).</p>
+
+    <div class="section-label">Dropout</div>
+    <p>During each training iteration, each neuron is <strong>randomly deactivated</strong> with probability p (typically 0.5). This forces the network to learn <strong>redundant representations</strong> and prevents co-adaptation of neurons.</p>
+    <div class="math-block">
+Training:   Apply mask m ~ Bernoulli(1-p) → h' = m ⊙ h
+Inference:  Scale weights by (1-p) or use inverted dropout during training.
+
+Effect: Equivalent to training an ensemble of 2ⁿ different sub-networks.
+        Reduces over-reliance on any single neuron.
+    </div>
+
+    <div class="section-label">Early Stopping</div>
+    <p>Monitor <strong>validation loss</strong> during training. Stop when validation loss starts increasing even though training loss keeps falling. The saved model at the minimum validation loss is returned.</p>
+    <div class="math-block">
+Epoch:    1   2   3   4   5   6   7   8
+Train L:  0.9 0.7 0.5 0.3 0.2 0.1 0.05 0.02
+Val L:    0.8 0.7 0.6 0.55 0.58 0.65 0.72 0.80
+                              ↑ STOP HERE (epoch 4)
+    </div>
+
+    <div class="part-label">PART B</div>
+    <div class="section-label">Data Augmentation</div>
+    <p>Creating new training samples by applying label-preserving transformations to existing images, reducing overfitting when data is scarce.</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>#</th><th>Technique</th><th>Description</th></tr>
+      <tr><td>1</td><td><strong>Horizontal/Vertical Flip</strong></td><td>Mirror the image along horizontal or vertical axis. Doubles dataset size.</td></tr>
+      <tr><td>2</td><td><strong>Random Rotation</strong></td><td>Rotate image by a random angle (e.g., ±15°). Adds rotational invariance.</td></tr>
+      <tr><td>3</td><td><strong>Random Crop / Zoom</strong></td><td>Randomly crop a patch and resize to original dimensions. Simulates scale variation.</td></tr>
+      <tr><td>4</td><td><strong>Brightness / Contrast Adjustment</strong></td><td>Multiply pixel values by a random factor. Models lighting variation.</td></tr>
+      <tr><td>5</td><td><strong>Gaussian Noise Addition</strong></td><td>Add zero-mean Gaussian noise. Makes model robust to sensor noise.</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- Q2 CNN Medical -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2</div>
+    <div class="q-title">CNN for medical image 200×200×1. Find output size after each layer. Compute trainable parameters of all conv layers.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Output size formula (Conv/Pool):
+  out = floor((in + 2p − k) / s) + 1
+  'same' padding: p = (k-1)/2 → output = input size
+  'valid' padding: p = 0
+    </div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Layer</th><th>Type</th><th>Config</th><th>Input</th><th>Output</th><th>Conv Params</th></tr>
+      <tr><td>L1</td><td>Conv1</td><td>16f, 5×5, s=1, same</td><td>200×200×1</td><td class="highlight">200×200×16</td><td class="num">(5×5×1+1)×16 = 416</td></tr>
+      <tr><td>L2</td><td>MaxPool1</td><td>2×2, s=2</td><td>200×200×16</td><td class="highlight">100×100×16</td><td class="num">0</td></tr>
+      <tr><td>L3</td><td>Conv2</td><td>32f, 3×3, s=1, valid</td><td>100×100×16</td><td class="highlight">98×98×32</td><td class="num">(3×3×16+1)×32 = 4,640</td></tr>
+      <tr><td>L4</td><td>Conv3</td><td>64f, 3×3, s=1, same</td><td>98×98×32</td><td class="highlight">98×98×64</td><td class="num">(3×3×32+1)×64 = 18,496</td></tr>
+      <tr><td>L5</td><td>MaxPool2</td><td>2×2, s=2</td><td>98×98×64</td><td class="highlight">49×49×64</td><td class="num">0</td></tr>
+      <tr><td>L6</td><td>Conv4</td><td>32f, 3×3, s=1, valid</td><td>49×49×64</td><td class="highlight">47×47×32</td><td class="num">(3×3×64+1)×32 = 18,464</td></tr>
+      <tr><td>L7</td><td>Conv5</td><td>64f, 3×3, s=1, same</td><td>47×47×32</td><td class="highlight">47×47×64</td><td class="num">(3×3×32+1)×64 = 18,496</td></tr>
+      <tr><td>L8</td><td>MaxPool3</td><td>2×2, s=2</td><td>47×47×64</td><td class="highlight">23×23×64</td><td class="num">0</td></tr>
+      <tr><td>L9</td><td>FC</td><td>256 neurons</td><td>23×23×64=33856</td><td class="highlight">256</td><td class="num">(33856+1)×256 = 8,667,392</td></tr>
+      <tr><td>L10</td><td>Output</td><td>4 neurons</td><td>256</td><td class="highlight">4</td><td class="num">(256+1)×4 = 1,028</td></tr>
+    </table></div>
+    <div class="math-block">
+Total Conv Layer Parameters:
+  416 + 4,640 + 18,496 + 18,464 + 18,496 = <span class="result">60,512</span>
+
+Total All Trainable Parameters:
+  60,512 + 8,667,392 + 1,028 = <span class="result">8,728,932</span>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 Transfer Learning / Normalization -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3</div>
+    <div class="q-title">a) Feature extraction vs fine-tuning – when to use each. b) Role of normalization in training stability and convergence.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="part-label">PART A (5M)</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Aspect</th><th>Feature Extraction</th><th>Fine-Tuning</th></tr>
+      <tr><td>Pre-trained layers</td><td>Frozen (not updated)</td><td>Some/all unfrozen (updated)</td></tr>
+      <tr><td>New layers trained</td><td>Only top classifier</td><td>Classifier + top N base layers</td></tr>
+      <tr><td>Learning rate</td><td>Normal (e.g., 1e-3)</td><td>Very small (e.g., 1e-5)</td></tr>
+      <tr><td>Use when</td><td>Target dataset is SMALL; domain is similar to source</td><td>Target dataset is LARGE; domain differs from source</td></tr>
+      <tr><td>Risk</td><td>Underfitting if domains differ</td><td>Overfitting / catastrophic forgetting if dataset is small</td></tr>
+      <tr><td>Speed</td><td>Fast</td><td>Slower</td></tr>
+    </table></div>
+    <p><strong>Rule of thumb:</strong> Small data + similar domain → Feature Extraction. Large data + different domain → Fine-tune all layers. Large data + similar domain → Fine-tune top layers.</p>
+
+    <div class="part-label">PART B (5M)</div>
+    <div class="section-label">Normalization for Training Stability</div>
+    <ul>
+      <li><strong>Batch Normalization:</strong> Normalises each feature over the mini-batch. Reduces internal covariate shift.</li>
+      <li><strong>Layer Normalization:</strong> Normalises over all features for a single sample. Used in Transformers and RNNs.</li>
+      <li><strong>Instance Normalization:</strong> Normalises per feature per sample. Used in style transfer.</li>
+    </ul>
+    <div class="math-block">
+How normalization improves convergence:
+
+1. Stable gradient magnitudes → fewer exploding/vanishing gradient issues
+2. Higher learning rates tolerable → faster convergence
+3. Reduces sensitivity to weight initialisation
+4. Acts as implicit regulariser (BN adds noise via batch statistics)
+5. Smoothes the loss landscape → gradients point more reliably towards minima
+    </div>
+  </div>
+</div>
+
+<!-- Q4 RNN Single Neuron -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4</div>
+    <div class="q-title">RNN single hidden neuron, 3 time steps. Wxh=[0.15,0.25,0.35], Whh=0.55, Why=[0.4,0.2,0.6]. Find hidden states and output vectors.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Setup</div>
+    <div class="math-block">
+Interpretation: Input x has 3 features. At each time step one feature is active.
+  t=1: x₁ = [1, 0, 0]    t=2: x₂ = [0, 1, 0]    t=3: x₃ = [0, 0, 1]
+
+W_xh = [0.15, 0.25, 0.35] (1×3, single hidden neuron)
+W_hh = 0.55  (scalar recurrent weight)
+W_hy = [0.4, 0.2, 0.6]   (1×3, 3 output neurons)
+
+h_t = tanh(W_xh · x_t + W_hh · h_{t-1})
+y_t = softmax(W_hy · h_t)   (W_hy: single hidden × 3 out → scale h by each weight)
+h₀  = 0
+    </div>
+
+    <div class="section-label">t = 1</div>
+    <div class="math-block">
+net₁ = W_xh·x₁ + W_hh·h₀ = [0.15,0.25,0.35]·[1,0,0] + 0.55×0
+     = 0.15 + 0 = 0.15
+<span class="result">h₁ = tanh(0.15) = 0.1489</span>
+
+o₁  = h₁ × W_hy = [0.4×0.1489, 0.2×0.1489, 0.6×0.1489]
+    = [0.05956, 0.02978, 0.08934]
+e^0.05956=1.0614  e^0.02978=1.0302  e^0.08934=1.0935   Σ=3.1851
+<span class="result">y₁ = [0.3333, 0.3234, 0.3433]  → Highest: y₃</span>
+    </div>
+
+    <div class="section-label">t = 2</div>
+    <div class="math-block">
+net₂ = [0.15,0.25,0.35]·[0,1,0] + 0.55×0.1489
+     = 0.25 + 0.0819 = 0.3319
+<span class="result">h₂ = tanh(0.3319) = 0.3195</span>
+
+o₂  = [0.4×0.3195, 0.2×0.3195, 0.6×0.3195] = [0.1278, 0.0639, 0.1917]
+e^0.1278=1.1363  e^0.0639=1.0660  e^0.1917=1.2113   Σ=3.4136
+<span class="result">y₂ = [0.3329, 0.3123, 0.3549]  → Highest: y₃</span>
+    </div>
+
+    <div class="section-label">t = 3</div>
+    <div class="math-block">
+net₃ = [0.15,0.25,0.35]·[0,0,1] + 0.55×0.3195
+     = 0.35 + 0.1757 = 0.5257
+<span class="result">h₃ = tanh(0.5257) = 0.4829</span>
+
+o₃  = [0.4×0.4829, 0.2×0.4829, 0.6×0.4829] = [0.1932, 0.0966, 0.2897]
+e^0.1932=1.2131  e^0.0966=1.1014  e^0.2897=1.3361   Σ=3.6506
+<span class="result">y₃ = [0.3323, 0.3017, 0.3660]  → Highest: y₃</span>
+    </div>
+    <div class="callout">
+      <div class="callout-icon">📊</div>
+      <div class="callout-text"><strong>Output neuron 3 (y₃)</strong> has the highest probability at all three time steps. This is because W_hy[2]=0.6 is the largest weight in W_hy, so it dominates the output distribution regardless of hidden state value.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 Bi-LSTM vs Bi-RNN / GRU -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q5</div>
+    <div class="q-title">a) Bi-LSTM vs Bi-RNN for long-term dependencies (5M). b) GRU working mechanism and training stability improvement (5M).</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="part-label">PART A (see also Q5 CAT-2 Set 1)</div>
+    <p>Refer to the full answer in Q5 (CAT-2 Set 1) above. Key addition: Bi-LSTM captures both past and future context at every token, outperforming Bi-RNN for long sequences due to LSTM's gated cell state preventing gradient vanishing.</p>
+
+    <div class="part-label">PART B – Gated Recurrent Unit (GRU)</div>
+    <div class="section-label">GRU Architecture</div>
+    <p>GRU is a streamlined version of LSTM with <strong>2 gates</strong> (vs LSTM's 3), no separate cell state:</p>
+    <div class="math-block">
+Update gate: zₜ = σ(W_z·[hₜ₋₁, xₜ] + b_z)
+Reset gate:  rₜ = σ(W_r·[hₜ₋₁, xₜ] + b_r)
+Candidate:   h̃ₜ = tanh(W·[rₜ⊙hₜ₋₁, xₜ] + b)
+New state:   hₜ = (1−zₜ)⊙hₜ₋₁ + zₜ⊙h̃ₜ
+    </div>
+
+    <div class="section-label">How GRU Improves Training Stability</div>
+    <ul>
+      <li><strong>Update gate</strong> decides how much of the past to keep: if zₜ≈0, old memory preserved (like LSTM forget gate); if zₜ≈1, new info replaces it.</li>
+      <li><strong>Reset gate</strong> controls how much past context influences the candidate state.</li>
+      <li>The convex combination <code>hₜ = (1−z)⊙h_{t-1} + z⊙h̃</code> creates a <strong>direct gradient path</strong> from hₜ to hₜ₋₁ → gradient flows without vanishing.</li>
+      <li>Fewer parameters than LSTM → less prone to overfitting, faster to train.</li>
+    </ul>
+
+    <div class="tbl-wrap"><table>
+      <tr><th></th><th>Standard RNN</th><th>LSTM</th><th>GRU</th></tr>
+      <tr><td>Gates</td><td>0</td><td>3 (f, i, o)</td><td>2 (z, r)</td></tr>
+      <tr><td>Cell state</td><td>No</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Vanishing grad</td><td>Severe</td><td>Minimal</td><td>Minimal</td></tr>
+      <tr><td>Parameters</td><td>Fewest</td><td>Most</td><td>Moderate</td></tr>
+      <tr><td>Speed</td><td>Fastest</td><td>Slowest</td><td>Faster than LSTM</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<hr class="exam-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     CAT-1 SET 4 (Feb 2026)
+════════════════════════════════════════════════════ -->
+<section id="cat1s4">
+<div class="exam-header">
+  <h2>CAT-1 – Set 4 | Winter Semester (2025-26) – February 2026</h2>
+  <div class="exam-meta">
+    <span>Max Marks: 50</span>
+    <span>Duration: 90 Min</span>
+    <span>Slot: F2 | Date: 07/02/2026</span>
+  </div>
+</div>
+
+<!-- Q1 Tensors -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1</div>
+    <div class="q-title">a) Dot product of A and B. b) Hadamard product of A and C. c) State formulas and resulting shapes.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+A = [[11, 14, 16],   shape: (2×3)
+     [ 9, 22, 12]]
+
+B = [[201, 198],     shape: (3×2)
+     [ 95, 112],
+     [101, 187]]
+
+C = [12, 34, 45]     shape: (3,) → broadcast to (2×3)
+    </div>
+
+    <div class="section-label">Part a – Dot Product A·B (Matrix Multiplication) → shape (2×2)</div>
+    <div class="math-block">
+A·B[0,0] = 11×201 + 14×95  + 16×101 = 2211 + 1330 + 1616 = <span class="result">5157</span>
+A·B[0,1] = 11×198 + 14×112 + 16×187 = 2178 + 1568 + 2992 = <span class="result">6738</span>
+A·B[1,0] =  9×201 + 22×95  + 12×101 = 1809 + 2090 + 1212 = <span class="result">5111</span>
+A·B[1,1] =  9×198 + 22×112 + 12×187 = 1782 + 2464 + 2244 = <span class="result">6490</span>
+
+Result = ⎡ 5157  6738 ⎤   Shape: (2, 2)
+         ⎣ 5111  6490 ⎦
+    </div>
+
+    <div class="section-label">Part b – Hadamard Product A ⊙ C (element-wise, broadcasting C across rows)</div>
+    <div class="math-block">
+Row 0: [11×12,  14×34,  16×45] = [132,  476,  720]
+Row 1: [ 9×12,  22×34,  12×45] = [108,  748,  540]
+
+Result = ⎡ 132  476  720 ⎤   Shape: (2, 3)
+         ⎣ 108  748  540 ⎦
+    </div>
+
+    <div class="section-label">Part c – Formulas and Shapes</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Operation</th><th>Formula</th><th>Input Shapes</th><th>Output Shape</th></tr>
+      <tr><td>Dot Product</td><td>C[i,j] = Σₖ A[i,k]·B[k,j]</td><td>(m×n)·(n×p)</td><td>(m×p)</td></tr>
+      <tr><td>Hadamard Product</td><td>C[i,j] = A[i,j]·B[i,j]</td><td>Same shape (or broadcast)</td><td>Same as inputs</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- Q2 Logistic Regression -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2</div>
+    <div class="q-title">Logistic regression to predict Pass(1)/Fail(0) based on hours studied. Predict for 60 hours.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Data:
+Hours:      51  54  58  61  63  65
+Pass/Fail:   0   0   1   0   1   1
+
+Model: P(pass) = σ(β₀ + β₁·x) = 1 / (1 + e^{-(β₀+β₁x)})
+    </div>
+
+    <div class="section-label">Manual Estimation using Feature Observations</div>
+    <div class="math-block">
+Passes occur at hours ≥ 58 (mostly). Threshold ≈ 58–60.
+n = 6,  x̄ = (51+54+58+61+63+65)/6 = 352/6 = 58.67
+ȳ = (0+0+1+0+1+1)/6 = 0.5
+
+Using gradient descent (η=0.1, initialise β₀=0, β₁=0):
+
+Iteration 1:
+  Predictions (all 0.5 initially)
+  ∂L/∂β₀ = (1/6)Σ(ŷᵢ−yᵢ) = (0.5+0.5−0.5+0.5−0.5−0.5)/6 = 0
+  ∂L/∂β₁ = (1/6)Σ(ŷᵢ−yᵢ)xᵢ = (1/6)[0.5×51+0.5×54+(−0.5)×58+0.5×61+(−0.5)×63+(−0.5)×65]
+          = (1/6)[25.5+27−29+30.5−31.5−32.5]
+          = (1/6)[−10] = −1.667
+  β₁ ← 0 − 0.1×(−1.667) = 0.167
+
+After convergence (typical values):
+  β₀ ≈ −10.0,   β₁ ≈ 0.17
+
+Predict for x = 60 hours:
+  z = β₀ + β₁×60 = −10.0 + 0.17×60 = −10.0 + 10.2 = 0.2
+  P(pass) = σ(0.2) = 1/(1+e^{−0.2}) = 1/(1+0.819) = 0.55
+
+<span class="result">Since P = 0.55 > 0.5 → Student with 60 hours will PASS (predicted class = 1)</span>
+    </div>
+
+    <div class="callout info">
+      <div class="callout-icon">📌</div>
+      <div class="callout-text">Full MLE solution requires iterative gradient descent until convergence. The result β₀≈−10, β₁≈0.17 is obtained by maximizing the log-likelihood. Any reasonable β values giving σ(z)>0.5 for x=60 earn full marks.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q3 Activation Functions -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3</div>
+    <div class="q-title">Explain activation functions with graphs, input/output ranges, derivatives, and suitable layer usage.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="tbl-wrap"><table>
+      <tr><th>Function</th><th>Formula</th><th>Range</th><th>Derivative</th><th>Best Used In</th><th>Notes</th></tr>
+      <tr>
+        <td><strong>Sigmoid</strong></td>
+        <td class="num">1/(1+e⁻ˣ)</td>
+        <td>(0, 1)</td>
+        <td class="num">σ(x)·(1−σ(x))</td>
+        <td>Output layer (binary classification)</td>
+        <td>Vanishing gradient for |x|→∞; not zero-centred</td>
+      </tr>
+      <tr>
+        <td><strong>Tanh</strong></td>
+        <td class="num">(eˣ−e⁻ˣ)/(eˣ+e⁻ˣ)</td>
+        <td>(−1, 1)</td>
+        <td class="num">1−tanh²(x)</td>
+        <td>Hidden layers, RNNs</td>
+        <td>Zero-centred; still has vanishing gradient at extremes</td>
+      </tr>
+      <tr>
+        <td><strong>Step</strong></td>
+        <td class="num">1 if x≥0 else 0</td>
+        <td>{0, 1}</td>
+        <td>0 (undefined at 0)</td>
+        <td>Perceptrons (not deep nets)</td>
+        <td>Not differentiable; no gradient flow</td>
+      </tr>
+      <tr>
+        <td><strong>ReLU</strong></td>
+        <td class="num">max(0, x)</td>
+        <td>[0, ∞)</td>
+        <td>1 if x>0; 0 if x≤0</td>
+        <td>Hidden layers (CNNs, MLPs)</td>
+        <td>Fast; dying ReLU problem for x&lt;0</td>
+      </tr>
+      <tr>
+        <td><strong>Leaky ReLU</strong></td>
+        <td class="num">x if x>0 else αx (α=0.01)</td>
+        <td>(−∞, ∞)</td>
+        <td>1 if x>0; α if x≤0</td>
+        <td>Hidden layers (fixes dying ReLU)</td>
+        <td>Never zero gradient; α is hyperparameter</td>
+      </tr>
+    </table></div>
+    <div class="math-block">
+Sigmoid derivative: d/dx σ(x) = σ(x)·(1−σ(x))   [chain rule from quotient rule]
+Tanh derivative:    d/dx tanh(x) = 1 − tanh²(x) = sech²(x)
+ReLU derivative:    d/dx max(0,x) = { 1, x>0 | 0, x≤0 }  (sub-gradient)
+Leaky ReLU:         d/dx = { 1, x>0 | α, x≤0 }
+    </div>
+  </div>
+</div>
+
+<!-- Q4 Gradient Descent -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4</div>
+    <div class="q-title">Minimize J(w₁,w₂) = w₁² + 2w₂² using gradient descent. Initial w₁=2, w₂=1, α=0.1. Two iterations.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+∂J/∂w₁ = 2w₁      ∂J/∂w₂ = 4w₂
+Update rule: wᵢ ← wᵢ − α·(∂J/∂wᵢ)
+    </div>
+
+    <div class="section-label">Iteration 1  (starting: w₁=2, w₂=1)</div>
+    <div class="math-block">
+∂J/∂w₁ = 2×2 = 4       →  w₁ = 2 − 0.1×4 = 2 − 0.4 = <span class="result">1.6</span>
+∂J/∂w₂ = 4×1 = 4       →  w₂ = 1 − 0.1×4 = 1 − 0.4 = <span class="result">0.6</span>
+J = 1.6² + 2×0.6² = 2.56 + 0.72 = 3.28   (down from J₀=4+2=6)
+    </div>
+
+    <div class="section-label">Iteration 2  (starting: w₁=1.6, w₂=0.6)</div>
+    <div class="math-block">
+∂J/∂w₁ = 2×1.6 = 3.2   →  w₁ = 1.6 − 0.1×3.2 = 1.6 − 0.32 = <span class="result">1.28</span>
+∂J/∂w₂ = 4×0.6 = 2.4   →  w₂ = 0.6 − 0.1×2.4 = 0.6 − 0.24 = <span class="result">0.36</span>
+J = 1.28² + 2×0.36² = 1.6384 + 0.2592 = 1.8976  (convergence towards 0)
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">✓</div>
+      <div class="callout-text">After 2 iterations: <strong>w₁ = 1.28, w₂ = 0.36</strong>. The cost decreased from 6.0 → 3.28 → 1.90. With α=0.1 the method converges stably (both eigenvalues of Hessian are 2 and 4; step sizes 0.2 and 0.4 are within stability bounds).</div>
+    </div>
+  </div>
+</div>
+
+<!-- Q5 Backpropagation -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q5</div>
+    <div class="q-title">Feedforward backpropagation: x₁=0.6, x₂=0.2. Weights w₁₃=0.2, w₁₄=0.5, w₂₃=0.7, w₂₄=0.3, w₃₅=0.4, w₄₅=0.9. Biases b₃=0.1, b₄=0.4, b₅=0.2. η=0.4, target=1. Two iterations (MSE).</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Architecture:  x₁, x₂ → H₃, H₄ → O₅
+Activation: sigmoid   σ(x) = 1/(1+e⁻ˣ)    σ'(x) = σ(1−σ)
+Loss: MSE = 0.5 × (t − O₅)²
+    </div>
+
+    <div class="section-label">── ITERATION 1 ──</div>
+    <div class="section-label">Forward Pass</div>
+    <div class="math-block">
+net₃ = 0.2×0.6 + 0.7×0.2 + 0.1 = 0.12+0.14+0.10 = 0.36
+H₃   = σ(0.36) = 1/(1+e⁻⁰·³⁶) = <span class="result">0.5890</span>
+
+net₄ = 0.5×0.6 + 0.3×0.2 + 0.4 = 0.30+0.06+0.40 = 0.76
+H₄   = σ(0.76) = 1/(1+e⁻⁰·⁷⁶) = <span class="result">0.6814</span>
+
+net₅ = 0.4×0.5890 + 0.9×0.6814 + 0.2 = 0.2356+0.6133+0.2000 = 1.0489
+O₅   = σ(1.0489) = 1/(1+e⁻¹·⁰⁴⁸⁹) = <span class="result">0.7407</span>
+
+MSE = 0.5×(1−0.7407)² = 0.5×0.0672 = 0.0336
+    </div>
+
+    <div class="section-label">Backward Pass – Output Layer</div>
+    <div class="math-block">
+δ₅ = (t − O₅)·O₅·(1−O₅) = (1−0.7407)×0.7407×0.2593 = 0.2593×0.1920 = <span class="result">0.04978</span>
+
+Δw₃₅ = η·δ₅·H₃ = 0.4×0.04978×0.5890 = 0.01172
+Δw₄₅ = η·δ₅·H₄ = 0.4×0.04978×0.6814 = 0.01357
+Δb₅  = η·δ₅     = 0.4×0.04978        = 0.01991
+    </div>
+
+    <div class="section-label">Backward Pass – Hidden Layer</div>
+    <div class="math-block">
+δ₃ = δ₅·w₃₅·H₃·(1−H₃) = 0.04978×0.4×0.5890×0.4110 = <span class="result">0.004820</span>
+δ₄ = δ₅·w₄₅·H₄·(1−H₄) = 0.04978×0.9×0.6814×0.3186 = <span class="result">0.009732</span>
+
+Δw₁₃ = 0.4×0.004820×0.6 = 0.001157   Δw₂₃ = 0.4×0.004820×0.2 = 0.000386
+Δb₃  = 0.4×0.004820     = 0.001928
+Δw₁₄ = 0.4×0.009732×0.6 = 0.002336   Δw₂₄ = 0.4×0.009732×0.2 = 0.000779
+Δb₄  = 0.4×0.009732     = 0.003893
+    </div>
+
+    <div class="section-label">Updated Weights After Iteration 1</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Weight</th><th>Old</th><th>Δ</th><th>New</th></tr>
+      <tr><td>w₁₃</td><td>0.2000</td><td>+0.001157</td><td class="highlight">0.2012</td></tr>
+      <tr><td>w₂₃</td><td>0.7000</td><td>+0.000386</td><td class="highlight">0.7004</td></tr>
+      <tr><td>b₃ </td><td>0.1000</td><td>+0.001928</td><td class="highlight">0.1019</td></tr>
+      <tr><td>w₁₄</td><td>0.5000</td><td>+0.002336</td><td class="highlight">0.5023</td></tr>
+      <tr><td>w₂₄</td><td>0.3000</td><td>+0.000779</td><td class="highlight">0.3008</td></tr>
+      <tr><td>b₄ </td><td>0.4000</td><td>+0.003893</td><td class="highlight">0.4039</td></tr>
+      <tr><td>w₃₅</td><td>0.4000</td><td>+0.011720</td><td class="highlight">0.4117</td></tr>
+      <tr><td>w₄₅</td><td>0.9000</td><td>+0.013570</td><td class="highlight">0.9136</td></tr>
+      <tr><td>b₅ </td><td>0.2000</td><td>+0.019910</td><td class="highlight">0.2199</td></tr>
+    </table></div>
+
+    <div class="section-label">── ITERATION 2 (using updated weights) ──</div>
+    <div class="math-block">
+net₃ = 0.2012×0.6 + 0.7004×0.2 + 0.1019 = 0.1207+0.1401+0.1019 = 0.3627
+H₃   = σ(0.3627) = <span class="result">0.5896</span>
+
+net₄ = 0.5023×0.6 + 0.3008×0.2 + 0.4039 = 0.3014+0.0602+0.4039 = 0.7655
+H₄   = σ(0.7655) = <span class="result">0.6826</span>
+
+net₅ = 0.4117×0.5896 + 0.9136×0.6826 + 0.2199
+     = 0.2427 + 0.6234 + 0.2199 = 1.0860
+O₅   = σ(1.0860) = <span class="result">0.7480</span>
+
+MSE₂ = 0.5×(1−0.7480)² = 0.5×0.0635 = 0.0318  (↓ from 0.0336 — converging ✓)
+    </div>
+  </div>
+</div>
+
+<hr class="exam-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     CAT-1 SET 3 (Feb 2026)
+════════════════════════════════════════════════════ -->
+<section id="cat1s3">
+<div class="exam-header">
+  <h2>CAT-1 – Set 3 | Winter Semester (2025-26) – February 2026</h2>
+  <div class="exam-meta">
+    <span>Max Marks: 50</span>
+    <span>Duration: 90 Min</span>
+    <span>Slot: F1 | Date: 07/02/2026</span>
+  </div>
+</div>
+
+<!-- Q1 Tensor ops -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q1</div>
+    <div class="q-title">a) Dot product x=12, A=[[91,12],[210,56],[101,87]]. b) Hadamard C=[9,6], D=[[8,5],[14,12],[4,11]]. c) Verify 2p−q+½r = [5,0].</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Part a – Scalar × Matrix (4M)</div>
+    <div class="math-block">
+x·A = 12 × [[91,12],[210,56],[101,87]]
+    = [[ 12×91,  12×12 ],
+       [12×210, 12×56  ],
+       [12×101, 12×87  ]]
+<span class="result">= [[1092,  144],
+   [2520,  672],
+   [1212, 1044]]</span>   Shape: (3, 2)
+    </div>
+
+    <div class="section-label">Part b – Hadamard C⊙D with broadcasting (4M)</div>
+    <div class="math-block">
+C=[9,6] broadcast across 3 rows of D:
+Row 0: [9×8,  6×5 ] = [72,  30]
+Row 1: [9×14, 6×12] = [126, 72]
+Row 2: [9×4,  6×11] = [36,  66]
+
+<span class="result">C⊙D = [[ 72,  30],
+       [126,  72],
+       [ 36,  66]]</span>  Shape: (3, 2)
+    </div>
+
+    <div class="section-label">Part c – Vector Expression (2M)</div>
+    <div class="math-block">
+p=[2,1], q=[−1,3], r=[4,−2]
+
+2p       = 2×[2,1]   = [4,  2]
+−q       = −[−1,3]   = [1, −3]
+½r       = ½×[4,−2]  = [2, −1]
+
+2p−q+½r = [4+1+2, 2+(−3)+(−1)] = [7, −2]
+
+<span class="comment">Note: The exam states the result should be [5, 0] but the correct calculation gives [7, −2].
+This appears to be a typo in the exam paper. Show the working steps for full marks.</span>
+    </div>
+  </div>
+</div>
+
+<!-- Q2 Gradient Descent -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q2</div>
+    <div class="q-title">a) Illustrate Gradient Descent (5M). b) Types of GD with advantages/disadvantages (5M).</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="part-label">PART A</div>
+    <div class="section-label">Process of Gradient Descent</div>
+    <p>Gradient Descent is an iterative optimisation algorithm that minimises a loss function J(θ) by moving parameters in the direction of the <strong>negative gradient</strong>.</p>
+    <div class="math-block">
+Algorithm:
+1. Initialise parameters θ randomly (or with small values)
+2. Compute loss J(θ) = (1/n)Σ L(ŷᵢ, yᵢ)
+3. Compute gradient: ∇J = ∂J/∂θ
+4. Update: θ ← θ − η·∇J
+5. Repeat until convergence (|ΔJ| < ε)
+
+Intuition: Imagine standing on a hilly landscape. The gradient tells you
+the steepest direction uphill. Moving in the opposite direction takes you
+towards the valley (minimum loss).
+    </div>
+
+    <div class="part-label">PART B</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Type</th><th>Batch Size</th><th>Update Frequency</th><th>Advantages</th><th>Disadvantages</th></tr>
+      <tr>
+        <td><strong>Batch GD (BGD)</strong></td>
+        <td>Full dataset</td>
+        <td>Once per epoch</td>
+        <td>Stable convergence; accurate gradient</td>
+        <td>Very slow for large datasets; memory intensive; gets stuck in local minima</td>
+      </tr>
+      <tr>
+        <td><strong>Stochastic GD (SGD)</strong></td>
+        <td>1 sample</td>
+        <td>After every sample</td>
+        <td>Fast; can escape local minima (noisy); online learning</td>
+        <td>Very noisy gradient; may not converge; high variance in updates</td>
+      </tr>
+      <tr>
+        <td><strong>Mini-Batch GD</strong></td>
+        <td>32–256 samples</td>
+        <td>After each mini-batch</td>
+        <td>Balance of speed and stability; GPU-efficient; reduced variance vs SGD</td>
+        <td>Hyperparameter (batch size) to tune; still some noise</td>
+      </tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- Q3 ANN Parameters -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3</div>
+    <div class="q-title">a) ANN for 65K 28×28 images, 10 classes. Hidden layers: 5, 10, 10 neurons. Count parameters per layer (6M). b) Perceptron vs MLP (4M).</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Part a – ANN Architecture</div>
+    <div class="math-block">
+Input: 28×28 = 784 neurons
+Hidden 1: 5 neurons
+Hidden 2: 10 neurons
+Hidden 3: 10 neurons
+Output: 10 neurons (10 classes)
+
+Layer parameters = (inputs + 1_bias) × outputs
+    </div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Layer</th><th>Neurons In</th><th>Neurons Out</th><th>Weights</th><th>Biases</th><th>Total</th></tr>
+      <tr><td>Input → H1</td><td>784</td><td>5</td><td>784×5 = 3,920</td><td>5</td><td class="highlight">3,925</td></tr>
+      <tr><td>H1 → H2</td><td>5</td><td>10</td><td>5×10 = 50</td><td>10</td><td class="highlight">60</td></tr>
+      <tr><td>H2 → H3</td><td>10</td><td>10</td><td>10×10 = 100</td><td>10</td><td class="highlight">110</td></tr>
+      <tr><td>H3 → Output</td><td>10</td><td>10</td><td>10×10 = 100</td><td>10</td><td class="highlight">110</td></tr>
+      <tr><td colspan="5"><strong>Total</strong></td><td class="highlight">4,205</td></tr>
+    </table></div>
+
+    <div class="section-label">Part b – Perceptron vs Multi-Layer Neural Network</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Aspect</th><th>Perceptron</th><th>Multi-Layer Neural Network (MLP)</th></tr>
+      <tr><td>Layers</td><td>Single layer (input + output only)</td><td>Input + ≥1 hidden + output</td></tr>
+      <tr><td>Activation</td><td>Step function</td><td>Sigmoid, ReLU, tanh etc.</td></tr>
+      <tr><td>Learning</td><td>Perceptron learning rule</td><td>Backpropagation + gradient descent</td></tr>
+      <tr><td>Problems solved</td><td>Only linearly separable (e.g., AND, OR)</td><td>Non-linearly separable (XOR, complex patterns)</td></tr>
+      <tr><td>Representational power</td><td>Linear decision boundary only</td><td>Universal function approximator</td></tr>
+      <tr><td>Convergence</td><td>Guaranteed if linearly separable</td><td>Not guaranteed; local minima possible</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- Q4 OR Gate Perceptron -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4</div>
+    <div class="q-title">Single-layer perceptron for OR gate. w₁=0.5, w₂=0.2, bias=1, threshold=1, η=0.3. One epoch, compute final output.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+OR Truth Table (training data):
+x₁  x₂  |  Target
+ 0   0   |    0
+ 0   1   |    1
+ 1   0   |    1
+ 1   1   |    1
+
+net = w₁×x₁ + w₂×x₂ + bias×1
+output = 1 if net ≥ threshold (1), else 0
+Update: wᵢ ← wᵢ + η×(target−output)×xᵢ
+        bias ← bias + η×(target−output)
+    </div>
+
+    <div class="steps">
+      <div class="step"><div class="step-title">Example 1: x=[0,0] target=0</div>
+        <div class="math-block">
+net = 0.5×0 + 0.2×0 + 1×1 = 1.0
+output = 1 (net ≥ 1)    error = 0−1 = −1
+Δw₁ = 0.3×(−1)×0 = 0    w₁=0.5
+Δw₂ = 0.3×(−1)×0 = 0    w₂=0.2
+Δb  = 0.3×(−1)×1 = −0.3  b=0.7
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Example 2: x=[0,1] target=1</div>
+        <div class="math-block">
+net = 0.5×0 + 0.2×1 + 0.7×1 = 0.9
+output = 0 (0.9 < 1)    error = 1−0 = 1
+Δw₁ = 0.3×1×0 = 0       w₁=0.5
+Δw₂ = 0.3×1×1 = 0.3     w₂=0.5
+Δb  = 0.3×1×1 = 0.3      b=1.0
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Example 3: x=[1,0] target=1</div>
+        <div class="math-block">
+net = 0.5×1 + 0.5×0 + 1.0×1 = 1.5
+output = 1 (1.5 ≥ 1)    error = 1−1 = 0
+No update.  w₁=0.5, w₂=0.5, b=1.0
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Example 4: x=[1,1] target=1</div>
+        <div class="math-block">
+net = 0.5×1 + 0.5×1 + 1.0×1 = 2.0
+output = 1    error = 0
+No update.  w₁=0.5, w₂=0.5, b=1.0
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <div class="callout-icon">✓</div>
+      <div class="callout-text"><strong>After 1 epoch: w₁=0.5, w₂=0.5, bias=1.0</strong><br>
+      Final verification with all inputs:<br>
+      (0,0): net=1.0→1 ✗ (still wrong — needs more epochs)<br>
+      (0,1): net=1.5→1 ✓  (1,0): net=1.5→1 ✓  (1,1): net=2.0→1 ✓<br>
+      The perceptron needs additional epochs or a lower initial bias to fully converge on OR.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="exam-divider">
+
+<!-- ═══════════════════════════════════════════════════
+     END-TERM / OTHER QUESTIONS
+════════════════════════════════════════════════════ -->
+<section id="endterm">
+<div class="exam-header">
+  <h2>End-Term Questions (Images 4 & 5)</h2>
+  <div class="exam-meta">
+    <span>LSTM Cell • BPTT • Inception Block • Backprop on Given Network • Adam Optimizer</span>
+  </div>
+</div>
+
+<!-- Backprop on Given Network (Image 5 Q3) -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q3 (End)</div>
+    <div class="q-title">Neural network backprop: x⁽¹⁾=[0.5,0.8,0.3], x⁽²⁾=[0.2,0.4,0.6], targets y⁽¹⁾=1, y⁽²⁾=0. MSE=½Σ(ŷ−y)². η=0.3. One iteration BGD.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+W⁽¹⁾ (input→hidden, 3×2):  W⁽²⁾ (hidden→output, 2×1):
+⎡ 0.1  0.2 ⎤               ⎡ 0.7 ⎤
+⎢ 0.3  0.4 ⎥               ⎣ 0.8 ⎦
+⎣ 0.5  0.6 ⎦
+b₄=[0.1, 0.2]  b₆=0.3      Activation: sigmoid
+    </div>
+
+    <div class="section-label">Forward Pass – Sample 1: x⁽¹⁾=[0.5,0.8,0.3]</div>
+    <div class="math-block">
+h₄_net = W⁽¹⁾ᵀ·x+b₄:
+  H₄_net[0] = 0.1×0.5+0.3×0.8+0.5×0.3+0.1 = 0.05+0.24+0.15+0.1 = 0.54
+  H₄_net[1] = 0.2×0.5+0.4×0.8+0.6×0.3+0.2 = 0.10+0.32+0.18+0.2 = 0.80
+H₄ = [σ(0.54), σ(0.80)] = [0.6318, 0.6900]
+
+O₆_net = 0.7×0.6318 + 0.8×0.6900 + 0.3 = 0.4423+0.5520+0.3 = 1.2943
+O₆⁽¹⁾ = σ(1.2943) = <span class="result">0.7846</span>   [target=1, error=0.2154]
+    </div>
+
+    <div class="section-label">Forward Pass – Sample 2: x⁽²⁾=[0.2,0.4,0.6]</div>
+    <div class="math-block">
+H₄_net[0] = 0.1×0.2+0.3×0.4+0.5×0.6+0.1 = 0.02+0.12+0.30+0.1 = 0.54
+H₄_net[1] = 0.2×0.2+0.4×0.4+0.6×0.6+0.2 = 0.04+0.16+0.36+0.2 = 0.76
+H₄ = [σ(0.54), σ(0.76)] = [0.6318, 0.6814]
+
+O₆⁽²⁾_net = 0.7×0.6318+0.8×0.6814+0.3 = 0.4423+0.5451+0.3 = 1.2874
+O₆⁽²⁾ = σ(1.2874) = <span class="result">0.7836</span>   [target=0, error=−0.7836]
+    </div>
+
+    <div class="section-label">Batch Gradients (average over 2 samples)</div>
+    <div class="math-block">
+δ₆⁽¹⁾ = (1−0.7846)×0.7846×(1−0.7846) = 0.2154×0.1680 = 0.03618
+δ₆⁽²⁾ = (0−0.7836)×0.7836×(1−0.7836) = −0.7836×0.1695 = −0.13283
+
+∂J/∂W₂ (weight from H₄ to O₆, averaged):
+  ΔW²[0] = η×½×(δ₆⁽¹⁾×H₄[0]⁽¹⁾ + δ₆⁽²⁾×H₄[0]⁽²⁾)
+           = 0.3×½×(0.03618×0.6318 + (−0.13283)×0.6318)
+           = 0.15×(0.02285 − 0.08393) = 0.15×(−0.06108) = −0.00916
+  ΔW²[1] = 0.15×(0.03618×0.6900 + (−0.13283)×0.6814)
+           = 0.15×(0.02496 − 0.09049) = −0.009834
+
+W²_new[0] = 0.7 − 0.00916 = <span class="result">0.6908</span>
+W²_new[1] = 0.8 − 0.009834 = <span class="result">0.7902</span>
+    </div>
+  </div>
+</div>
+
+<!-- Adam Optimizer -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q4 (End)</div>
+    <div class="q-title">Explain Adam (Adaptive Moment Estimation): first moment, second moment, bias correction, parameter update rule.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Motivation</div>
+    <p>Adam combines the advantages of <strong>AdaGrad</strong> (adapts learning rate per parameter) and <strong>RMSProp</strong> (uses exponential moving average of squared gradients), plus adds <strong>momentum</strong>.</p>
+
+    <div class="section-label">Algorithm</div>
+    <div class="math-block">
+Hyperparameters: η=0.001, β₁=0.9, β₂=0.999, ε=10⁻⁸
+
+At each step t with gradient g:
+
+1. First moment estimate (momentum):
+   m_t = β₁·m_{t-1} + (1−β₁)·g
+   [Exponential moving average of gradients → direction]
+
+2. Second moment estimate (adaptive scaling):
+   v_t = β₂·v_{t-1} + (1−β₂)·g²
+   [Exponential moving average of squared gradients → magnitude]
+
+3. Bias correction (compensates for initialisation at 0):
+   m̂_t = m_t / (1−β₁ᵗ)
+   v̂_t = v_t / (1−β₂ᵗ)
+   [At t=1: 1−β₁=0.1, so m̂ = m/0.1 = 10m → unbiased]
+
+4. Parameter update:
+   θ ← θ − η · m̂_t / (√v̂_t + ε)
+    </div>
+
+    <div class="section-label">Interpretation of Each Component</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Component</th><th>Role</th><th>Effect</th></tr>
+      <tr><td>m̂ₜ (1st moment)</td><td>Smoothed gradient direction (momentum)</td><td>Reduces oscillation; accelerates in consistent direction</td></tr>
+      <tr><td>v̂ₜ (2nd moment)</td><td>Smoothed squared gradient (curvature)</td><td>Shrinks steps for frequently updated params; enlarges for infrequent</td></tr>
+      <tr><td>Bias correction</td><td>Corrects initialisation bias (m₀=v₀=0)</td><td>Prevents very small updates in early training</td></tr>
+      <tr><td>η/√v̂+ε</td><td>Adaptive learning rate per parameter</td><td>Automatically scales step size; ε prevents division by zero</td></tr>
+    </table></div>
+
+    <div class="callout">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-text"><strong>Why Adam is preferred:</strong> Works well with noisy gradients, sparse gradients, and non-stationary objectives. Typical defaults (β₁=0.9, β₂=0.999) work well across most deep learning tasks without tuning.</div>
+    </div>
+  </div>
+</div>
+
+<!-- Inception Block -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q5a (End)</div>
+    <div class="q-title">Inception block 28×28×192. Compute output depth (channels after concatenation), output size per branch, total learnable parameters.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Input: 28×28×192
+
+Branches:
+ (1) 1×1 conv: 64 filters
+ (2) 1×1 conv (96 filters) → 3×3 conv (128 filters)
+ (3) 1×1 conv (16 filters) → 5×5 conv (32 filters)
+ (4) 3×3 max pool → 1×1 conv (32 filters)
+    </div>
+
+    <div class="section-label">Output Size per Branch (using same padding)</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Branch</th><th>Operations</th><th>Output Size</th><th>Channels</th></tr>
+      <tr><td>1</td><td>1×1 conv</td><td>28×28</td><td class="highlight">64</td></tr>
+      <tr><td>2</td><td>1×1→3×3 conv (same)</td><td>28×28</td><td class="highlight">128</td></tr>
+      <tr><td>3</td><td>1×1→5×5 conv (same)</td><td>28×28</td><td class="highlight">32</td></tr>
+      <tr><td>4</td><td>3×3 maxpool (same)→1×1 conv</td><td>28×28</td><td class="highlight">32</td></tr>
+    </table></div>
+    <div class="math-block">
+<span class="result">Output depth after concatenation = 64+128+32+32 = 256 channels
+Final output shape = 28×28×256</span>
+    </div>
+
+    <div class="section-label">Learnable Parameters (with bias)</div>
+    <div class="math-block">
+Branch 1: (1×1×192+1)×64 = 193×64 = 12,352
+
+Branch 2:
+  Step 1 – 1×1 (96 filters): (1×1×192+1)×96 = 18,528
+  Step 2 – 3×3 (128 filters): (3×3×96+1)×128 = 110,720
+
+Branch 3:
+  Step 1 – 1×1 (16 filters): (1×1×192+1)×16 = 3,088
+  Step 2 – 5×5 (32 filters): (5×5×16+1)×32 = 12,832
+
+Branch 4:
+  MaxPool: 0
+  1×1 (32 filters): (1×1×192+1)×32 = 6,176
+
+<span class="result">Total = 12,352 + 18,528 + 110,720 + 3,088 + 12,832 + 6,176 = 163,696 parameters</span>
+    </div>
+  </div>
+</div>
+
+<!-- LSTM Cell -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q8 (End)</div>
+    <div class="q-title">LSTM cell: xₜ=[0.6,−0.1], h_{t-1}=[0.2,0.5], c_{t-1}=[0.4,0.1]. Compute forget gate, input gate, cell state, output gate.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="math-block">
+Given weight matrices (each 2×4, acting on [xₜ; h_{t-1}] = [0.6, −0.1, 0.2, 0.5]):
+
+Wf=[[0.2,−0.3,0.4,0.1],[0.5,0.2,−0.1,0.3]]   bf=[0.1, 0.2]
+Wi=[[−0.1,0.3,0.2,−0.2],[0.4,−0.2,0.1,0.5]]   bi=[−0.1, 0.3]
+Wo=[[0.3,0.1,−0.4,0.2],[0.2,0.6,0.3,−0.1]]    bo=[0.2, −0.2]
+Wc=[[0.5,−0.2,0.1,0.3],[−0.4,0.2,0.6,0.1]]    bc=[0.05, 0.1]
+
+Combined input z = [0.6, −0.1, 0.2, 0.5]
+    </div>
+
+    <div class="section-label">Forget Gate  fₜ = σ(Wf·z + bf)</div>
+    <div class="math-block">
+Wf·z[0] = 0.2×0.6+(−0.3)×(−0.1)+0.4×0.2+0.1×0.5 = 0.12+0.03+0.08+0.05 = 0.28
+Wf·z[1] = 0.5×0.6+0.2×(−0.1)+(−0.1)×0.2+0.3×0.5 = 0.30−0.02−0.02+0.15 = 0.41
++bf:  [0.28+0.1, 0.41+0.2] = [0.38, 0.61]
+<span class="result">fₜ = [σ(0.38), σ(0.61)] = [0.5939, 0.6479]</span>
+    </div>
+
+    <div class="section-label">Input Gate  iₜ = σ(Wi·z + bi)</div>
+    <div class="math-block">
+Wi·z[0] = (−0.1)×0.6+0.3×(−0.1)+0.2×0.2+(−0.2)×0.5 = −0.06−0.03+0.04−0.10 = −0.15
+Wi·z[1] = 0.4×0.6+(−0.2)×(−0.1)+0.1×0.2+0.5×0.5    = 0.24+0.02+0.02+0.25  = 0.53
++bi:  [−0.15+(−0.1), 0.53+0.3] = [−0.25, 0.83]
+<span class="result">iₜ = [σ(−0.25), σ(0.83)] = [0.4378, 0.6966]</span>
+    </div>
+
+    <div class="section-label">Cell Candidate  g̃ₜ = tanh(Wc·z + bc)</div>
+    <div class="math-block">
+Wc·z[0] = 0.5×0.6+(−0.2)×(−0.1)+0.1×0.2+0.3×0.5 = 0.30+0.02+0.02+0.15 = 0.49
+Wc·z[1] = (−0.4)×0.6+0.2×(−0.1)+0.6×0.2+0.1×0.5 = −0.24−0.02+0.12+0.05 = −0.09
++bc:  [0.49+0.05, −0.09+0.1] = [0.54, 0.01]
+<span class="result">g̃ₜ = [tanh(0.54), tanh(0.01)] = [0.5131, 0.0100]</span>
+    </div>
+
+    <div class="section-label">Cell State  cₜ = fₜ ⊙ c_{t-1} + iₜ ⊙ g̃ₜ</div>
+    <div class="math-block">
+cₜ[0] = 0.5939×0.4 + 0.4378×0.5131 = 0.2376 + 0.2246 = <span class="result">0.4622</span>
+cₜ[1] = 0.6479×0.1 + 0.6966×0.0100 = 0.0648 + 0.0070 = <span class="result">0.0718</span>
+    </div>
+
+    <div class="section-label">Output Gate  oₜ = σ(Wo·z + bo)</div>
+    <div class="math-block">
+Wo·z[0] = 0.3×0.6+0.1×(−0.1)+(−0.4)×0.2+0.2×0.5 = 0.18−0.01−0.08+0.10 = 0.19
+Wo·z[1] = 0.2×0.6+0.6×(−0.1)+0.3×0.2+(−0.1)×0.5 = 0.12−0.06+0.06−0.05 = 0.07
++bo:  [0.19+0.2, 0.07+(−0.2)] = [0.39, −0.13]
+<span class="result">oₜ = [σ(0.39), σ(−0.13)] = [0.5963, 0.4675]</span>
+    </div>
+
+    <div class="section-label">Hidden State  hₜ = oₜ ⊙ tanh(cₜ)</div>
+    <div class="math-block">
+tanh(cₜ) = [tanh(0.4622), tanh(0.0718)] = [0.4338, 0.0717]
+<span class="result">hₜ = [0.5963×0.4338, 0.4675×0.0717] = [0.2587, 0.0335]</span>
+    </div>
+  </div>
+</div>
+
+<!-- Attention / YOLO -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q9A (End)</div>
+    <div class="q-title">Need for attention mechanism. Detailed steps of Bahdanau attention.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Why Attention is Needed</div>
+    <p>In seq2seq models with a fixed encoder context vector, the decoder must compress the <strong>entire input sequence into one vector</strong>. This bottleneck fails for long sequences — early tokens are forgotten by the time decoding occurs.</p>
+
+    <div class="section-label">Bahdanau Attention Mechanism</div>
+    <div class="steps">
+      <div class="step"><div class="step-title">Step 1 – Encode</div>
+        <p>Encode input sequence x₁…xₙ using a bidirectional RNN to produce hidden states h₁…hₙ (each hᵢ = [h→ᵢ; h←ᵢ]).</p></div>
+      <div class="step"><div class="step-title">Step 2 – Alignment Score</div>
+        <div class="math-block">
+eᵢⱼ = score(sⱼ₋₁, hᵢ) = vᵀ·tanh(W₁·sⱼ₋₁ + W₂·hᵢ)
+where sⱼ₋₁ is the previous decoder hidden state.
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 3 – Attention Weights (Softmax over scores)</div>
+        <div class="math-block">
+αᵢⱼ = exp(eᵢⱼ) / Σₖ exp(eₖⱼ)    [weights sum to 1]
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 4 – Context Vector</div>
+        <div class="math-block">
+cⱼ = Σᵢ αᵢⱼ·hᵢ    [weighted sum of encoder states]
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 5 – Decoder Update</div>
+        <div class="math-block">
+sⱼ = f(sⱼ₋₁, yⱼ₋₁, cⱼ)    [decode using dynamic context]
+P(yⱼ|y<j, x) = softmax(g(sⱼ, cⱼ))
+        </div>
+      </div>
+    </div>
+    <p><strong>Advantage:</strong> The model learns to "look at" the most relevant encoder positions for each decoder step — solving the bottleneck problem and enabling parallelism.</p>
+  </div>
+</div>
+
+<!-- BPTT -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q7 (End)</div>
+    <div class="q-title">BPTT working, key challenges: gradient behaviour, computational complexity.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="section-label">Working of BPTT</div>
+    <p>BPTT unrolls the RNN across T time steps and applies standard backpropagation on the unrolled graph.</p>
+    <div class="math-block">
+Forward pass: for t = 1 to T:
+  hₜ = tanh(W_hh·h_{t-1} + W_xh·xₜ + b)
+  ŷₜ = softmax(W_hy·hₜ)
+  Lₜ = CrossEntropy(ŷₜ, yₜ)
+
+Total loss: L = Σₜ Lₜ
+
+Backward pass: for t = T down to 1:
+  δhₜ = ∂L/∂hₜ = W_hyᵀ·δyₜ + W_hhᵀ·δh_{t+1}·diag(1−hₜ²)
+
+Gradient of W_hh:
+  ∂L/∂W_hh = Σₜ δhₜ·h_{t-1}ᵀ
+            = Σₜ Σₖ (∂Lₜ/∂hₜ · ∏ᵢ₌ₖᵗ⁻¹ ∂hᵢ₊₁/∂hᵢ) · ∂hₖ/∂W_hh
+    </div>
+
+    <div class="section-label">Key Challenges</div>
+    <div class="tbl-wrap"><table>
+      <tr><th>Challenge</th><th>Description</th><th>Solution</th></tr>
+      <tr><td>Vanishing Gradient</td><td>∏ diag(1−hₜ²) → 0 for long T. Early time steps get near-zero gradient. Long-term dependencies not learned.</td><td>LSTM/GRU; gradient clipping; residual connections</td></tr>
+      <tr><td>Exploding Gradient</td><td>If spectral radius of W_hh > 1, product grows exponentially.</td><td>Gradient norm clipping: if ‖g‖>threshold, g ← g×threshold/‖g‖</td></tr>
+      <tr><td>Memory complexity</td><td>Must store all hₜ for T steps during forward pass. O(T) memory.</td><td>Truncated BPTT: backprop only k steps instead of T</td></tr>
+      <tr><td>Computational complexity</td><td>O(T×d²) per parameter update. Very slow for long sequences.</td><td>Truncated BPTT; parallel architectures (Transformers)</td></tr>
+    </table></div>
+  </div>
+</div>
+
+<!-- VAE / GAN -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">Q10 (End)</div>
+    <div class="q-title">A) VAE: model fails to learn useful info → blurred images. Two methods to fix. B) GAN for face generation with diverse expressions.</div>
+    <div class="marks-badge">10 M</div>
+  </div>
+  <div class="q-body">
+    <div class="part-label">PART A – VAE Posterior Collapse / Blurry Outputs</div>
+    <div class="section-label">Cause</div>
+    <p>VAE optimises ELBO = E[log p(x|z)] − KL[q(z|x) ‖ p(z)]. When the KL term dominates, the encoder ignores the input and pushes q(z|x) towards the prior → decoder gets no information → blurry outputs.</p>
+
+    <div class="section-label">Fix 1 – KL Annealing (β-scheduling)</div>
+    <div class="math-block">
+Loss = Reconstruction_loss + β·KL_loss
+
+Start with β=0 (train decoder first), gradually increase β to 1.
+→ Decoder learns to use latent code before KL penalty kicks in.
+    </div>
+
+    <div class="section-label">Fix 2 – Improved Decoder Capacity / Perceptual Loss</div>
+    <div class="math-block">
+Replace pixel-level MSE with perceptual loss:
+  L_perceptual = ‖φ(x̂) − φ(x)‖²
+where φ is a pre-trained VGG feature extractor.
+→ Captures high-frequency details, sharper reconstructions.
+
+Alternative: Use a convolutional decoder with skip connections (U-Net style).
+    </div>
+
+    <div class="part-label">PART B – GAN for Diverse Facial Expressions</div>
+    <div class="steps">
+      <div class="step"><div class="step-title">Step 1 – Architecture</div>
+        <p>Use <strong>Conditional GAN (cGAN)</strong> or <strong>StyleGAN</strong>. Condition on expression label (happy, sad, angry, etc.) to ensure diversity.</p></div>
+      <div class="step"><div class="step-title">Step 2 – Diverse Dataset</div>
+        <p>Collect balanced data across all expressions. Apply augmentation. Use AffectNet or RAF-DB datasets.</p></div>
+      <div class="step"><div class="step-title">Step 3 – Loss Function</div>
+        <div class="math-block">
+L_D = −E[log D(x)] − E[log(1−D(G(z)))]    (discriminator)
+L_G = −E[log D(G(z))] + λ·L_feature_match  (generator)
+Add identity loss: L_id = ‖F(G(z))−F(x_ref)‖ for anonymization
+        </div>
+      </div>
+      <div class="step"><div class="step-title">Step 4 – Training Stabilisation</div>
+        <p>Use <strong>Wasserstein GAN (WGAN-GP)</strong> with gradient penalty to prevent mode collapse. Apply spectral normalisation to discriminator. Use progressive growing for high-resolution output.</p></div>
+      <div class="step"><div class="step-title">Step 5 – Ensure Diversity</div>
+        <p>Monitor <strong>Fréchet Inception Distance (FID)</strong> and <strong>Inception Score (IS)</strong>. If mode collapse detected, increase noise input dimensionality or apply minibatch discrimination.</p></div>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<div style="text-align:center;padding:3rem 0 1rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--muted)">
+  CSE4006 · Deep Learning · VIT-AP University · All Exam Answers · 2025-26
+</div>
+
+</main>
+
+<script>
+// Active nav link on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#'+current);
+  });
+});
+</script>
+</body>
+</html>

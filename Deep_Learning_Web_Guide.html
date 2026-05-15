@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Learning (CSE4006) - Complete Study Guide & Solved Papers</title>
+    <!-- MathJax for rendering math formulas -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --border-color: #dee2e6;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+        header {
+            background: var(--primary);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--secondary);
+            border-radius: 8px 8px 0 0;
+        }
+        h1 { margin: 0; font-size: 2.5em; }
+        h2 {
+            color: var(--primary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 { color: var(--secondary); margin-top: 25px; }
+        h4 { color: #2980b9; }
+        .toc {
+            background: #f1f2f6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .toc ul { list-style-type: none; padding-left: 0; }
+        .toc li { margin-bottom: 10px; }
+        .toc a { color: var(--primary); text-decoration: none; font-weight: bold; }
+        .toc a:hover { color: var(--secondary); text-decoration: underline; }
+        
+        .math-box {
+            background: #eaf2f8;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .solution-box {
+            background: #fdfefe;
+            border: 1px solid #d5dbdb;
+            border-top: 4px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        th { background-color: var(--primary); color: white; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        code {
+            background: #f1f2f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Deep Learning (CSE4006)</h1>
+        <p>Comprehensive FAT Study Guide & Solved Previous Papers</p>
+    </header>
+
+    <div class="toc">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#part1">Part 1: Comprehensive Module Theory</a>
+                <ul>
+                    <li><a href="#m2">Module 2: Regularization & Optimization</a></li>
+                    <li><a href="#m3">Module 3: CNN Architectures & Transfer Learning</a></li>
+                    <li><a href="#m4">Module 4: RNNs, LSTM, GRU & Sequence Models</a></li>
+                    <li><a href="#m5">Modules 5 & 6: Attention, YOLO, GANs & VAEs</a></li>
+                </ul>
+            </li>
+            <li><a href="#part2">Part 2: Solved Previous Papers</a>
+                <ul>
+                    <li><a href="#fat">F1 Slot FAT Paper (May 2026) Detailed Solutions</a></li>
+                    <li><a href="#cat2">CAT-2 Paper (March 2026) Key Solutions</a></li>
+                    <li><a href="#cat1">CAT-1 Paper (Feb 2026) Key Theory</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- PART 1: THEORY -->
+    <h1 id="part1" style="color:var(--primary); text-align:center; border-bottom: 2px solid var(--secondary);">Part 1: Comprehensive Module Theory</h1>
+
+    <h2 id="m2">Module 2: Regularization & Optimization</h2>
+    
+    <h3>1. Regularization (Preventing Overfitting)</h3>
+    <p>Overfitting occurs when a model learns noise and memorizes training data, performing poorly on unseen data. Regularization introduces constraints to prevent this.</p>
+    <ul>
+        <li><strong>L1 Regularization (Lasso):</strong> Adds the absolute value of weights to the loss. Formula: \( Loss = Original + \lambda \sum |w| \). Forces weights to zero, creating sparse models. Acts as a <strong>feature selector</strong>.</li>
+        <li><strong>L2 Regularization (Ridge):</strong> Adds squared value of weights. Formula: \( Loss = Original + \lambda \sum w^2 \). Distributes weights evenly and prevents them from becoming too large.</li>
+        <li><strong>Dropout:</strong> Randomly disables a fraction of neurons (e.g., 50%) during training. Prevents co-dependency among neurons and forces the model to learn robust, general patterns.</li>
+        <li><strong>Early Stopping:</strong> Training is halted when validation loss stops decreasing, preventing the model from over-training on noise.</li>
+        <li><strong>Batch Normalization:</strong> Normalizes inputs of each layer during training on mini-batches. Stabilizes learning, speeds up convergence, and acts as a weak regularizer.</li>
+    </ul>
+
+    <h3>2. Optimization Algorithms</h3>
+    <p>Optimization adjusts weights and biases to minimize the loss function.</p>
+    <ul>
+        <li><strong>Batch Gradient Descent:</strong> Uses the entire dataset for one update. Stable but very slow for large data.</li>
+        <li><strong>Stochastic Gradient Descent (SGD):</strong> Updates weights using one example at a time. Fast, escapes local minima, but has noisy updates.</li>
+        <li><strong>Mini-Batch Gradient Descent:</strong> The standard approach. Uses batches (e.g., 32, 64). Balances speed and stability.</li>
+        <li><strong>Momentum:</strong> Adds a fraction of the previous update to the current one, accelerating convergence and reducing oscillation.</li>
+        <li><strong>Adam (Adaptive Moment Estimation):</strong> Combines Momentum and RMSProp. Adapts learning rates for each parameter. The most widely used optimizer in deep learning.</li>
+    </ul>
+
+    <h2 id="m3">Module 3: CNN Architectures & Transfer Learning</h2>
+
+    <h3>1. CNN Core Components</h3>
+    <ul>
+        <li><strong>Convolutional Layer:</strong> Extracts features using filters/kernels.</li>
+        <li><strong>Activation (ReLU):</strong> Adds non-linearity, converting negatives to zero.</li>
+        <li><strong>Pooling (Max/Average):</strong> Downsamples feature maps, reducing dimensions and computation.</li>
+    </ul>
+
+    <div class="math-box">
+        <h4>Crucial CNN Formulas</h4>
+        <p><strong>Output Spatial Dimension:</strong> \( 	ext{Output Size} = \lfloor rac{W - F + 2P}{S} floor + 1 \)</p>
+        <p><em>Where W = Input size, F = Filter size, P = Padding, S = Stride.</em></p>
+        <p><strong>Trainable Parameters:</strong> \( 	ext{Params} = (F 	imes F 	imes C_{in} 	imes C_{out}) + C_{out} \)</p>
+        <p><em>Where \(C_{in}\) = Input channels, \(C_{out}\) = Number of filters.</em></p>
+    </div>
+
+    <h3>2. Popular Architectures</h3>
+    <ul>
+        <li><strong>AlexNet:</strong> Won ImageNet 2012. Introduced ReLU, Dropout, and Data Augmentation.</li>
+        <li><strong>VGG16/19:</strong> Uses only 3x3 filters. Deep but heavy on parameters (~138M).</li>
+        <li><strong>GoogLeNet (Inception):</strong> Uses parallel convolutions (1x1, 3x3, 5x5) and Global Average Pooling to drastically reduce parameters.</li>
+        <li><strong>ResNet:</strong> Uses <em>skip connections</em> to solve the vanishing gradient problem, enabling networks with 100+ layers.</li>
+    </ul>
+
+    <h3>3. Transfer Learning</h3>
+    <p>Reusing pre-trained models (like VGG trained on ImageNet) for new tasks.</p>
+    <ul>
+        <li><strong>Feature Extraction:</strong> Freeze all pre-trained layers. Use them only to extract features and train a new, fresh classification layer at the end. Best when the new dataset is small.</li>
+        <li><strong>Fine-Tuning:</strong> Unfreeze the top layers of the pre-trained model and train them alongside the classifier with a very small learning rate. Best when you have a larger dataset.</li>
+    </ul>
+
+    <h2 id="m4">Module 4: RNNs, LSTM, GRU & Sequence Models</h2>
+
+    <h3>1. Backpropagation Through Time (BPTT)</h3>
+    <p>Unrolls the RNN across time steps to compute gradients. Suffers heavily from <strong>Vanishing and Exploding Gradients</strong> on long sequences.</p>
+    
+    <div class="math-box">
+        <h4>RNN Formulas (Essential for Problems)</h4>
+        <p><strong>Hidden State:</strong> \( h_t = 	anh(W_{xh}x_t + W_{hh}h_{t-1} + b_h) \)</p>
+        <p><strong>Logits:</strong> \( z_t = W_{hy}h_t + b_y \)</p>
+        <p><strong>Softmax Output:</strong> \( \hat{y}_t = rac{e^{z_i}}{\sum e^{z_j}} \)</p>
+    </div>
+
+    <h3>2. Comparisons of Sequence Models</h3>
+    <table>
+        <tr>
+            <th>Architecture</th>
+            <th>Characteristics</th>
+        </tr>
+        <tr>
+            <td><strong>RNN</strong></td>
+            <td>Basic memory loop. Fails to remember long-term context due to vanishing gradients.</td>
+        </tr>
+        <tr>
+            <td><strong>LSTM (Long Short-Term Memory)</strong></td>
+            <td>Solves vanishing gradients. Has 3 gates (Input, Forget, Output) and a separate <em>Cell State</em> (\(C_t\)) to carry long-term memory. Highly accurate but computationally expensive.</td>
+        </tr>
+        <tr>
+            <td><strong>GRU (Gated Recurrent Unit)</strong></td>
+            <td>Simpler than LSTM. Has only 2 gates (Update, Reset) and merges the cell state into the hidden state. Faster to train and requires fewer parameters.</td>
+        </tr>
+        <tr>
+            <td><strong>Bi-RNN vs Bi-LSTM</strong></td>
+            <td>Both process data forwards and backwards. Bi-RNN still suffers from short memory. Bi-LSTM retains long-term bidirectional context (e.g., understanding a word based on the end of the sentence).</td>
+        </tr>
+    </table>
+
+    <h2 id="m5">Modules 5 & 6: Attention, YOLO, GANs & VAEs</h2>
+    <ul>
+        <li><strong>Attention Mechanism (Bahdanau):</strong> Solves the bottleneck of standard Encoder-Decoder models. Instead of squashing a whole sentence into one vector, it allows the decoder to "pay attention" to different parts of the input sequence dynamically while generating each word.</li>
+        <li><strong>YOLO (Single-Pass) vs R-CNN (Two-Stage):</strong> Traditional R-CNN proposes thousands of regions and classifies them sequentially (slow). YOLO (You Only Look Once) divides the image into a grid and predicts bounding boxes and classes simultaneously in a single forward pass (extremely fast, real-time).</li>
+        <li><strong>VAEs (Variational Autoencoders):</strong> Generative models that learn the underlying probability distribution of data to generate new, diverse samples.</li>
+        <li><strong>GANs (Generative Adversarial Networks):</strong> Consists of a Generator (creates fake images) and a Discriminator (tries to catch fakes). They compete until the Generator produces hyper-realistic images.</li>
+    </ul>
+
+    <!-- PART 2: SOLVED PAPERS -->
+    <h1 id="part2" style="color:var(--primary); text-align:center; border-bottom: 2px solid var(--secondary); margin-top:50px;">Part 2: Solved Previous Papers</h1>
+
+    <h2 id="fat">F1 Slot FAT Paper (May 2026) Solutions</h2>
+
+    <div class="solution-box">
+        <h3>Q3 (b) Feature Extraction vs Fine-Tuning</h3>
+        <p><strong>Feature Extraction:</strong> We freeze the convolutional base of a pre-trained model and only train a new fully connected layer. Use this when the new dataset is <em>small</em> and similar to the original dataset (e.g., ImageNet) to prevent overfitting.</p>
+        <p><strong>Fine-Tuning:</strong> We unfreeze the top convolutional layers and train them along with the classifier using a very low learning rate. Use this when the new dataset is <em>large</em>, allowing the model to adapt its feature extraction to the new specific domain without overfitting.</p>
+        
+        <h3>Q3 (b) Role of Normalization</h3>
+        <p>Normalization scales inputs to a standard range (e.g., 0 to 1). <strong>Batch Normalization</strong> specifically normalizes activations between layers. It improves training stability by reducing internal covariate shift, allowing the use of higher learning rates, which drastically improves convergence speed.</p>
+    </div>
+
+    <div class="solution-box">
+        <h3>Q4. RNN Calculation Problem</h3>
+        <p><strong>Given:</strong> 1 hidden neuron, 3 time steps. \(W_{xh} = [0.15, 0.25, 0.35]\), \(W_{hh} = 0.55\), \(W_{hy} = [0.4, 0.2, 0.6]\). Assume \(h_0 = 0\), inputs \(x_t = 1\) (standard assumption if inputs aren't provided in the prompt snippet), biases = 0.</p>
+        
+        <h4>Step 1: Compute Hidden States (\(h_t\))</h4>
+        <p>Formula: \(h_t = 	anh(W_{xh}[t] 	imes x_t + W_{hh} 	imes h_{t-1})\)</p>
+        <ul>
+            <li><strong>t=1:</strong> \(h_1 = 	anh(0.15 	imes 1 + 0.55 	imes 0) = 	anh(0.15) pprox 0.149\)</li>
+            <li><strong>t=2:</strong> \(h_2 = 	anh(0.25 	imes 1 + 0.55 	imes 0.149) = 	anh(0.25 + 0.0819) = 	anh(0.3319) pprox 0.320\)</li>
+            <li><strong>t=3:</strong> \(h_3 = 	anh(0.35 	imes 1 + 0.55 	imes 0.320) = 	anh(0.35 + 0.176) = 	anh(0.526) pprox 0.482\)</li>
+        </ul>
+
+        <h4>Step 2: Compute Output Vector (\(y_t\))</h4>
+        <p>Formula: \(z_t = W_{hy} 	imes h_t\), then apply Softmax.</p>
+        <p><strong>At t=1 (\(h_1 = 0.149\)):</strong></p>
+        <ul>
+            <li>\(z_1 = [0.4, 0.2, 0.6] 	imes 0.149 = [0.0596, 0.0298, 0.0894]\)</li>
+            <li>Exponentials: \(e^{0.0596} = 1.061\), \(e^{0.0298} = 1.030\), \(e^{0.0894} = 1.093\)</li>
+            <li>Sum = \(3.184\)</li>
+            <li><strong>Softmax Output:</strong> \([1.061/3.184, 1.030/3.184, 1.093/3.184] = [0.333, 0.323, 0.343]\)</li>
+        </ul>
+        <p><em>(Repeat exponential math for t=2 and t=3 using \(h_2\) and \(h_3\))</em></p>
+    </div>
+
+    <div class="solution-box">
+        <h3>Q5. Bi-LSTM vs Bi-RNN & GRU</h3>
+        <p><strong>(a) Bi-LSTM vs Bi-RNN:</strong> Both process sequences in forward and backward directions to capture past and future context. However, Bi-RNN uses simple recurrent units and suffers from the vanishing gradient problem, meaning it cannot capture long-term dependencies. Bi-LSTM uses memory cells and three gates (Input, Forget, Output) to effectively store and retrieve information over long sequences, making it vastly superior for complex sequence data.</p>
+        <p><strong>(b) GRU Working Mechanism:</strong> The Gated Recurrent Unit uses only two gates: an <strong>Update Gate</strong> (decides how much past information to keep) and a <strong>Reset Gate</strong> (decides how much to forget). Unlike LSTM, it does not have a separate cell state; it merges memory into the hidden state. This simpler architecture improves training stability and speed compared to standard RNNs while avoiding vanishing gradients.</p>
+    </div>
+
+    <h2 id="cat2">CAT-2 Paper (March 2026) Solutions</h2>
+
+    <div class="solution-box">
+        <h3>Q1. L1 Regularization as a Feature Selector</h3>
+        <p>L1 Regularization adds the absolute value of the weights to the loss function. Because of the geometry of the absolute value penalty (creating sharp corners in the loss landscape), gradient descent naturally pushes the weights of less important features exactly to zero. By zeroing out useless weights, L1 effectively performs automatic feature selection, resulting in a sparse, highly interpretable model.</p>
+    </div>
+
+    <div class="solution-box">
+        <h3>Q2. CNN Parameter Calculation</h3>
+        <p><strong>Given:</strong> RGB Image \(128 	imes 128 	imes 3\).</p>
+        <p><strong>Layer 1 (Conv):</strong> 32 filters, size \(3 	imes 3\).<br>
+        Formula: \((F 	imes F 	imes C_{in} 	imes C_{out}) + C_{out}\) <br>
+        Params = \((3 	imes 3 	imes 3 	imes 32) + 32 = (27 	imes 32) + 32 = 864 + 32 = \) <strong>896</strong></p>
+        
+        <p><strong>Layer 3 (Conv):</strong> 64 filters, size \(3 	imes 3\). Input from L2 has 32 channels.<br>
+        Params = \((3 	imes 3 	imes 32 	imes 64) + 64 = (288 	imes 64) + 64 = 18432 + 64 = \) <strong>18,496</strong></p>
+        
+        <p><strong>Pooling Layers:</strong> Always have <strong>0</strong> trainable parameters.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
