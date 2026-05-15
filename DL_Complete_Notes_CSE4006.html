@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSE4006 Deep Learning – Complete Study Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8fa;
+  --surface:#fff;
+  --border:#e2e6ea;
+  --accent:#1a56db;
+  --accent2:#0e9f6e;
+  --accent3:#e3a008;
+  --accent4:#e02424;
+  --accent5:#7e3af2;
+  --text:#111928;
+  --muted:#6b7280;
+  --code-bg:#1e2430;
+  --code-text:#e2e8f0;
+  --tag-blue:#dbeafe;
+  --tag-green:#d1fae5;
+  --tag-yellow:#fef3c7;
+  --tag-red:#fee2e2;
+  --tag-purple:#ede9fe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7}
+a{color:var(--accent);text-decoration:none}
+
+/* ── SIDEBAR NAV ── */
+#sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;z-index:200;padding:1rem 0 2rem}
+#sidebar-brand{padding:.8rem 1.2rem 1rem;font-size:.85rem;font-weight:700;color:var(--accent);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
+#sidebar-brand span{font-size:1.1rem}
+.nav-module{padding:.55rem 1.2rem;display:block;font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:.15s}
+.nav-module:hover,.nav-module.active{color:var(--accent);background:#eff6ff}
+.nav-sub{padding:.35rem 1.2rem .35rem 2rem;display:block;font-size:.78rem;color:var(--muted);cursor:pointer;transition:.15s;border-left:2px solid transparent;margin-left:.6rem}
+.nav-sub:hover,.nav-sub.active{color:var(--accent);border-left-color:var(--accent);background:#eff6ff}
+
+/* ── MAIN ── */
+#main{margin-left:240px;padding:2rem 2.5rem 6rem}
+.page-title{font-family:'Merriweather',serif;font-size:2rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.page-sub{color:var(--muted);font-size:.9rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--border)}
+
+/* ── MODULE ── */
+.module{margin-bottom:3rem}
+.module-header{background:linear-gradient(135deg,var(--accent) 0%,#3b82f6 100%);color:#fff;padding:1.2rem 1.8rem;border-radius:10px;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.module-header.m2{background:linear-gradient(135deg,var(--accent2),#34d399)}
+.module-header.m3{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
+.module-header.m4{background:linear-gradient(135deg,var(--accent4),#f87171)}
+.module-header.m5{background:linear-gradient(135deg,var(--accent5),#a78bfa)}
+.module-header.m6{background:linear-gradient(135deg,#0f766e,#14b8a6)}
+.module-num{font-size:2rem;font-weight:700;opacity:.6;font-family:'Merriweather',serif}
+.module-title{font-size:1.3rem;font-weight:700}
+.module-meta{font-size:.8rem;opacity:.85;margin-top:.2rem}
+
+/* ── TOPIC ── */
+.topic{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:1.2rem;overflow:hidden}
+.topic-header{padding:.9rem 1.3rem;background:#f9fafb;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.7rem;cursor:pointer}
+.topic-num{background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.2rem .5rem;border-radius:4px}
+.topic-title{font-weight:600;font-size:.95rem;flex:1}
+.topic-body{padding:1.3rem}
+
+/* ── THEORY / DEFINITION ── */
+.definition{background:var(--tag-blue);border-left:4px solid var(--accent);padding:.9rem 1.1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem}
+.formula-box{background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',monospace;font-size:.83rem;padding:1rem 1.3rem;border-radius:7px;margin:.8rem 0;overflow-x:auto;line-height:2}
+.formula-box .cmt{color:#94a3b8}
+.formula-box .hi{color:#fbbf24;font-weight:600}
+.formula-box .res{color:#4ade80;font-weight:600}
+
+/* ── QUESTION BANK ── */
+.qbank{background:var(--tag-yellow);border:1px solid #fcd34d;border-radius:7px;padding:1rem 1.2rem;margin:1rem 0}
+.qbank-title{font-weight:700;font-size:.82rem;color:#92400e;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.qbank ol{padding-left:1.3rem}
+.qbank li{font-size:.88rem;margin-bottom:.35rem;color:#78350f}
+
+/* ── NUMERIC EXAMPLE ── */
+.example{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;margin:1rem 0}
+.example-head{background:#16a34a;color:#fff;padding:.6rem 1rem;font-weight:700;font-size:.82rem;display:flex;align-items:center;gap:.5rem;border-radius:7px 7px 0 0}
+.example-body{padding:1.1rem}
+.step-block{background:#fff;border:1px solid #d1fae5;border-radius:6px;padding:.75rem 1rem;margin:.6rem 0}
+.step-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#16a34a;font-weight:700;text-transform:uppercase;margin-bottom:.3rem}
+
+/* ── KEY POINTS ── */
+.key-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem;margin:.8rem 0}
+.key-card{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.9rem 1rem}
+.key-card h4{font-size:.85rem;font-weight:700;margin-bottom:.4rem;color:var(--accent)}
+
+/* ── COMPARISON TABLE ── */
+.tbl-wrap{overflow-x:auto;margin:.8rem 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{background:#f3f4f6;font-weight:700;padding:.6rem .9rem;border:1px solid var(--border);text-align:left}
+td{padding:.55rem .9rem;border:1px solid var(--border);vertical-align:top}
+tr:nth-child(even) td{background:#f9fafb}
+.good{color:#16a34a;font-weight:600}
+.bad{color:#dc2626;font-weight:600}
+.num{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#1d4ed8}
+.bold-cell{font-weight:700;color:var(--accent)}
+
+/* ── TAGS ── */
+.tag{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:12px;font-weight:600;margin:.1rem}
+.tag-blue{background:var(--tag-blue);color:#1e40af}
+.tag-green{background:var(--tag-green);color:#065f46}
+.tag-yellow{background:var(--tag-yellow);color:#92400e}
+.tag-red{background:var(--tag-red);color:#991b1b}
+.tag-purple{background:var(--tag-purple);color:#4c1d95}
+
+/* ── CALLOUT ── */
+.callout{border-radius:7px;padding:.9rem 1.1rem;margin:.8rem 0;display:flex;gap:.7rem;align-items:flex-start}
+.callout.info{background:#eff6ff;border:1px solid #bfdbfe}
+.callout.warn{background:#fffbeb;border:1px solid #fde68a}
+.callout.tip{background:#f0fdf4;border:1px solid #bbf7d0}
+.callout-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem}
+.callout-text{font-size:.88rem}
+
+p{margin:.6rem 0}
+ul,ol{padding-left:1.4rem;margin:.5rem 0}
+li{margin-bottom:.3rem;font-size:.9rem}
+strong{font-weight:700}
+h4{margin:.9rem 0 .4rem;font-size:.95rem;color:var(--text)}
+h5{margin:.7rem 0 .3rem;font-size:.88rem;color:var(--accent);font-weight:700}
+section{scroll-margin-top:20px}
+
+@media(max-width:768px){
+  #sidebar{display:none}
+  #main{margin-left:0;padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<nav id="sidebar">
+  <div id="sidebar-brand"><span>📘</span> CSE4006 DL Notes</div>
+  <a class="nav-module" href="#m1">MODULE 1 · Math & ML</a>
+  <a class="nav-sub" href="#m1-linalg">Linear Algebra</a>
+  <a class="nav-sub" href="#m1-prob">Probability</a>
+  <a class="nav-sub" href="#m1-optim">Gradient Optimization</a>
+  <a class="nav-sub" href="#m1-nn">Neural Networks Intro</a>
+  <a class="nav-sub" href="#m1-act">Activation Functions</a>
+
+  <a class="nav-module" href="#m2">MODULE 2 · Deep Networks</a>
+  <a class="nav-sub" href="#m2-mlp">MLP & Forward Pass</a>
+  <a class="nav-sub" href="#m2-backprop">Backpropagation</a>
+  <a class="nav-sub" href="#m2-reg">Regularization</a>
+  <a class="nav-sub" href="#m2-optim">Optimizers</a>
+
+  <a class="nav-module" href="#m3">MODULE 3 · CNNs</a>
+  <a class="nav-sub" href="#m3-conv">Convolution Layers</a>
+  <a class="nav-sub" href="#m3-arch">Architectures</a>
+  <a class="nav-sub" href="#m3-transfer">Transfer Learning</a>
+  <a class="nav-sub" href="#m3-bn">Batch Norm</a>
+
+  <a class="nav-module" href="#m4">MODULE 4 · RNNs</a>
+  <a class="nav-sub" href="#m4-rnn">RNN & BPTT</a>
+  <a class="nav-sub" href="#m4-lstm">LSTM</a>
+  <a class="nav-sub" href="#m4-gru">GRU</a>
+  <a class="nav-sub" href="#m4-birnn">Bidirectional</a>
+
+  <a class="nav-module" href="#m5">MODULE 5 · Detection</a>
+  <a class="nav-sub" href="#m5-enc">Encoder-Decoder</a>
+  <a class="nav-sub" href="#m5-att">Attention</a>
+  <a class="nav-sub" href="#m5-rcnn">RCNN / YOLO</a>
+
+  <a class="nav-module" href="#m6">MODULE 6 · VAE & GAN</a>
+  <a class="nav-sub" href="#m6-ae">Autoencoders</a>
+  <a class="nav-sub" href="#m6-vae">VAE</a>
+  <a class="nav-sub" href="#m6-gan">GAN</a>
+
+  <a class="nav-module" href="#numericals">🔢 NUMERICALS</a>
+  <a class="nav-sub" href="#n-tensor">Tensor Ops</a>
+  <a class="nav-sub" href="#n-gd">Gradient Descent</a>
+  <a class="nav-sub" href="#n-bp">Backpropagation</a>
+  <a class="nav-sub" href="#n-cnn">CNN Params</a>
+  <a class="nav-sub" href="#n-rnn">RNN/LSTM</a>
+</nav>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<div id="main">
+<div class="page-title">CSE4006 · Deep Learning</div>
+<div class="page-sub">VIT-AP University · Complete Study Notes · All 6 Modules · FAT/CAT Ready</div>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 1
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m1" class="module">
+<div class="module-header">
+  <div class="module-num">1</div>
+  <div><div class="module-title">Applied Math & ML Basics</div><div class="module-meta">7 hours · Linear Algebra · Probability · Gradient Optimization · Neural Network Intro · Activation Functions</div></div>
+</div>
+
+<!-- Linear Algebra -->
+<div class="topic" id="m1-linalg">
+<div class="topic-header"><span class="topic-num">1.1</span><span class="topic-title">Linear Algebra – Scalars, Vectors, Matrices, Tensors & Operations</span></div>
+<div class="topic-body">
+  <div class="key-grid">
+    <div class="key-card"><h4>Scalar</h4><p>A single number. No shape. Example: learning rate η = 0.01</p></div>
+    <div class="key-card"><h4>Vector</h4><p>1-D array of numbers. Shape (n,). Example: input feature x = [0.5, 0.8, 0.3]</p></div>
+    <div class="key-card"><h4>Matrix</h4><p>2-D array. Shape (m × n). Used for weight matrices W.</p></div>
+    <div class="key-card"><h4>Tensor</h4><p>N-D generalisation of a matrix. RGB image = 3-D tensor (H×W×C).</p></div>
+  </div>
+  <h4>Key Operations</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Operation</th><th>Formula</th><th>Shape Rule</th><th>Example</th></tr>
+    <tr><td><strong>Dot Product</strong></td><td>C = A·B, Cᵢⱼ = Σₖ Aᵢₖ·Bₖⱼ</td><td>(m×n)·(n×p) → (m×p)</td><td>Weight matrix times input</td></tr>
+    <tr><td><strong>Hadamard (Element-wise)</strong></td><td>C = A⊙B, Cᵢⱼ = Aᵢⱼ·Bᵢⱼ</td><td>Same shape → same shape</td><td>Dropout masks, gate operations</td></tr>
+    <tr><td><strong>Transpose</strong></td><td>Aᵀᵢⱼ = Aⱼᵢ</td><td>(m×n) → (n×m)</td><td>Reversing rows/cols</td></tr>
+    <tr><td><strong>Inverse</strong></td><td>A·A⁻¹ = I</td><td>(n×n) → (n×n)</td><td>Solving linear systems</td></tr>
+  </table></div>
+
+  <h4>Orthogonal Matrix</h4>
+  <div class="definition">A matrix Q is <strong>orthogonal</strong> if QᵀQ = I = QQᵀ. Rows and columns are mutually perpendicular unit vectors. Inverse = Transpose (Q⁻¹ = Qᵀ).</div>
+
+  <h4>Special Matrices</h4>
+  <ul>
+    <li><strong>Identity matrix I:</strong> Diagonal = 1, rest = 0. A·I = A.</li>
+    <li><strong>Diagonal matrix:</strong> Non-zero only on main diagonal.</li>
+    <li><strong>Symmetric:</strong> A = Aᵀ</li>
+  </ul>
+
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Compute dot product of two given matrices. State the result shape. [4M]</li>
+    <li>Perform Hadamard product with broadcasting. [4M]</li>
+    <li>Is the given matrix orthogonal? Find its inverse. [6M]</li>
+    <li>Scale a matrix to [0,1] range using Hadamard product. [4M]</li>
+    <li>State the difference between dot product and Hadamard product. [2M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Probability -->
+<div class="topic" id="m1-prob">
+<div class="topic-header"><span class="topic-num">1.2</span><span class="topic-title">Probability Basics for Deep Learning</span></div>
+<div class="topic-body">
+  <div class="key-grid">
+    <div class="key-card"><h4>Random Variable</h4><p>Variable whose value is determined by a random experiment. Discrete or continuous.</p></div>
+    <div class="key-card"><h4>Probability Distribution</h4><p>Describes likelihood of outcomes. P(X=x) ≥ 0, ΣP = 1</p></div>
+    <div class="key-card"><h4>Gaussian / Normal</h4><p>p(x) = (1/√2πσ²) exp(−(x−μ)²/2σ²). Used in weight init, noise, VAEs.</p></div>
+    <div class="key-card"><h4>Bernoulli</h4><p>Binary outcome. P(X=1)=p, P(X=0)=1−p. Used in dropout.</p></div>
+  </div>
+  <div class="formula-box">
+Softmax: P(yᵢ) = exp(zᵢ) / Σⱼ exp(zⱼ)   <span class="cmt">← converts scores to probabilities (sum=1)</span>
+
+Cross-Entropy Loss: L = −Σᵢ yᵢ log(ŷᵢ)    <span class="cmt">← measures distribution difference</span>
+
+KL Divergence: D_KL(P‖Q) = Σᵢ P(i) log(P(i)/Q(i))  <span class="cmt">← used in VAE</span>
+  </div>
+</div></div>
+
+<!-- Gradient Optimization -->
+<div class="topic" id="m1-optim">
+<div class="topic-header"><span class="topic-num">1.3</span><span class="topic-title">Gradient-Based Optimization</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Gradient:</strong> Vector of partial derivatives ∇J(θ). Points in direction of steepest ascent. We move in the negative direction to minimise J.</div>
+  <div class="formula-box">
+Gradient Descent update rule:
+  θ ← θ − η · ∇J(θ)
+
+where η = learning rate (step size), ∇J = gradient of loss w.r.t. parameters
+
+Chain Rule (essential for backpropagation):
+  If z = f(g(x))  →  dz/dx = (dz/dg) · (dg/dx)
+  </div>
+  <h4>Linear Regression</h4>
+  <div class="formula-box">
+Model:    ŷ = Wx + b
+Loss:     J = (1/n)Σ(ŷᵢ − yᵢ)²    (MSE)
+Update:   W ← W − η·(∂J/∂W)  =  W − η·(2/n)Σ(ŷᵢ−yᵢ)·xᵢ
+  </div>
+  <h4>Logistic Regression</h4>
+  <div class="formula-box">
+Model:    ŷ = σ(Wx + b) = 1/(1 + e^{−(Wx+b)})
+Loss:     J = −(1/n)Σ[yᵢlog(ŷᵢ) + (1−yᵢ)log(1−ŷᵢ)]   (Binary Cross-Entropy)
+Predict:  class = 1 if ŷ > 0.5 else 0
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Build a logistic regression model for given data, predict for a new value. [10M]</li>
+    <li>Perform 2 iterations of gradient descent on a quadratic function. [10M]</li>
+    <li>Formulate a linear regression model for rainfall prediction. [10M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Neural Network Intro -->
+<div class="topic" id="m1-nn">
+<div class="topic-header"><span class="topic-num">1.4</span><span class="topic-title">Introduction to Neural Networks</span></div>
+<div class="topic-body">
+  <div class="definition">A Neural Network is a directed acyclic graph of interconnected neurons. Each connection has a weight. Each neuron computes a weighted sum of its inputs, adds a bias, and applies an activation function.</div>
+  <h4>Perceptron</h4>
+  <div class="formula-box">
+Single neuron: output = f(Σᵢ wᵢxᵢ + b)
+
+Learning rule: wᵢ ← wᵢ + η·(target − output)·xᵢ
+               b  ← b  + η·(target − output)
+
+Threshold activation: output = 1 if net ≥ θ, else 0
+  </div>
+  <h4>Multi-Layer Perceptron (MLP)</h4>
+  <ul>
+    <li>Input layer → one or more hidden layers → output layer</li>
+    <li>Each layer is a linear transformation followed by non-linear activation</li>
+    <li>Can approximate any continuous function (Universal Approximation Theorem)</li>
+    <li>Trained via backpropagation</li>
+  </ul>
+  <div class="tbl-wrap"><table>
+    <tr><th>Aspect</th><th>Perceptron</th><th>MLP</th></tr>
+    <tr><td>Layers</td><td>1 (input + output)</td><td>Input + ≥1 hidden + output</td></tr>
+    <tr><td>Activation</td><td>Step function</td><td>Sigmoid, ReLU, tanh</td></tr>
+    <tr><td>Learning</td><td>Perceptron rule</td><td>Backprop + GD</td></tr>
+    <tr><td>Problems</td><td>Only linearly separable</td><td>Non-linear (XOR etc.)</td></tr>
+  </table></div>
+</div></div>
+
+<!-- Activation Functions -->
+<div class="topic" id="m1-act">
+<div class="topic-header"><span class="topic-num">1.5</span><span class="topic-title">Activation Functions</span></div>
+<div class="topic-body">
+  <div class="tbl-wrap"><table>
+    <tr><th>Name</th><th>Formula</th><th>Range</th><th>Derivative</th><th>Use</th><th>Issue</th></tr>
+    <tr><td><strong>Sigmoid</strong></td><td class="num">1/(1+e⁻ˣ)</td><td>(0,1)</td><td class="num">σ(1−σ)</td><td>Binary output</td><td class="bad">Vanishing gradient</td></tr>
+    <tr><td><strong>Tanh</strong></td><td class="num">(eˣ−e⁻ˣ)/(eˣ+e⁻ˣ)</td><td>(−1,1)</td><td class="num">1−tanh²(x)</td><td>RNNs, hidden layers</td><td class="bad">Vanishing gradient at extremes</td></tr>
+    <tr><td><strong>Step</strong></td><td class="num">1 if x≥0 else 0</td><td>{0,1}</td><td>0 (undefined at 0)</td><td>Perceptrons only</td><td class="bad">Not differentiable</td></tr>
+    <tr><td><strong>ReLU</strong></td><td class="num">max(0, x)</td><td>[0,∞)</td><td class="num">1 if x>0, 0 else</td><td>CNNs, MLPs</td><td class="bad">Dying ReLU</td></tr>
+    <tr><td><strong>Leaky ReLU</strong></td><td class="num">x if x>0 else αx</td><td>(−∞,∞)</td><td class="num">1 if x>0, α else</td><td>Hidden layers</td><td class="good">Fixes dying ReLU</td></tr>
+    <tr><td><strong>Softmax</strong></td><td class="num">eˣⁱ/Σeˣʲ</td><td>(0,1), sum=1</td><td>(complex)</td><td>Multi-class output</td><td>Numerically unstable (use log-softmax)</td></tr>
+  </table></div>
+  <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-text"><strong>Why ReLU is preferred over sigmoid:</strong> Does not saturate for positive inputs → gradients don't vanish. Sparse activation (many zeros) → efficient. Simple computation → fast.</div></div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Explain all 5 activation functions with formula, range, derivative, graph, and suitable layer. [10M]</li>
+    <li>Why is ReLU preferred over Sigmoid? What is the dying ReLU problem? [5M]</li>
+    <li>Compute sigmoid/tanh/softmax for a given vector. [2M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 2
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m2" class="module">
+<div class="module-header m2">
+  <div class="module-num">2</div>
+  <div><div class="module-title">Practical Deep Networks</div><div class="module-meta">8 hours · MLP · Backpropagation · Regularization · Optimizers</div></div>
+</div>
+
+<!-- MLP -->
+<div class="topic" id="m2-mlp">
+<div class="topic-header"><span class="topic-num">2.1</span><span class="topic-title">Multilayer Perceptron & Forward Pass</span></div>
+<div class="topic-body">
+  <h4>Architecture</h4>
+  <div class="formula-box">
+Layer l:  z⁽ˡ⁾ = W⁽ˡ⁾ · a⁽ˡ⁻¹⁾ + b⁽ˡ⁾
+          a⁽ˡ⁾ = f(z⁽ˡ⁾)   where f = activation function
+
+Total parameters in FC layer: (n_in + 1) × n_out  <span class="cmt">(+1 for bias)</span>
+  </div>
+  <h4>Loss Functions</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Loss</th><th>Formula</th><th>When to Use</th></tr>
+    <tr><td>MSE</td><td class="num">½Σ(ŷ−y)²</td><td>Regression</td></tr>
+    <tr><td>Cross-Entropy (Binary)</td><td class="num">−[y log ŷ + (1−y)log(1−ŷ)]</td><td>Binary classification</td></tr>
+    <tr><td>Cross-Entropy (Multi)</td><td class="num">−Σ yᵢ log ŷᵢ</td><td>Multi-class classification</td></tr>
+    <tr><td>Hinge Loss</td><td class="num">max(0, 1 − y·f(x))</td><td>SVM, binary (+1/−1)</td></tr>
+  </table></div>
+</div></div>
+
+<!-- Backpropagation -->
+<div class="topic" id="m2-backprop">
+<div class="topic-header"><span class="topic-num">2.2</span><span class="topic-title">Backpropagation Algorithm</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Backpropagation</strong> = Efficiently compute gradients of the loss w.r.t. all parameters using the chain rule, propagating error backwards from output to input.</div>
+  <h4>Algorithm (sigmoid activation, MSE loss)</h4>
+  <div class="formula-box">
+<span class="hi">FORWARD PASS:</span>
+  net_j = Σᵢ wᵢⱼ·xᵢ + bⱼ
+  out_j = sigmoid(net_j) = 1/(1+e^{−net_j})
+
+<span class="hi">BACKWARD PASS (Output layer):</span>
+  δⱼ = (target_j − out_j) · out_j · (1 − out_j)    <span class="cmt">← error signal</span>
+
+<span class="hi">BACKWARD PASS (Hidden layer):</span>
+  δⱼ = out_j·(1−out_j) · Σₖ (δₖ · wⱼₖ)            <span class="cmt">← propagated error</span>
+
+<span class="hi">WEIGHT UPDATE:</span>
+  Δwᵢⱼ = η · δⱼ · out_i
+  wᵢⱼ_new = wᵢⱼ_old + Δwᵢⱼ
+
+  Δbⱼ = η · δⱼ
+  bⱼ_new = bⱼ_old + Δbⱼ
+  </div>
+  <div class="callout info"><div class="callout-icon">📌</div><div class="callout-text">For MSE loss L=½Σ(t−o)², the output delta formula uses (t−o) with the derivative of activation. For cross-entropy + softmax, the delta simplifies to (ŷ−y).</div></div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Given a 3-layer network with specified weights and inputs, apply backprop for 1–2 iterations. Show all intermediate values. [10M]</li>
+    <li>Derive the delta rule for output and hidden layers. [5M]</li>
+    <li>Explain BPTT. What are its key challenges? [10M]</li>
+    <li>What is Batch Gradient Descent? Compare BGD, SGD, Mini-Batch GD. [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Regularization -->
+<div class="topic" id="m2-reg">
+<div class="topic-header"><span class="topic-num">2.3</span><span class="topic-title">Regularization for Deep Learning</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Regularization</strong> = Adding a penalty to the loss function to reduce model complexity and prevent overfitting.</div>
+  <h4>L1 vs L2 Regularization</h4>
+  <div class="formula-box">
+L1 (Lasso):  L_reg = L + λΣ|wᵢ|
+  Gradient: sign(wᵢ) → weights can go exactly to ZERO → feature selection
+
+L2 (Ridge):  L_reg = L + λΣwᵢ²
+  Gradient: 2λwᵢ → weights shrink but stay non-zero → weight decay
+
+<span class="hi">Key difference:</span>
+  L1 constraint = diamond (corners on axes) → hits sparse solutions
+  L2 constraint = sphere (smooth) → distributes weight reduction evenly
+  <span class="res">L1 acts as automatic FEATURE SELECTOR because it drives irrelevant weights to exactly 0</span>
+  </div>
+  <h4>Dropout</h4>
+  <div class="formula-box">
+During training: randomly deactivate each neuron with probability p
+  Mask: m ~ Bernoulli(1−p)   →   h' = m ⊙ h
+During inference: scale weights by (1−p) [or use inverted dropout during training]
+Effect: trains ensemble of 2^n sub-networks
+  </div>
+  <h4>Other Techniques</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Technique</th><th>Mechanism</th><th>When to Use</th></tr>
+    <tr><td><strong>Early Stopping</strong></td><td>Stop when validation loss increases</td><td>Always monitor val loss</td></tr>
+    <tr><td><strong>Data Augmentation</strong></td><td>Flip, rotate, crop, noise addition</td><td>Small image datasets</td></tr>
+    <tr><td><strong>Batch Normalization</strong></td><td>Normalize activations per mini-batch</td><td>Deep CNNs, faster training</td></tr>
+    <tr><td><strong>Weight Decay</strong></td><td>Same as L2 regularization</td><td>All deep networks</td></tr>
+  </table></div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Explain L1 vs L2 regularization. Why is L1 a feature selector? [10M]</li>
+    <li>Explain Dropout and Early Stopping with diagrams. [5M]</li>
+    <li>List 5 data augmentation techniques. [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Optimizers -->
+<div class="topic" id="m2-optim">
+<div class="topic-header"><span class="topic-num">2.4</span><span class="topic-title">Optimizers for Training Deep Models</span></div>
+<div class="topic-body">
+  <div class="tbl-wrap"><table>
+    <tr><th>Optimizer</th><th>Update Rule</th><th>Advantage</th><th>Disadvantage</th></tr>
+    <tr><td><strong>SGD</strong></td><td class="num">θ ← θ − η·g</td><td>Simple, fast per step</td><td>Noisy, oscillates</td></tr>
+    <tr><td><strong>Momentum</strong></td><td class="num">v ← βv + g; θ ← θ − η·v</td><td>Dampens oscillation, faster</td><td>Overshoot</td></tr>
+    <tr><td><strong>RMSProp</strong></td><td class="num">v ← βv + (1−β)g²; θ ← θ − η·g/√v</td><td>Adaptive LR per param</td><td>No bias correction</td></tr>
+    <tr><td><strong>Adam</strong></td><td>(see below)</td><td class="good">Best of both worlds</td><td>May not generalise as well as SGD in some cases</td></tr>
+    <tr><td><strong>AdaGrad</strong></td><td class="num">G ← G + g²; θ ← θ − η·g/√G</td><td>Sparse features</td><td>LR shrinks too fast</td></tr>
+  </table></div>
+
+  <h4>Adam (Adaptive Moment Estimation) – Full Derivation</h4>
+  <div class="formula-box">
+Hyperparameters: η=0.001, β₁=0.9, β₂=0.999, ε=10⁻⁸
+
+Step 1 – First moment (momentum):
+  m_t = β₁·m_{t-1} + (1−β₁)·g_t
+
+Step 2 – Second moment (adaptive scaling):
+  v_t = β₂·v_{t-1} + (1−β₂)·g_t²
+
+Step 3 – Bias correction (corrects initialisation at 0):
+  m̂_t = m_t / (1 − β₁^t)
+  v̂_t = v_t / (1 − β₂^t)
+
+Step 4 – Parameter update:
+  <span class="res">θ_t = θ_{t-1} − η · m̂_t / (√v̂_t + ε)</span>
+
+<span class="hi">Interpretation:</span>
+  m̂_t = smoothed gradient direction (like momentum)
+  v̂_t = smoothed squared gradient magnitude (like RMSProp)
+  Together → large steps in low-curvature directions, small steps in high-curvature
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Explain Adam optimizer. Derive all 4 steps. Interpret each component. [10M]</li>
+    <li>Compare BGD, SGD, Mini-Batch GD with pros/cons. [10M]</li>
+    <li>What is gradient descent? Illustrate its process. [5M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 3
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m3" class="module">
+<div class="module-header m3">
+  <div class="module-num">3</div>
+  <div><div class="module-title">Convolutional Neural Networks</div><div class="module-meta">7 hours · Convolution · Pooling · VGG · GoogleNet · ResNet · Transfer Learning · BN · Data Augmentation</div></div>
+</div>
+
+<!-- Convolution -->
+<div class="topic" id="m3-conv">
+<div class="topic-header"><span class="topic-num">3.1</span><span class="topic-title">Convolutional & Pooling Layers</span></div>
+<div class="topic-body">
+  <h4>Convolution Operation</h4>
+  <div class="formula-box">
+Output size (conv):  out = floor((in + 2p − k) / s) + 1
+
+  where: in = input size, p = padding, k = kernel size, s = stride
+
+Padding types:
+  'same'  (p = (k−1)/2): output size = input size
+  'valid' (p = 0):       output size = in − k + 1
+
+Learnable parameters (one conv layer):
+  <span class="res">params = (k × k × C_in + 1) × C_out</span>   (+1 for bias per filter)
+
+Examples:
+  3×3 conv, 1 input ch, 32 filters:  (3×3×1+1)×32 = 10×32 = 320
+  3×3 conv, 32 → 64 filters:         (3×3×32+1)×64 = 289×64 = 18,496
+  </div>
+  <h4>Pooling</h4>
+  <div class="formula-box">
+Max Pooling:     output = max value in each window
+Average Pooling: output = mean value in each window
+Global Avg Pool: output = mean of entire feature map → single scalar per channel
+
+Output size same formula: floor((in − k)/s) + 1
+Pooling has ZERO learnable parameters.
+  </div>
+  <h4>Full CNN Parameter Count</h4>
+  <div class="formula-box">
+For each layer:
+  Conv:    (k×k×C_in+1)×C_out    ← learnable
+  Pool:    0                      ← no params
+  FC:      (n_in + 1) × n_out    ← learnable (n_in includes all spatial dimensions)
+
+FC after last pool: n_in = H_out × W_out × C_out
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Given a CNN architecture, compute output size after each layer and total parameters. [10M]</li>
+    <li>Apply max pooling (stride 2) and average pooling (stride 1) to a given matrix. [4M]</li>
+    <li>Apply convolution with a given filter to an input matrix (valid padding). Show result. [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Architectures -->
+<div class="topic" id="m3-arch">
+<div class="topic-header"><span class="topic-num">3.2</span><span class="topic-title">CNN Architectures – VGG, GoogleNet/Inception, ResNet</span></div>
+<div class="topic-body">
+  <div class="tbl-wrap"><table>
+    <tr><th>Architecture</th><th>Key Idea</th><th>Innovation</th><th>Depth</th></tr>
+    <tr><td><strong>VGG-16/19</strong></td><td>Stack of 3×3 convolutions</td><td>Depth over large kernels; simple, uniform design</td><td>16–19 layers</td></tr>
+    <tr><td><strong>GoogleNet (Inception)</strong></td><td>Inception blocks</td><td>Parallel paths (1×1, 3×3, 5×5, pool) concatenated; 1×1 conv bottleneck</td><td>22 layers</td></tr>
+    <tr><td><strong>ResNet</strong></td><td>Residual/skip connections</td><td>Solves vanishing gradient in very deep nets; H(x) = F(x) + x</td><td>50/101/152 layers</td></tr>
+  </table></div>
+
+  <h4>Inception Block (GoogLeNet)</h4>
+  <div class="formula-box">
+Input: W×H×C
+
+4 parallel branches (same padding → same spatial output):
+  Branch 1: 1×1 conv (64 filters)
+  Branch 2: 1×1 conv (96) → 3×3 conv (128)
+  Branch 3: 1×1 conv (16) → 5×5 conv (32)
+  Branch 4: 3×3 max-pool → 1×1 conv (32)
+
+Output: concatenate all branches along depth dimension
+  Total depth = 64 + 128 + 32 + 32 = <span class="res">256 channels</span>
+
+1×1 conv purpose: dimensionality reduction before expensive 3×3/5×5 convs → saves computation
+  </div>
+
+  <h4>ResNet Skip Connection</h4>
+  <div class="formula-box">
+Standard:    a⁽ˡ⁺¹⁾ = f(W⁽ˡ⁾·a⁽ˡ⁾ + b⁽ˡ⁾)
+Residual:    a⁽ˡ⁺²⁾ = f(F(a⁽ˡ⁾) + a⁽ˡ⁾)   where F = 2-layer transform
+
+Gradient through skip: ∂L/∂a⁽ˡ⁾ = ∂L/∂a⁽ˡ⁺²⁾ · (∂F/∂a⁽ˡ⁾ + I)
+→ Identity term I ensures gradient ≥ 1 → NO vanishing gradient
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Draw and explain the Inception block. Compute output depth and parameters. [5M+5M]</li>
+    <li>How does ResNet solve the vanishing gradient problem in very deep networks? [5M]</li>
+    <li>Compare VGG, GoogLeNet, ResNet in terms of depth, params, innovation. [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- Transfer Learning -->
+<div class="topic" id="m3-transfer">
+<div class="topic-header"><span class="topic-num">3.3</span><span class="topic-title">Transfer Learning & Data Augmentation</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Transfer Learning:</strong> Reusing a model pre-trained on a large source dataset (e.g., ImageNet) and adapting it to a smaller target task. Leverages learned hierarchical features.</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Strategy</th><th>What is Frozen</th><th>What is Trained</th><th>When to Use</th></tr>
+    <tr><td><strong>Feature Extraction</strong></td><td>All pre-trained layers</td><td>New top classifier only</td><td>Small dataset + similar domain</td></tr>
+    <tr><td><strong>Fine-Tuning</strong></td><td>Early layers (general features)</td><td>Top N layers + classifier</td><td>Large dataset or different domain</td></tr>
+    <tr><td><strong>Full Retraining</strong></td><td>Nothing</td><td>Everything</td><td>Very different domain + large data</td></tr>
+  </table></div>
+  <h4>Data Augmentation Techniques</h4>
+  <div class="key-grid">
+    <div class="key-card"><h4>1. Horizontal/Vertical Flip</h4><p>Mirror image. Doubles dataset size with no cost.</p></div>
+    <div class="key-card"><h4>2. Random Rotation</h4><p>Rotate by ±15°. Adds rotational invariance.</p></div>
+    <div class="key-card"><h4>3. Random Crop/Zoom</h4><p>Crop a patch and resize. Simulates scale variation.</p></div>
+    <div class="key-card"><h4>4. Brightness/Contrast</h4><p>Multiply pixels by random factor. Lighting variation.</p></div>
+    <div class="key-card"><h4>5. Gaussian Noise</h4><p>Add zero-mean noise. Robustness to sensor noise.</p></div>
+    <div class="key-card"><h4>6. Colour Jitter</h4><p>Randomly shift hue/saturation. Domain invariance.</p></div>
+  </div>
+</div></div>
+
+<!-- Batch Norm -->
+<div class="topic" id="m3-bn">
+<div class="topic-header"><span class="topic-num">3.4</span><span class="topic-title">Batch Normalization & Dropout in CNNs</span></div>
+<div class="topic-body">
+  <div class="formula-box">
+Batch Normalization (for mini-batch B = {x₁,...,xₘ}):
+
+Step 1: μ_B = (1/m)Σxᵢ                    ← batch mean
+Step 2: σ²_B = (1/m)Σ(xᵢ − μ_B)²          ← batch variance
+Step 3: x̂ᵢ = (xᵢ − μ_B) / √(σ²_B + ε)   ← normalize
+Step 4: yᵢ = γ·x̂ᵢ + β                    ← scale & shift (γ, β are LEARNED)
+
+<span class="hi">Why it helps:</span>
+  1. Reduces internal covariate shift
+  2. Allows higher learning rates → faster convergence
+  3. Acts as implicit regularizer
+  4. Smoothes loss landscape
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>How does transfer learning improve CNN performance? Feature extraction vs fine-tuning? [6M]</li>
+    <li>Explain Batch Normalization. How does it make training faster? [4M]</li>
+    <li>List and explain 5 data augmentation techniques. [5M]</li>
+    <li>Explain dropout. How does it prevent overfitting? [5M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 4
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m4" class="module">
+<div class="module-header m4">
+  <div class="module-num">4</div>
+  <div><div class="module-title">Recurrent Neural Networks</div><div class="module-meta">8 hours · RNN · BPTT · LSTM · GRU · Bidirectional RNN/LSTM</div></div>
+</div>
+
+<!-- RNN & BPTT -->
+<div class="topic" id="m4-rnn">
+<div class="topic-header"><span class="topic-num">4.1</span><span class="topic-title">RNN & Backpropagation Through Time (BPTT)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>RNN:</strong> A neural network with recurrent (self-loop) connections that allows it to maintain a hidden state, enabling sequential/temporal processing.</div>
+  <div class="formula-box">
+<span class="hi">Forward pass:</span>
+  hₜ = tanh(W_xh·xₜ + W_hh·h_{t-1} + b_h)
+  ŷₜ = softmax(W_hy·hₜ + b_y)
+
+<span class="hi">BPTT – Gradient through time:</span>
+  ∂L/∂W_hh = Σₜ Σₖ≤t ∂Lₜ/∂hₜ · (∏ᵢ₌ₖᵗ⁻¹ ∂hᵢ₊₁/∂hᵢ) · ∂hₖ/∂W_hh
+
+Product term: ∏ diag(1−hᵢ²) → 0 if many steps → <span class="res">vanishing gradient</span>
+              or → ∞ → <span class="res">exploding gradient</span>
+  </div>
+  <h4>BPTT Challenges</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Challenge</th><th>Cause</th><th>Solution</th></tr>
+    <tr><td>Vanishing gradient</td><td>Product of derivatives < 1 → 0</td><td>LSTM/GRU, gradient clipping</td></tr>
+    <tr><td>Exploding gradient</td><td>Product of derivatives > 1 → ∞</td><td>Gradient norm clipping</td></tr>
+    <tr><td>Memory complexity</td><td>Store all hₜ for T steps: O(T)</td><td>Truncated BPTT</td></tr>
+    <tr><td>Compute cost</td><td>O(T·d²) per update</td><td>Transformers as alternative</td></tr>
+  </table></div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Describe BPTT. Discuss vanishing gradient and computational complexity challenges. [10M]</li>
+    <li>Given RNN weights and input sequence, compute hidden states and output vectors using forward propagation. Apply softmax. Identify highest probability output. [10M]</li>
+    <li>How do self-connection weights W_hh influence hidden state across time steps? [4M]</li>
+  </ol></div>
+</div></div>
+
+<!-- LSTM -->
+<div class="topic" id="m4-lstm">
+<div class="topic-header"><span class="topic-num">4.2</span><span class="topic-title">Long Short-Term Memory (LSTM)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>LSTM:</strong> A gated RNN cell with an explicit cell state that acts as a memory highway. Uses three gates (forget, input, output) to selectively remember and forget information.</div>
+  <div class="formula-box">
+Combined input: z = [xₜ; h_{t-1}]   (concatenation)
+
+<span class="hi">Forget gate:</span>   fₜ = σ(Wf·z + bf)     ← what to erase from cell state
+<span class="hi">Input gate:</span>    iₜ = σ(Wi·z + bi)     ← what new info to write
+<span class="hi">Cell candidate:</span> g̃ₜ = tanh(Wc·z + bc)  ← candidate values to write
+<span class="hi">Cell state:</span>    cₜ = fₜ⊙c_{t-1} + iₜ⊙g̃ₜ  ← memory update (KEY!)
+<span class="hi">Output gate:</span>   oₜ = σ(Wo·z + bo)     ← what to output
+<span class="hi">Hidden state:</span>  hₜ = oₜ⊙tanh(cₜ)
+
+<span class="res">Gradient through cell: ∂cₜ/∂c_{t-1} = fₜ (element-wise)
+→ When fₜ ≈ 1, gradient flows freely → NO vanishing gradient!</span>
+  </div>
+  <h4>Why LSTM > RNN</h4>
+  <div class="key-grid">
+    <div class="key-card"><h4>Cell State Highway</h4><p>cₜ passes through time with only element-wise multiplication (by fₜ), no repeated matrix multiplication → stable gradient.</p></div>
+    <div class="key-card"><h4>Gated Memory</h4><p>Forget gate can set fₜ≈1 for long-term memory and fₜ≈0 for short-term. Enables learning both short and long dependencies.</p></div>
+    <div class="key-card"><h4>Selective Writing</h4><p>Input gate iₜ and cell candidate g̃ₜ control what new info enters the cell state. Not everything is blindly stored.</p></div>
+    <div class="key-card"><h4>Selective Reading</h4><p>Output gate oₜ controls how much of the cell state to expose as the hidden state at each step.</p></div>
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>Given LSTM weight matrices, biases, input xₜ, h_{t-1}, c_{t-1}, compute forget gate, input gate, cell state, output gate, hidden state. [10M]</li>
+    <li>Explain LSTM architecture with all 4 gates. Why does it solve vanishing gradients? [10M]</li>
+    <li>How does the cell state act as a gradient highway? [4M]</li>
+  </ol></div>
+</div></div>
+
+<!-- GRU -->
+<div class="topic" id="m4-gru">
+<div class="topic-header"><span class="topic-num">4.3</span><span class="topic-title">Gated Recurrent Unit (GRU)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>GRU:</strong> Simplified version of LSTM with 2 gates (update + reset) and no separate cell state. Fewer parameters, similar performance.</div>
+  <div class="formula-box">
+z = [xₜ; h_{t-1}]
+
+<span class="hi">Update gate:</span>  zₜ = σ(W_z·z + b_z)   ← how much to update hidden state
+<span class="hi">Reset gate:</span>   rₜ = σ(W_r·z + b_r)   ← how much past to consider
+<span class="hi">Candidate:</span>    h̃ₜ = tanh(W·[rₜ⊙h_{t-1}, xₜ] + b)
+<span class="hi">New state:</span>    <span class="res">hₜ = (1−zₜ)⊙h_{t-1} + zₜ⊙h̃ₜ</span>
+
+Key: convex combination ensures gradient highway:
+  ∂hₜ/∂h_{t-1} = (1−zₜ) + zₜ·∂h̃ₜ/∂h_{t-1}
+  (1−zₜ) term preserves gradient → no vanishing
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>RNN</th><th>LSTM</th><th>GRU</th></tr>
+    <tr><td>Gates</td><td>0</td><td>3 (f,i,o)</td><td>2 (z,r)</td></tr>
+    <tr><td>Cell state</td><td>No</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Vanishing grad</td><td class="bad">Severe</td><td class="good">Minimal</td><td class="good">Minimal</td></tr>
+    <tr><td>Parameters</td><td>Fewest</td><td>Most (4×)</td><td>Moderate (3×)</td></tr>
+    <tr><td>Training speed</td><td>Fastest</td><td>Slowest</td><td>Faster than LSTM</td></tr>
+    <tr><td>Performance</td><td>Poor (long)</td><td>Best</td><td>Similar to LSTM</td></tr>
+  </table></div>
+</div></div>
+
+<!-- Bidirectional -->
+<div class="topic" id="m4-birnn">
+<div class="topic-header"><span class="topic-num">4.4</span><span class="topic-title">Bidirectional RNN & Bi-LSTM</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Bidirectional RNN/LSTM:</strong> Processes the sequence in both forward and backward directions, concatenating hidden states. Each position has context from both past AND future tokens.</div>
+  <div class="formula-box">
+Forward LSTM:  h→ₜ processes x₁ → x₂ → ... → xₙ
+Backward LSTM: h←ₜ processes xₙ → xₙ₋₁ → ... → x₁
+
+Output: ŷₜ = W·[h→ₜ ; h←ₜ] + b   (concatenation)
+
+Use case: Speech-to-text, named entity recognition, machine translation.
+"The bank can guarantee deposits will eventually cover future tuition costs"
+→ "bank" needs future context to determine meaning (financial or river?)
+  </div>
+  <h4>Why Bi-LSTM outperforms Bi-RNN for long sequences</h4>
+  <ul>
+    <li>Bi-RNN suffers vanishing gradients → early tokens get near-zero gradient</li>
+    <li>LSTM's cell state preserves information over long distances</li>
+    <li>Bidirectional pass provides full sequence context at every position</li>
+  </ul>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>How does Bi-LSTM improve upon Bi-RNN for speech-to-text on long sentences? Explain role of self-connection weights. [10M]</li>
+    <li>Compare RNN, LSTM, GRU in terms of gates, cell state, gradient, parameters. [5M]</li>
+    <li>Explain GRU. How does it improve training stability? [5M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 5
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m5" class="module">
+<div class="module-header m5">
+  <div class="module-num">5</div>
+  <div><div class="module-title">Region-based CNNs & Attention</div><div class="module-meta">6 hours · Encoder-Decoder · Attention · RCNN · YOLO</div></div>
+</div>
+
+<!-- Encoder-Decoder -->
+<div class="topic" id="m5-enc">
+<div class="topic-header"><span class="topic-num">5.1</span><span class="topic-title">Encoder-Decoder Models</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Encoder-Decoder:</strong> The encoder compresses input into a fixed-size context vector (latent representation). The decoder generates output from this context vector.</div>
+  <div class="key-grid">
+    <div class="key-card"><h4>Encoder</h4><p>Reads entire input sequence, produces context vector C = h_T (final hidden state).</p></div>
+    <div class="key-card"><h4>Context Vector</h4><p>Fixed-length bottleneck. Information bottleneck problem: long sequences compressed into one vector.</p></div>
+    <div class="key-card"><h4>Decoder</h4><p>Generates output token by token, conditioned on context vector and previously generated tokens.</p></div>
+    <div class="key-card"><h4>Limitation</h4><p>Fixed context vector cannot capture all information from long sequences → attention mechanism needed.</p></div>
+  </div>
+  <h4>U-Net (for segmentation)</h4>
+  <p>Encoder-decoder with <strong>skip connections</strong> between corresponding encoder and decoder layers. Preserves spatial information lost during downsampling. Used in medical image segmentation.</p>
+</div></div>
+
+<!-- Attention -->
+<div class="topic" id="m5-att">
+<div class="topic-header"><span class="topic-num">5.2</span><span class="topic-title">Attention Mechanism (Bahdanau)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Attention:</strong> Instead of a single context vector, compute a dynamic weighted sum of all encoder hidden states for each decoder step. The model learns which encoder positions to "attend" to.</div>
+  <h4>Bahdanau Attention Steps</h4>
+  <div class="formula-box">
+<span class="hi">Step 1 – Encode:</span>
+  Run bidirectional RNN on x₁...xₙ → hidden states h₁,...,hₙ
+
+<span class="hi">Step 2 – Alignment score:</span>
+  eᵢⱼ = vᵀ·tanh(W₁·sⱼ₋₁ + W₂·hᵢ)
+  where sⱼ₋₁ = previous decoder state
+
+<span class="hi">Step 3 – Attention weights (softmax):</span>
+  αᵢⱼ = exp(eᵢⱼ) / Σₖ exp(eₖⱼ)     ← sum = 1
+
+<span class="hi">Step 4 – Context vector:</span>
+  cⱼ = Σᵢ αᵢⱼ·hᵢ                   ← dynamic, decoder-step-specific
+
+<span class="hi">Step 5 – Decode:</span>
+  sⱼ = f(sⱼ₋₁, yⱼ₋₁, cⱼ)
+  P(yⱼ|y<j, x) = softmax(g(sⱼ, cⱼ))
+
+<span class="res">Key advantage: no information bottleneck. Each output position can directly access any input position.</span>
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>What is the need for attention? Explain all steps of Bahdanau attention in detail. [10M]</li>
+    <li>How does attention solve the information bottleneck problem in seq2seq models? [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- RCNN / YOLO -->
+<div class="topic" id="m5-rcnn">
+<div class="topic-header"><span class="topic-num">5.3</span><span class="topic-title">RCNN, Fast RCNN, Faster RCNN & YOLO</span></div>
+<div class="topic-body">
+  <div class="tbl-wrap"><table>
+    <tr><th>Model</th><th>Approach</th><th>Speed</th><th>Key Innovation</th></tr>
+    <tr><td><strong>RCNN</strong></td><td>Selective search proposals → CNN per region</td><td>Slow (2000 forward passes)</td><td>Region-based CNN</td></tr>
+    <tr><td><strong>Fast RCNN</strong></td><td>CNN on full image → ROI pooling on features</td><td>Faster</td><td>Shared computation, ROI pooling</td></tr>
+    <tr><td><strong>Faster RCNN</strong></td><td>Region Proposal Network (RPN) + detection head</td><td>~5 fps</td><td>End-to-end trainable, RPN</td></tr>
+    <tr><td><strong>YOLO</strong></td><td>Single forward pass, divide image into grid</td><td>Real-time (45+ fps)</td><td>Single-stage detection</td></tr>
+  </table></div>
+
+  <h4>YOLO – How Single-Pass Detection Works</h4>
+  <div class="formula-box">
+1. Divide image into S×S grid (e.g., 7×7)
+2. Each cell predicts:
+   - B bounding boxes: (x, y, w, h, confidence)  ← confidence = P(object)×IoU
+   - C class probabilities: P(class|object)
+3. Final prediction: class score = confidence × P(class|object)
+4. Non-Maximum Suppression (NMS) removes duplicate detections
+
+Total predictions per image: S×S × (B×5 + C)
+
+<span class="res">vs Two-stage (RCNN): One network handles both localisation and classification
+simultaneously in a single forward pass → real-time performance</span>
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>How does YOLO's single-pass approach differ from RCNN? How does it predict bounding boxes AND class labels simultaneously? [10M]</li>
+    <li>Compare RCNN, Fast RCNN, Faster RCNN in terms of approach and speed. [5M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     MODULE 6
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="m6" class="module">
+<div class="module-header m6">
+  <div class="module-num">6</div>
+  <div><div class="module-title">VAEs and GANs</div><div class="module-meta">9 hours · Autoencoders · VAE · GAN · Multi-task Learning</div></div>
+</div>
+
+<!-- Autoencoders -->
+<div class="topic" id="m6-ae">
+<div class="topic-header"><span class="topic-num">6.1</span><span class="topic-title">Autoencoders</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>Autoencoder:</strong> Unsupervised network trained to reconstruct its input. Encoder compresses input to latent space z; decoder reconstructs from z. Forces learning of compact representations.</div>
+  <div class="formula-box">
+Encoder: z = f_enc(x; θ_enc)   <span class="cmt">← compress</span>
+Decoder: x̂ = f_dec(z; θ_dec)  <span class="cmt">← reconstruct</span>
+Loss:    L = ‖x − x̂‖²          <span class="cmt">← reconstruction error (MSE)</span>
+
+Types:
+  Undercomplete: dim(z) < dim(x) → learns compressed representation
+  Sparse:       regularise z to be sparse → forces few active neurons
+  Denoising:    input = corrupted x, target = clean x → learns denoising
+  Variational:  adds probabilistic latent space (VAE)
+  </div>
+</div></div>
+
+<!-- VAE -->
+<div class="topic" id="m6-vae">
+<div class="topic-header"><span class="topic-num">6.2</span><span class="topic-title">Variational Autoencoder (VAE)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>VAE:</strong> A generative model where the encoder outputs parameters of a distribution (μ, σ) rather than a single point. Samples z ~ N(μ, σ²). Enables generation of new data by sampling from the prior.</div>
+  <div class="formula-box">
+Encoder: q_φ(z|x) = N(μ_φ(x), σ_φ(x)²)   ← outputs μ, σ (not z directly)
+
+Reparameterisation trick:
+  z = μ + σ·ε   where ε ~ N(0, I)  ← makes sampling differentiable
+
+Decoder: p_θ(x|z)   ← generate x from z
+
+<span class="hi">ELBO loss (to maximise):</span>
+  ELBO = E[log p_θ(x|z)] − KL[q_φ(z|x) ‖ p(z)]
+
+  Term 1 (reconstruction): E[log p(x|z)] → MSE or BCE loss
+  Term 2 (regularisation): KL divergence → pushes q(z|x) towards N(0,I)
+
+<span class="res">Generation: sample z ~ N(0,I), decode → new image</span>
+  </div>
+  <h4>VAE Problems & Solutions</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Problem</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td>Blurry outputs</td><td>MSE loss penalises all pixel differences equally</td><td>Perceptual loss (VGG features), adversarial loss (VAE-GAN)</td></tr>
+    <tr><td>Posterior collapse</td><td>KL dominates → encoder ignores input</td><td>KL annealing (β schedule: start β=0, increase to 1)</td></tr>
+    <tr><td>Limited diversity</td><td>Unimodal prior N(0,I)</td><td>Mixture of Gaussians prior, VQ-VAE</td></tr>
+  </table></div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>When training a VAE, the model fails to learn useful info → blurred images. List ≥2 methods to address. [10M]</li>
+    <li>Explain VAE architecture. Derive the ELBO loss. [10M]</li>
+    <li>What is the reparameterisation trick? Why is it needed? [5M]</li>
+  </ol></div>
+</div></div>
+
+<!-- GAN -->
+<div class="topic" id="m6-gan">
+<div class="topic-header"><span class="topic-num">6.3</span><span class="topic-title">Generative Adversarial Networks (GAN)</span></div>
+<div class="topic-body">
+  <div class="definition"><strong>GAN:</strong> Two networks trained adversarially. Generator G tries to fool the Discriminator D. D tries to distinguish real from fake. At Nash equilibrium, G generates indistinguishable data.</div>
+  <div class="formula-box">
+Minimax objective:
+  min_G max_D  V(D,G) = E[log D(x)] + E[log(1−D(G(z)))]
+
+Discriminator loss: L_D = −E[log D(x)] − E[log(1−D(G(z)))]  ← maximise
+Generator loss:     L_G = −E[log D(G(z))]                    ← minimise
+
+Training alternation:
+  Step 1: Fix G, train D for k steps
+  Step 2: Fix D, train G for 1 step
+  Repeat
+  </div>
+
+  <h4>GAN Problems & Solutions</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Problem</th><th>Description</th><th>Solution</th></tr>
+    <tr><td><strong>Mode Collapse</strong></td><td>G maps all z to same output → no diversity</td><td>WGAN-GP, minibatch discrimination, increased noise</td></tr>
+    <tr><td><strong>Training Instability</strong></td><td>G and D go out of sync; oscillation</td><td>WGAN (Wasserstein distance), spectral normalisation, careful LR</td></tr>
+    <tr><td><strong>Non-convergence</strong></td><td>D becomes too good → G gets zero gradient</td><td>Label smoothing, add noise to D inputs, balance training</td></tr>
+    <tr><td><strong>Vanishing gradient for G</strong></td><td>log(1−D(G(z))) → saturated</td><td>Use −log D(G(z)) instead (non-saturating GAN)</td></tr>
+  </table></div>
+
+  <h4>GAN Variants</h4>
+  <div class="key-grid">
+    <div class="key-card"><h4>DCGAN</h4><p>Deep Convolutional GAN. Uses transpose convolutions in G, strided convolutions in D. No FC layers. BatchNorm. LeakyReLU in D.</p></div>
+    <div class="key-card"><h4>cGAN (Conditional GAN)</h4><p>Generator and discriminator both conditioned on class label y. Allows targeted generation: generate face with "happy" expression.</p></div>
+    <div class="key-card"><h4>CycleGAN</h4><p>Unpaired image-to-image translation. Two generators, two discriminators. Cycle consistency loss ensures X→Y→X = X.</p></div>
+    <div class="key-card"><h4>StyleGAN</h4><p>Style-based generator. Separate style codes control different scales of features (coarse: pose, fine: hair texture). State-of-art for faces.</p></div>
+    <div class="key-card"><h4>WGAN-GP</h4><p>Wasserstein distance + gradient penalty. Stable training, meaningful loss metric. Critic (not discriminator) trained multiple times per G step.</p></div>
+    <div class="key-card"><h4>Evaluation Metrics</h4><p>FID (Fréchet Inception Distance): lower = better quality + diversity. IS (Inception Score): higher = better. Used to compare GANs.</p></div>
+  </div>
+
+  <h4>Steps to Build GAN for Face Generation (Identity Anonymisation)</h4>
+  <div class="formula-box">
+1. Architecture: Use DCGAN or StyleGAN backbone.
+   For diverse expressions → add conditional input (expression label)
+
+2. Dataset: Collect balanced data across all expression classes.
+   Apply augmentation to underrepresented expressions.
+
+3. Loss functions:
+   L_D = BCE(D(x), 1) + BCE(D(G(z)), 0) + λ·GP   ← gradient penalty for stability
+   L_G = BCE(D(G(z)), 1) + λ_id·L_identity        ← identity preservation
+   L_id = ‖face_encoder(G(z)) − face_encoder(x_ref)‖  ← anonymisation constraint
+
+4. Training: Alternate D and G updates. Monitor FID every N iterations.
+   Use spectral normalisation on D. Progressive growing from 4×4 to target.
+
+5. Diversity check: If mode collapse detected:
+   → Add minibatch discrimination to D
+   → Increase latent dimension
+   → Use WGAN-GP
+  </div>
+  <div class="qbank"><div class="qbank-title">🎯 Likely Exam Questions</div><ol>
+    <li>GAN for face generation with diverse expressions for identity anonymisation: what steps to ensure it works? [10M]</li>
+    <li>Explain GAN training with minimax objective. What is mode collapse and how to fix it? [10M]</li>
+    <li>Compare VAE and GAN for generative modelling. [5M]</li>
+  </ol></div>
+</div></div>
+</section>
+
+<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NUMERICALS SECTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+<section id="numericals" class="module">
+<div class="module-header" style="background:linear-gradient(135deg,#1e293b,#334155)">
+  <div class="module-num">🔢</div>
+  <div><div class="module-title">Numerical Examples – Exam Solved Problems</div><div class="module-meta">One complete worked example per question type with full step-by-step solutions</div></div>
+</div>
+
+<!-- Tensor Ops -->
+<div class="topic" id="n-tensor">
+<div class="topic-header"><span class="topic-num">N.1</span><span class="topic-title">Tensor Operations – Dot Product, Hadamard, Scaling</span></div>
+<div class="topic-body">
+  <div class="example">
+    <div class="example-head">📐 Example: A·B (dot product) and A⊙C (Hadamard)</div>
+    <div class="example-body">
+      <p><strong>Given:</strong><br>
+      A = [[11,14,16],[9,22,12]] (2×3), B = [[201,198],[95,112],[101,187]] (3×2), C = [12,34,45] (broadcast)</p>
+      <div class="step-block"><div class="step-label">Step 1 – Check shapes: (2×3)·(3×2) → result is (2×2)</div>
+        <div class="formula-box">
+A·B[0,0] = 11×201 + 14×95 + 16×101 = 2211+1330+1616 = <span class="res">5157</span>
+A·B[0,1] = 11×198 + 14×112 + 16×187 = 2178+1568+2992 = <span class="res">6738</span>
+A·B[1,0] = 9×201 + 22×95 + 12×101 = 1809+2090+1212 = <span class="res">5111</span>
+A·B[1,1] = 9×198 + 22×112 + 12×187 = 1782+2464+2244 = <span class="res">6490</span>
+Result: [[5157, 6738], [5111, 6490]]   Shape: (2,2)
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Step 2 – Hadamard A⊙C (C=[12,34,45] broadcast across rows)</div>
+        <div class="formula-box">
+Row 0: [11×12, 14×34, 16×45] = [132, 476, 720]
+Row 1: [ 9×12, 22×34, 12×45] = [108, 748, 540]
+Result: [[132,476,720],[108,748,540]]   Shape: (2,3)
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Step 3 – Scaling to [0,1] with Hadamard (normalize to B=A/255)</div>
+        <div class="formula-box">
+For pixel matrix: B = A/255   (each element divided by 255)
+Hadamard result: A⊙B = A×(A/255) = A²/255
+Example: A[0,0]=12  →  B[0,0]=12/255=0.047  →  (A⊙B)[0,0]=12×0.047=0.565
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">📐 Example: Inverse of a 3×3 Matrix</div>
+    <div class="example-body">
+      <p><strong>Given:</strong> A = [[1,2,3],[0,1,4],[5,6,0]]</p>
+      <div class="step-block"><div class="step-label">Step 1 – Determinant (cofactor expansion along row 1)</div>
+        <div class="formula-box">
+det(A) = 1×(1×0−4×6) − 2×(0×0−4×5) + 3×(0×6−1×5)
+       = 1×(−24) − 2×(−20) + 3×(−5)
+       = −24 + 40 − 15 = <span class="res">1</span>
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Step 2 – Cofactor matrix</div>
+        <div class="formula-box">
+C₁₁=+(0−24)=−24  C₁₂=−(0−20)=+20  C₁₃=+(0−5)=−5
+C₂₁=−(0−18)=+18  C₂₂=+(0−15)=−15  C₂₃=−(6−10)=+4
+C₃₁=+(8−3)=+5    C₃₂=−(4−0)=−4    C₃₃=+(1−0)=+1
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Step 3 – Inverse = adj(A)/det(A) = Cᵀ/1</div>
+        <div class="formula-box">
+A⁻¹ = ⎡ −24   18   5 ⎤
+      ⎢  20  −15  −4 ⎥
+      ⎣  −5    4   1 ⎦
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- Gradient Descent -->
+<div class="topic" id="n-gd">
+<div class="topic-header"><span class="topic-num">N.2</span><span class="topic-title">Gradient Descent – 2 Iterations on Quadratic</span></div>
+<div class="topic-body">
+  <div class="example">
+    <div class="example-head">📉 Example: Minimize J(w₁,w₂) = w₁² + 2w₂², initial w₁=2, w₂=1, α=0.1</div>
+    <div class="example-body">
+      <div class="step-block"><div class="step-label">Partial Derivatives</div>
+        <div class="formula-box">∂J/∂w₁ = 2w₁      ∂J/∂w₂ = 4w₂</div>
+      </div>
+      <div class="step-block"><div class="step-label">Iteration 1  (w₁=2, w₂=1)</div>
+        <div class="formula-box">
+w₁ = 2 − 0.1×(2×2) = 2 − 0.4 = <span class="res">1.6</span>
+w₂ = 1 − 0.1×(4×1) = 1 − 0.4 = <span class="res">0.6</span>
+J = 1.6² + 2×0.6² = 2.56 + 0.72 = 3.28   (was 6.0)
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Iteration 2  (w₁=1.6, w₂=0.6)</div>
+        <div class="formula-box">
+w₁ = 1.6 − 0.1×(2×1.6) = 1.6 − 0.32 = <span class="res">1.28</span>
+w₂ = 0.6 − 0.1×(4×0.6) = 0.6 − 0.24 = <span class="res">0.36</span>
+J = 1.28² + 2×0.36² = 1.6384 + 0.2592 = 1.90   (converging ✓)
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- Backpropagation -->
+<div class="topic" id="n-bp">
+<div class="topic-header"><span class="topic-num">N.3</span><span class="topic-title">Full Backpropagation – 3-Layer Network (2 iterations)</span></div>
+<div class="topic-body">
+  <div class="example">
+    <div class="example-head">🔁 Example: x₁=0.6, x₂=0.2; Weights as given in exam; η=0.4, target=1</div>
+    <div class="example-body">
+      <p><strong>Network:</strong> x₁,x₂ → H₃,H₄ → O₅ (sigmoid everywhere, MSE loss)</p>
+      <p><strong>Weights:</strong> w₁₃=0.2, w₁₄=0.5, w₂₃=0.7, w₂₄=0.3, w₃₅=0.4, w₄₅=0.9</p>
+      <p><strong>Biases:</strong> b₃=0.1, b₄=0.4, b₅=0.2</p>
+      
+      <div class="step-block"><div class="step-label">Forward Pass</div>
+        <div class="formula-box">
+net₃ = 0.2×0.6 + 0.7×0.2 + 0.1 = 0.36   H₃ = σ(0.36) = <span class="res">0.5890</span>
+net₄ = 0.5×0.6 + 0.3×0.2 + 0.4 = 0.76   H₄ = σ(0.76) = <span class="res">0.6814</span>
+net₅ = 0.4×0.5890 + 0.9×0.6814 + 0.2 = 1.0489
+O₅   = σ(1.0489) = <span class="res">0.7407</span>
+MSE  = 0.5×(1−0.7407)² = 0.0336
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Output Layer Delta</div>
+        <div class="formula-box">
+δ₅ = (target − O₅) × O₅ × (1 − O₅)
+   = (1 − 0.7407) × 0.7407 × 0.2593
+   = 0.2593 × 0.1920 = <span class="res">0.04978</span>
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Hidden Layer Deltas</div>
+        <div class="formula-box">
+δ₃ = δ₅ × w₃₅ × H₃ × (1−H₃)
+   = 0.04978 × 0.4 × 0.5890 × 0.4110 = <span class="res">0.004820</span>
+
+δ₄ = δ₅ × w₄₅ × H₄ × (1−H₄)
+   = 0.04978 × 0.9 × 0.6814 × 0.3186 = <span class="res">0.009732</span>
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Weight Updates (Δw = η × δ × input)</div>
+        <div class="formula-box">
+Δw₃₅ = 0.4×0.04978×0.5890 = 0.01172  → w₃₅_new = 0.4117
+Δw₄₅ = 0.4×0.04978×0.6814 = 0.01357  → w₄₅_new = 0.9136
+Δb₅  = 0.4×0.04978        = 0.01991  → b₅_new  = 0.2199
+
+Δw₁₃ = 0.4×0.004820×0.6 = 0.001157  → w₁₃_new = 0.2012
+Δw₂₃ = 0.4×0.004820×0.2 = 0.000386  → w₂₃_new = 0.7004
+Δb₃  = 0.4×0.004820      = 0.001928  → b₃_new  = 0.1019
+
+Δw₁₄ = 0.4×0.009732×0.6 = 0.002336  → w₁₄_new = 0.5023
+Δw₂₄ = 0.4×0.009732×0.2 = 0.000779  → w₂₄_new = 0.3008
+Δb₄  = 0.4×0.009732      = 0.003893  → b₄_new  = 0.4039
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">🔁 Example: OR Gate Perceptron Training (w₁=0.5, w₂=0.2, bias=1, η=0.3)</div>
+    <div class="example-body">
+      <p><strong>Threshold=1. Output=1 if net≥threshold.</strong></p>
+      <div class="step-block"><div class="step-label">Process each training example in order</div>
+        <div class="formula-box">
+Ex 1: x=[0,0] target=0   net=0×0.5+0×0.2+1=1.0  out=1  error=−1
+  Δw₁=0, Δw₂=0, Δb=0.3×(−1)=−0.3   → w₁=0.5, w₂=0.2, b=0.7
+
+Ex 2: x=[0,1] target=1   net=0×0.5+1×0.2+0.7=0.9  out=0  error=+1
+  Δw₂=0.3×1×1=0.3, Δb=0.3   → w₂=0.5, b=1.0
+
+Ex 3: x=[1,0] target=1   net=1×0.5+0×0.5+1.0=1.5  out=1  error=0
+  No update.
+
+Ex 4: x=[1,1] target=1   net=0.5+0.5+1.0=2.0  out=1  error=0
+  No update.
+
+<span class="res">After epoch 1: w₁=0.5, w₂=0.5, bias=1.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- CNN Params -->
+<div class="topic" id="n-cnn">
+<div class="topic-header"><span class="topic-num">N.4</span><span class="topic-title">CNN Output Size & Parameter Count</span></div>
+<div class="topic-body">
+  <div class="example">
+    <div class="example-head">🧮 Example: RGB 128×128 input, 2 Conv + 2 Pool + 2 FC layers</div>
+    <div class="example-body">
+      <div class="formula-box">
+Input: 128×128×3
+
+L1 – Conv: 32 filters, 3×3, stride=1, same padding
+  Output: 128×128×32   Params: (3×3×3+1)×32 = 28×32 = <span class="res">896</span>
+
+L2 – MaxPool: 2×2, stride=2
+  Output: 64×64×32   Params: <span class="res">0</span>
+
+L3 – Conv: 64 filters, 3×3, stride=1, same padding
+  Output: 64×64×64   Params: (3×3×32+1)×64 = 289×64 = <span class="res">18,496</span>
+
+L4 – MaxPool: 2×2, stride=2
+  Output: 32×32×64   Params: <span class="res">0</span>
+
+L5 – Flatten → FC: 256 neurons
+  n_in = 32×32×64 = 65,536   Params: (65536+1)×256 = <span class="res">16,777,472</span>
+
+L6 – FC: 128 neurons
+  Params: (256+1)×128 = <span class="res">32,896</span>
+
+Output – FC: 24 classes
+  Params: (128+1)×24 = <span class="res">3,096</span>
+
+Total = 896+18496+16777472+32896+3096 = <span class="res">16,832,856</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">🧮 Example: Convolution on 5×5 Matrix + Max Pooling</div>
+    <div class="example-body">
+      <p><strong>Input (5×5), Filter (3×3, valid), Leaky ReLU α=0.01:</strong></p>
+      <div class="formula-box">
+Input:         Filter:
+2  4  6  8 10    1  0 -1
+1  3  5  7  9    1  0 -1
+0  2  4  6  8    1  0 -1
+1  1  2  2  3
+-5 4  3  2  1
+
+Conv at (0,0): 2×1+4×0+6×(−1)+1×1+3×0+5×(−1)+0×1+2×0+4×(−1) = 2+0−6+1+0−5+0+0−4 = −12
+Conv at (0,1): 4×1+6×0+8×(−1)+3×1+5×0+7×(−1)+2×1+4×0+6×(−1) = 4+0−8+3+0−7+2+0−6 = −12
+Conv at (0,2): 6×1+8×0+10×(−1)+5×1+7×0+9×(−1)+4×1+6×0+8×(−1) = 6−10+5−9+4−8 = −12
+
+Leaky ReLU:  if value < 0 → value × 0.01
+
+Output after Leaky ReLU (3×3):
+−0.12  −0.12  −0.12
+ ...    ...    ...    (complete all 9 positions similarly)
+
+Max Pooling 2×2, stride=1 on 3×3 → output 2×2 (pick max in each window)
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- RNN / LSTM Numericals -->
+<div class="topic" id="n-rnn">
+<div class="topic-header"><span class="topic-num">N.5</span><span class="topic-title">RNN Forward Pass & LSTM Cell Computation</span></div>
+<div class="topic-body">
+  <div class="example">
+    <div class="example-head">🔄 Example: RNN Forward Propagation (3 time steps, tanh hidden, softmax output)</div>
+    <div class="example-body">
+      <p><strong>Given:</strong> W_xh=[[0.2,0.4],[0.3,0.1],[0.5,0.2]], W_hh=[[0.6,0],[0,0.4]], W_hy=[[0.3,0.5,0.2],[0.4,0.2,0.6]], h₀=[0,0]</p>
+      <p><strong>Input sequence:</strong> t=1:[1,0,0], t=2:[0,1,0], t=3:[0,0,1]</p>
+      
+      <div class="step-block"><div class="step-label">t=1:  hₜ = tanh(W_xhᵀ·xₜ + W_hh·h₀)</div>
+        <div class="formula-box">
+W_xhᵀ·x₁ = [0.2×1+0.3×0+0.5×0, 0.4×1+0.1×0+0.2×0] = [0.2, 0.4]
+W_hh·h₀ = [0, 0]
+h₁ = tanh([0.2, 0.4]) = [<span class="res">0.1974, 0.3799</span>]
+
+y₁_raw = W_hyᵀ·h₁:  [0.3×0.1974+0.4×0.3799, 0.5×0.1974+0.2×0.3799, 0.2×0.1974+0.6×0.3799]
+       = [0.2112, 0.1747, 0.2674]
+y₁ = softmax([0.2112,0.1747,0.2674]) = [<span class="res">0.3309, 0.3191, 0.3500</span>]  ← Highest: y₃
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">t=2:  hₜ = tanh(W_xhᵀ·x₂ + W_hh·h₁)</div>
+        <div class="formula-box">
+W_xhᵀ·x₂ = [0.3, 0.1]
+W_hh·h₁ = [0.6×0.1974, 0.4×0.3799] = [0.1184, 0.1520]
+h₂ = tanh([0.4184, 0.2520]) = [<span class="res">0.3963, 0.2462</span>]
+y₂ = softmax(W_hyᵀ·h₂) → [0.3290, 0.3389, 0.3321]  ← Highest: y₂
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">t=3:  hₜ = tanh(W_xhᵀ·x₃ + W_hh·h₂)</div>
+        <div class="formula-box">
+W_xhᵀ·x₃ = [0.5, 0.2]
+W_hh·h₂ = [0.6×0.3963, 0.4×0.2462] = [0.2378, 0.0985]
+h₃ = tanh([0.7378, 0.2985]) = [<span class="res">0.6274, 0.2907</span>]
+y₃ = softmax(W_hyᵀ·h₃) → [0.3263, 0.3490, 0.3248]  ← Highest: y₂
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">⚡ Example: LSTM Cell – Full Computation</div>
+    <div class="example-body">
+      <p><strong>xₜ=[0.6,−0.1], h_{t-1}=[0.2,0.5], c_{t-1}=[0.4,0.1], bf=[0.1,0.2], bi=[−0.1,0.3], bc=[0.05,0.1], bo=[0.2,−0.2]</strong></p>
+      <div class="step-block"><div class="step-label">Combined input z = [xₜ; h_{t-1}] = [0.6, −0.1, 0.2, 0.5]</div></div>
+      <div class="step-block"><div class="step-label">Forget Gate  fₜ = σ(Wf·z + bf)</div>
+        <div class="formula-box">
+Wf·z[0] = 0.2×0.6+(−0.3)×(−0.1)+0.4×0.2+0.1×0.5 = 0.12+0.03+0.08+0.05 = 0.28
+Wf·z[1] = 0.5×0.6+0.2×(−0.1)+(−0.1)×0.2+0.3×0.5 = 0.30−0.02−0.02+0.15 = 0.41
+fₜ = σ([0.28+0.1, 0.41+0.2]) = σ([0.38, 0.61]) = [<span class="res">0.5939, 0.6479</span>]
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Input Gate  iₜ = σ(Wi·z + bi)</div>
+        <div class="formula-box">
+Wi·z[0] = (−0.1)×0.6+0.3×(−0.1)+0.2×0.2+(−0.2)×0.5 = −0.15  → +bi=−0.25
+Wi·z[1] = 0.4×0.6+(−0.2)×(−0.1)+0.1×0.2+0.5×0.5 = 0.53  → +bi=0.83
+iₜ = σ([−0.25, 0.83]) = [<span class="res">0.4378, 0.6966</span>]
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Cell Candidate  g̃ₜ = tanh(Wc·z + bc)</div>
+        <div class="formula-box">
+Wc·z[0]+bc = 0.49+0.05 = 0.54   Wc·z[1]+bc = −0.09+0.1 = 0.01
+g̃ₜ = [tanh(0.54), tanh(0.01)] = [<span class="res">0.5131, 0.0100</span>]
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Cell State  cₜ = fₜ⊙c_{t-1} + iₜ⊙g̃ₜ</div>
+        <div class="formula-box">
+cₜ[0] = 0.5939×0.4 + 0.4378×0.5131 = 0.2376+0.2246 = <span class="res">0.4622</span>
+cₜ[1] = 0.6479×0.1 + 0.6966×0.0100 = 0.0648+0.0070 = <span class="res">0.0718</span>
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Output Gate & Hidden State</div>
+        <div class="formula-box">
+oₜ = σ([0.19+0.2, 0.07−0.2]) = σ([0.39, −0.13]) = [<span class="res">0.5963, 0.4675</span>]
+hₜ = oₜ⊙tanh(cₜ) = [0.5963×tanh(0.4622), 0.4675×tanh(0.0718)]
+   = [0.5963×0.4338, 0.4675×0.0717] = [<span class="res">0.2587, 0.0335</span>]
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="example-head">📊 Example: Dense Layer + Softmax (from FAT Q5)</div>
+    <div class="example-body">
+      <p><strong>Input (flatten from CNN) → 3-unit dense layer → softmax</strong></p>
+      <p>W = [[0.2,0.4,0.6],[0.1,0.3,0.5],[0.7,0.8,0.9],[0.2,0.1,0.3]], b=[0.1,0.2,0.3]</p>
+      <div class="step-block"><div class="step-label">Dense Layer (ReLU activation)</div>
+        <div class="formula-box">
+Assume input x (after flatten) = [x₁, x₂, x₃, x₄]
+z = Wᵀ·x + b   (shape: 3)
+Apply ReLU: a = max(0, z)
+Then softmax: P(class i) = e^{aᵢ} / Σⱼ e^{aⱼ}   (sum = 1)
+        </div>
+      </div>
+      <div class="step-block"><div class="step-label">Softmax Example: z=[2.1, 0.5, 1.8]</div>
+        <div class="formula-box">
+e^2.1 = 8.166  e^0.5 = 1.649  e^1.8 = 6.050   sum = 15.865
+P = [8.166/15.865, 1.649/15.865, 6.050/15.865]
+  = [<span class="res">0.515, 0.104, 0.381</span>]   ← Class 1 has highest probability
+        </div>
+      </div>
+    </div>
+  </div>
+</div></div>
+
+<!-- Quick Reference Sheet -->
+<div class="topic">
+<div class="topic-header"><span class="topic-num">★</span><span class="topic-title">Quick Formula Reference Sheet – Print This!</span></div>
+<div class="topic-body">
+  <div class="formula-box">
+═══════════════════════════════════════════════════════════
+          CSE4006 DEEP LEARNING – FORMULA CHEAT SHEET
+═══════════════════════════════════════════════════════════
+
+MODULE 1 – MATH
+  Sigmoid:      σ(x) = 1/(1+e⁻ˣ)     σ'(x) = σ(1−σ)
+  Tanh:         tanh(x) = (eˣ−e⁻ˣ)/(eˣ+e⁻ˣ)   tanh'= 1−tanh²
+  ReLU:         max(0,x)   derivative: 1(x>0)
+  Softmax:      P(i) = eˣⁱ / Σeˣʲ
+  MSE:          ½Σ(y−ŷ)²
+  Cross-Entropy: −Σy·log(ŷ)
+  GD update:    θ ← θ − η·∇J
+
+MODULE 2 – BACKPROP
+  δ_output = (t−o)·o·(1−o)        [MSE + sigmoid]
+  δ_hidden = h·(1−h)·Σ(δ_next·w)
+  Δw = η·δ·input
+  L1: +λ·sign(w)   L2: +2λw  (added to gradient)
+
+MODULE 3 – CNN
+  Conv output: floor((in+2p−k)/s)+1
+  Conv params: (k·k·C_in+1)·C_out
+  FC params:   (n_in+1)·n_out
+  BN: x̂=(x−μ)/√(σ²+ε), y=γx̂+β
+
+MODULE 4 – RNN/LSTM
+  RNN:  hₜ = tanh(Wxh·xₜ + Whh·h_{t-1})
+  LSTM: fₜ=σ(Wf·z+bf)  iₜ=σ(Wi·z+bi)
+        g̃=tanh(Wc·z+bc)  cₜ=f⊙c_{t-1}+i⊙g̃
+        oₜ=σ(Wo·z+bo)  hₜ=o⊙tanh(cₜ)
+  GRU:  zₜ=σ(Wz·z)  rₜ=σ(Wr·z)
+        h̃=tanh(W·[r⊙h_{t-1},xₜ])
+        hₜ=(1−z)⊙h_{t-1}+z⊙h̃
+
+MODULE 5 – ATTENTION
+  Score:   eᵢⱼ = vᵀ·tanh(W₁·sⱼ₋₁+W₂·hᵢ)
+  Weight:  αᵢⱼ = softmax(eᵢⱼ)
+  Context: cⱼ = Σᵢ αᵢⱼ·hᵢ
+
+MODULE 6 – VAE/GAN
+  ELBO: E[log p(x|z)] − KL[q(z|x)‖p(z)]
+  Repar: z = μ + σ·ε,  ε~N(0,I)
+  GAN: min_G max_D [E[logD(x)]+E[log(1−D(G(z)))]]
+
+ADAM OPTIMIZER
+  mₜ = β₁mₜ₋₁ + (1−β₁)g       [β₁=0.9]
+  vₜ = β₂vₜ₋₁ + (1−β₂)g²      [β₂=0.999]
+  m̂ = m/(1−β₁ᵗ)   v̂ = v/(1−β₂ᵗ)
+  θ ← θ − η·m̂/(√v̂+ε)          [ε=10⁻⁸]
+
+INCEPTION BLOCK (28×28×192 input)
+  Branch 1: 1×1 conv → 64ch
+  Branch 2: 1×1→3×3 → 128ch
+  Branch 3: 1×1→5×5 → 32ch
+  Branch 4: MaxPool→1×1 → 32ch
+  Concat → 28×28×256
+═══════════════════════════════════════════════════════════
+  </div>
+</div></div>
+
+<!-- Master Question Bank -->
+<div class="topic">
+<div class="topic-header"><span class="topic-num">★★</span><span class="topic-title">Complete FAT/CAT Question Bank – Most Likely Questions</span></div>
+<div class="topic-body">
+  <div class="qbank"><div class="qbank-title">🔴 HIGH PROBABILITY – APPEAR EVERY EXAM</div><ol>
+    <li>Tensor operations: dot product, Hadamard product, matrix inverse [10M]</li>
+    <li>Backpropagation on a 3-layer network with specified weights, 1–2 iterations [10M]</li>
+    <li>Logistic regression or linear regression on tabular data, predict for new input [10M]</li>
+    <li>Gradient descent on a function, 2 iterations [10M]</li>
+    <li>CNN architecture: output sizes and parameter counts [10M]</li>
+    <li>RNN forward propagation with softmax output, identify highest probability [10M]</li>
+    <li>LSTM cell computation: forget gate, input gate, cell state, output gate [10M]</li>
+  </ol></div>
+
+  <div class="qbank" style="background:var(--tag-red);border-color:#fca5a5"><div class="qbank-title" style="color:#7f1d1d">🟠 MEDIUM PROBABILITY</div><ol style="color:#7f1d1d">
+    <li>Explain all 5 activation functions with formulas, graphs, derivatives [10M]</li>
+    <li>L1 vs L2 regularization; why L1 is a feature selector [10M]</li>
+    <li>Adam optimizer: all 4 steps + interpretation [10M]</li>
+    <li>BPTT: working + challenges (vanishing gradient, complexity) [10M]</li>
+    <li>Inception block: draw, compute output depth + parameters [5M+5M]</li>
+    <li>Transfer learning: feature extraction vs fine-tuning [6M] + Batch normalisation [4M]</li>
+    <li>Bi-LSTM vs Bi-RNN for long-term dependencies [10M]</li>
+    <li>GAN for face generation with diverse expressions [10M]</li>
+    <li>VAE: blurry outputs – 2 methods to fix [10M]</li>
+    <li>Bahdanau attention mechanism – need + all steps [10M]</li>
+    <li>YOLO: single-pass vs two-stage detection [10M]</li>
+  </ol></div>
+
+  <div class="qbank" style="background:var(--tag-purple);border-color:#c4b5fd"><div class="qbank-title" style="color:#4c1d95">🟡 ALSO PREPARE</div><ol style="color:#4c1d95">
+    <li>Perceptron learning for OR/AND gate (1 epoch) [10M]</li>
+    <li>ANN: calculate total learnable parameters per layer [6M]</li>
+    <li>Perceptron vs MLP [4M]</li>
+    <li>GRU architecture + comparison with LSTM [5M+5M]</li>
+    <li>Dropout and Early Stopping [5M+5M]</li>
+    <li>VGG vs GoogleNet vs ResNet comparison [5M]</li>
+    <li>ResNet: how skip connections solve deep network training [5M]</li>
+    <li>Scale matrix to [0,1] and compute Hadamard product [4M]</li>
+    <li>Multi-task deep learning concept [5M]</li>
+  </ol></div>
+</div></div>
+
+</section>
+
+<div style="text-align:center;padding:3rem 0;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:2rem">
+  <strong>CSE4006 Deep Learning · VIT-AP University · All 6 Modules · Complete Study Notes</strong><br>
+  <span>Syllabus version 4.1 · Cover everything in this file for 10/10 in FAT & CAT</span>
+</div>
+</div><!-- /main -->
+
+<script>
+// Highlight active nav item on scroll
+const allLinks = document.querySelectorAll('#sidebar a');
+const allSections = document.querySelectorAll('section[id], .topic[id]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  allSections.forEach(s => { if(window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  allLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+  });
+}, { passive: true });
+</script>
+</body>
+</html>
