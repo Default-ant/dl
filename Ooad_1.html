@@ -458,4 +458,45 @@
                     STRATEGY DESIGN PATTERN BLUEPRINT
 ================================================================================
 
- 
+ +------------------------------------------+
+ |                 Context                  |
+ +------------------------------------------+
+ | - systemStatus: String = "ACTIVE"        |
+ | - activeStrategy: Strategy         *  . . . . . . . . . . . +
+ +------------------------------------------| : [Ownership Dot]
+ | + executeTask(payload: String): void     | v
+ | + setStrategy(s: Strategy): void         |==================================
+ +------------------------------------------+      <<interface>> Strategy
+                                            +----------------------------------+
+                                            |                                  |
+                                            +----------------------------------+
+                                            | + performTask(p: String): void   |
+                                            +----------------------------------+
+                                                              ^
+                                                              |
+                                                    [Realization Contract]
+                                                   (Dashed, Hollow Triangle)
+                                                              |
+                                           +------------------+------------------+
+                                           |                                     |
+                       +---------------------------------------+ +---------------------------------------+
+                       |           ConcreteStrategyA           | |           ConcreteStrategyB           |
+                       +---------------------------------------+ +---------------------------------------+
+                       |                                       | |                                       |
+                       +---------------------------------------+ +---------------------------------------+
+                       | + performTask(p: String): void        | | + performTask(p: String): void        |
+                       +---------------------------------------+ +---------------------------------------+
+                       | {algorithmMode = "DES"}               | | {algorithmMode = "AES"}               |
+                       | {executionLimit <= 500}               | | {executionLimit <= 2000}              |
+                       +---------------------------------------+ +---------------------------------------+
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Unified Modeling Language Reference Portal. Curated from Object Management Group de facto standards.</p>
+    </footer>
+
+</body>
+</html>
