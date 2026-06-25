@@ -1,199 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CSE4006 Deep Learning – Complete Study Notes</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f7f8fa;
-  --surface:#fff;
-  --border:#e2e6ea;
-  --accent:#1a56db;
-  --accent2:#0e9f6e;
-  --accent3:#e3a008;
-  --accent4:#e02424;
-  --accent5:#7e3af2;
-  --text:#111928;
-  --muted:#6b7280;
-  --code-bg:#1e2430;
-  --code-text:#e2e8f0;
-  --tag-blue:#dbeafe;
-  --tag-green:#d1fae5;
-  --tag-yellow:#fef3c7;
-  --tag-red:#fee2e2;
-  --tag-purple:#ede9fe;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.7}
-a{color:var(--accent);text-decoration:none}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UML 2.5 Metamodel & Modeling Principles Portal</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --primary: #0f172a;
+            --primary-accent: #2563eb;
+            --border: #e2e8f0;
+            --sketch-bg: #1e293b;
+            --sketch-text: #f1f5f9;
+        }
 
-/* ── SIDEBAR NAV ── */
-#sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;z-index:200;padding:1rem 0 2rem}
-#sidebar-brand{padding:.8rem 1.2rem 1rem;font-size:.85rem;font-weight:700;color:var(--accent);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
-#sidebar-brand span{font-size:1.1rem}
-.nav-module{padding:.55rem 1.2rem;display:block;font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;cursor:pointer;transition:.15s}
-.nav-module:hover,.nav-module.active{color:var(--accent);background:#eff6ff}
-.nav-sub{padding:.35rem 1.2rem .35rem 2rem;display:block;font-size:.78rem;color:var(--muted);cursor:pointer;transition:.15s;border-left:2px solid transparent;margin-left:.6rem}
-.nav-sub:hover,.nav-sub.active{color:var(--accent);border-left-color:var(--accent);background:#eff6ff}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-/* ── MAIN ── */
-#main{margin-left:240px;padding:2rem 2.5rem 6rem}
-.page-title{font-family:'Merriweather',serif;font-size:2rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
-.page-sub{color:var(--muted);font-size:.9rem;margin-bottom:2.5rem;padding-bottom:1.5rem;border-bottom:2px solid var(--border)}
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 0;
+        }
 
-/* ── MODULE ── */
-.module{margin-bottom:3rem}
-.module-header{background:linear-gradient(135deg,var(--accent) 0%,#3b82f6 100%);color:#fff;padding:1.2rem 1.8rem;border-radius:10px;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
-.module-header.m2{background:linear-gradient(135deg,var(--accent2),#34d399)}
-.module-header.m3{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
-.module-header.m4{background:linear-gradient(135deg,var(--accent4),#f87171)}
-.module-header.m5{background:linear-gradient(135deg,var(--accent5),#a78bfa)}
-.module-header.m6{background:linear-gradient(135deg,#0f766e,#14b8a6)}
-.module-num{font-size:2rem;font-weight:700;opacity:.6;font-family:'Merriweather',serif}
-.module-title{font-size:1.3rem;font-weight:700}
-.module-meta{font-size:.8rem;opacity:.85;margin-top:.2rem}
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-accent);
+        }
 
-/* ── TOPIC ── */
-.topic{background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:1.2rem;overflow:hidden}
-.topic-header{padding:.9rem 1.3rem;background:#f9fafb;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.7rem;cursor:pointer}
-.topic-num{background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:.2rem .5rem;border-radius:4px}
-.topic-title{font-weight:600;font-size:.95rem;flex:1}
-.topic-body{padding:1.3rem}
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
 
-/* ── THEORY / DEFINITION ── */
-.definition{background:var(--tag-blue);border-left:4px solid var(--accent);padding:.9rem 1.1rem;border-radius:0 6px 6px 0;margin:.8rem 0;font-size:.9rem}
-.formula-box{background:var(--code-bg);color:var(--code-text);font-family:'JetBrains Mono',monospace;font-size:.83rem;padding:1rem 1.3rem;border-radius:7px;margin:.8rem 0;overflow-x:auto;line-height:2}
-.formula-box .cmt{color:#94a3b8}
-.formula-box .hi{color:#fbbf24;font-weight:600}
-.formula-box .res{color:#4ade80;font-weight:600}
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-/* ── QUESTION BANK ── */
-.qbank{background:var(--tag-yellow);border:1px solid #fcd34d;border-radius:7px;padding:1rem 1.2rem;margin:1rem 0}
-.qbank-title{font-weight:700;font-size:.82rem;color:#92400e;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
-.qbank ol{padding-left:1.3rem}
-.qbank li{font-size:.88rem;margin-bottom:.35rem;color:#78350f}
+        nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            background-color: #1e293b;
+            padding: 0.75rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #334155;
+        }
 
-/* ── NUMERIC EXAMPLE ── */
-.example{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;margin:1rem 0}
-.example-head{background:#16a34a;color:#fff;padding:.6rem 1rem;font-weight:700;font-size:.82rem;display:flex;align-items:center;gap:.5rem;border-radius:7px 7px 0 0}
-.example-body{padding:1.1rem}
-.step-block{background:#fff;border:1px solid #d1fae5;border-radius:6px;padding:.75rem 1rem;margin:.6rem 0}
-.step-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:#16a34a;font-weight:700;text-transform:uppercase;margin-bottom:.3rem}
+        nav-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
 
-/* ── KEY POINTS ── */
-.key-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem;margin:.8rem 0}
-.key-card{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:.9rem 1rem}
-.key-card h4{font-size:.85rem;font-weight:700;margin-bottom:.4rem;color:var(--accent)}
+        nav-bar a:hover {
+            color: white;
+            background-color: var(--primary-accent);
+        }
 
-/* ── COMPARISON TABLE ── */
-.tbl-wrap{overflow-x:auto;margin:.8rem 0}
-table{width:100%;border-collapse:collapse;font-size:.85rem}
-th{background:#f3f4f6;font-weight:700;padding:.6rem .9rem;border:1px solid var(--border);text-align:left}
-td{padding:.55rem .9rem;border:1px solid var(--border);vertical-align:top}
-tr:nth-child(even) td{background:#f9fafb}
-.good{color:#16a34a;font-weight:600}
-.bad{color:#dc2626;font-weight:600}
-.num{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:#1d4ed8}
-.bold-cell{font-weight:700;color:var(--accent)}
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
 
-/* ── TAGS ── */
-.tag{display:inline-block;font-size:.7rem;padding:.15rem .5rem;border-radius:12px;font-weight:600;margin:.1rem}
-.tag-blue{background:var(--tag-blue);color:#1e40af}
-.tag-green{background:var(--tag-green);color:#065f46}
-.tag-yellow{background:var(--tag-yellow);color:#92400e}
-.tag-red{background:var(--tag-red);color:#991b1b}
-.tag-purple{background:var(--tag-purple);color:#4c1d95}
+        section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+        }
 
-/* ── CALLOUT ── */
-.callout{border-radius:7px;padding:.9rem 1.1rem;margin:.8rem 0;display:flex;gap:.7rem;align-items:flex-start}
-.callout.info{background:#eff6ff;border:1px solid #bfdbfe}
-.callout.warn{background:#fffbeb;border:1px solid #fde68a}
-.callout.tip{background:#f0fdf4;border:1px solid #bbf7d0}
-.callout-icon{font-size:1rem;flex-shrink:0;margin-top:.1rem}
-.callout-text{font-size:.88rem}
+        section h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--primary-accent);
+            padding-left: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
 
-p{margin:.6rem 0}
-ul,ol{padding-left:1.4rem;margin:.5rem 0}
-li{margin-bottom:.3rem;font-size:.9rem}
-strong{font-weight:700}
-h4{margin:.9rem 0 .4rem;font-size:.95rem;color:var(--text)}
-h5{margin:.7rem 0 .3rem;font-size:.88rem;color:var(--accent);font-weight:700}
-section{scroll-margin-top:20px}
+        p {
+            margin-bottom: 1rem;
+        }
 
-@media(max-width:768px){
-  #sidebar{display:none}
-  #main{margin-left:0;padding:1rem}
-}
-</style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .card {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.25rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            color: var(--primary-accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+        }
+
+        .sketch-box {
+            background-color: var(--sketch-bg);
+            color: var(--sketch-text);
+            font-family: "Courier New", Courier, monospace;
+            padding: 1.25rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid #334155;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-alt {
+            background-color: #fef08a;
+            color: #854d0e;
+        }
+
+        .highlight-box {
+            background-color: #eff6ff;
+            border-left: 4px solid var(--primary-accent);
+            padding: 1rem;
+            border-radius: 0 6px 6px 0;
+            margin: 1.5rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+            background-color: white;
+        }
+    </style>
 </head>
 <body>
 
-<!-- ═══════════════ SIDEBAR ═══════════════ -->
-<nav id="sidebar">
-  <div id="sidebar-brand"><span>📘</span> CSE4006 DL Notes</div>
-  <a class="nav-module" href="#m1">MODULE 1 · Math & ML</a>
-  <a class="nav-sub" href="#m1-linalg">Linear Algebra</a>
-  <a class="nav-sub" href="#m1-prob">Probability</a>
-  <a class="nav-sub" href="#m1-optim">Gradient Optimization</a>
-  <a class="nav-sub" href="#m1-nn">Neural Networks Intro</a>
-  <a class="nav-sub" href="#m1-act">Activation Functions</a>
+    <header>
+        <h1>UML 2.5 Metamodel &amp; Modeling Principles Portal</h1>
+        <p>A comprehensive architectural reference guide mapping the core building blocks, structural rules, and foundational modeling principles of software design.</p>
+    </header>
 
-  <a class="nav-module" href="#m2">MODULE 2 · Deep Networks</a>
-  <a class="nav-sub" href="#m2-mlp">MLP & Forward Pass</a>
-  <a class="nav-sub" href="#m2-backprop">Backpropagation</a>
-  <a class="nav-sub" href="#m2-reg">Regularization</a>
-  <a class="nav-sub" href="#m2-optim">Optimizers</a>
+    <nav-bar>
+        <a href="#things">1. Things</a>
+        <a href="#relationships">2. Relationships</a>
+        <a href="#diagrams">3. Diagrams</a>
+        <a href="#rules">4. Semantic Rules</a>
+        <a href="#principles">5. 4 Principles</a>
+        <a href="#pattern">6. Strategy Pattern Blueprint</a>
+    </nav-bar>
 
-  <a class="nav-module" href="#m3">MODULE 3 · CNNs</a>
-  <a class="nav-sub" href="#m3-conv">Convolution Layers</a>
-  <a class="nav-sub" href="#m3-arch">Architectures</a>
-  <a class="nav-sub" href="#m3-transfer">Transfer Learning</a>
-  <a class="nav-sub" href="#m3-bn">Batch Norm</a>
+    <div class="container">
 
-  <a class="nav-module" href="#m4">MODULE 4 · RNNs</a>
-  <a class="nav-sub" href="#m4-rnn">RNN & BPTT</a>
-  <a class="nav-sub" href="#m4-lstm">LSTM</a>
-  <a class="nav-sub" href="#m4-gru">GRU</a>
-  <a class="nav-sub" href="#m4-birnn">Bidirectional</a>
+        <!-- SECTION 1: THINGS -->
+        <section id="things">
+            <h2>📁 Pillar 1: Things (UML Vocabulary)</h2>
+            <p>Things are the primary architectural abstractions and first-class citizens used to populate system blueprints. They represent the static nouns, dynamic verbs, organizational units, and explanatory context of a design model.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Structural Things</h3>
+                    <p>Static nouns modeling conceptual or physical layouts.</p>
+                    <ul>
+                        <li><strong>Class:</strong> Set of objects sharing attributes and operations.</li>
+                        <li><strong>Interface:</strong> Non-implemented public service contract.</li>
+                        <li><strong>Use Case:</strong> Sequence of goal-driven system actions.</li>
+                        <li><strong>Component:</strong> Modular, physical execution block.</li>
+                        <li><strong>Node:</strong> Computational hardware environment.</li>
+                        <li><strong>Collaboration:</strong> Cooperative pattern of roles.</li>
+                        <li><strong>Active Class:</strong> Class owning concurrent threads.</li>
+                        <li><strong>Artifact:</strong> Physical file (e.g., jar, dll) deployed to a Node.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Behavioral Things</h3>
+                    <p>Dynamic verbs representing pathways and state shifts.</p>
+                    <ul>
+                        <li><strong>Interaction:</strong> Chronological messages passed among lifelines.</li>
+                        <li><strong>State Machine:</strong> Specification tracking an object's discrete transitions over time.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Grouping &amp; Annotational</h3>
+                    <p>Modularity containers and descriptive remark units.</p>
+                    <ul>
+                        <li><strong>Package:</strong> Organizational mechanism to build distinct namespaces.</li>
+                        <li><strong>Note:</strong> Visually attached textual comments or constraints.</li>
+                    </ul>
+                </div>
+            </div>
 
-  <a class="nav-module" href="#m5">MODULE 5 · Detection</a>
-  <a class="nav-sub" href="#m5-enc">Encoder-Decoder</a>
-  <a class="nav-sub" href="#m5-att">Attention</a>
-  <a class="nav-sub" href="#m5-rcnn">RCNN / YOLO</a>
+            <div class="sketch-box">
+[ STRUCTURAL &amp; ANNOTATIONAL THINGS - HANDWRITTEN SKETCHES ]
 
-  <a class="nav-module" href="#m6">MODULE 6 · VAE & GAN</a>
-  <a class="nav-sub" href="#m6-ae">Autoencoders</a>
-  <a class="nav-sub" href="#m6-vae">VAE</a>
-  <a class="nav-sub" href="#m6-gan">GAN</a>
+     +-----------------------+              O ProvidedInterface
+     |       ClassName       |              |
+     +-----------------------+              +---[ Lollipop / Socket ]
+     | - attribute: Type     |              |
+     +-----------------------+             ( ) RequiredInterface
+     | + operation(): Type   |
+     +-----------------------+              +=============================+
+                                            |       ActiveClassName       |
+          <<component>>                     +=============================+
+     +-----------------------+
+     |     ComponentName     |              / \  ActorName
+     +-----------------------+             /   \
+                                            / \
+         ( UseCaseName )
+                                            +-----------------------------+
+                                            |      Package/Folder         |
+         + - - - - - - - - - +              +---+-------------------------+
+         : CollaborationName :                  |                         |
+         + - - - - - - - - - +                  |       PackageName       |
+                                                |                         |
+         +-------------------+                  +-------------------------+
+         | Note / Comment    |
+         | Block             |o [Fold]
+         +-------------------+
+            </div>
+        </section>
 
-  <a class="nav-module" href="#numericals">🔢 NUMERICALS</a>
-  <a class="nav-sub" href="#n-tensor">Tensor Ops</a>
-  <a class="nav-sub" href="#n-gd">Gradient Descent</a>
-  <a class="nav-sub" href="#n-bp">Backpropagation</a>
-  <a class="nav-sub" href="#n-cnn">CNN Params</a>
-  <a class="nav-sub" href="#n-rnn">RNN/LSTM</a>
-</nav>
+        <!-- SECTION 2: RELATIONSHIPS -->
+        <section id="relationships">
+            <h2>🔗 Pillar 2: Relationships (The Connectors)</h2>
+            <p>Relationships act as the semantic links in UML, connecting individual vocabulary elements to construct meaningful architectures.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Relationship Type</th>
+                        <th>Semantic Meaning</th>
+                        <th>Graphical Notation Sketch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dependency</strong></td>
+                        <td>A temporary "uses" relation. Changes to the supplier alter the client.</td>
+                        <td><code>[Client] - - - - - - - - - - &gt; [Supplier]</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Association</strong></td>
+                        <td>A persistent structural link. One object holds a long-term field reference to another.</td>
+                        <td><code>[Class A] ----------------------- [Class B]</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aggregation</strong></td>
+                        <td>A weak whole-part "has-a" relationship; lifetimes are independent.</td>
+                        <td><code>[Container] &lt;&gt;------------------ [Part]</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Composition</strong></td>
+                        <td>A strong parent-child "part-of" relationship; lifetimes are tightly bound.</td>
+                        <td><code>[Container] &lt;#&gt;----------------- [Part]</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Generalization</strong></td>
+                        <td>Static "is-a" inheritance. The subclass inherits parent attributes and methods.</td>
+                        <td><code>[Subclass] ----------------------|&gt; [Superclass]</code></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Realization</strong></td>
+                        <td>Contract implementation. A concrete class executes the signatures of an interface.</td>
+                        <td><code>[Class] - - - - - - - - - - - - -|&gt; [Interface]</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-<!-- ═══════════════ MAIN ═══════════════ -->
-<div id="main">
-<div class="page-title">CSE4006 · Deep Learning</div>
-<div class="page-sub">VIT-AP University · Complete Study Notes · All 6 Modules · FAT/CAT Ready</div>
+        <!-- SECTION 3: DIAGRAMS -->
+        <section id="diagrams">
+            <h2>📊 Pillar 3: Diagrams (The Visual Projections)</h2>
+            <p>UML 2.5 defines exactly 14 official diagrams to represent static blueprints and dynamic operational system flows.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3><span class="badge">Structural Diagrams (7)</span></h3>
+                    <p>Focus on static structure independent of timeline-ordered execution.</p>
+                    <ol>
+                        <li><strong>Class Diagram:</strong> Compile-time types and static relations.</li>
+                        <li><strong>Object Diagram:</strong> SNAPSHOT of active instances at runtime.</li>
+                        <li><strong>Package Diagram:</strong> System grouping schemas and folder modularity.</li>
+                        <li><strong>Component Diagram:</strong> Physical modular elements and interface linkages.</li>
+                        <li><strong>Deployment Diagram:</strong> Physical execution hardware mapping.</li>
+                        <li><strong>Composite Structure:</strong> Decomposed classifier parts and runtime ports.</li>
+                        <li><strong>Profile Diagram:</strong> Custom domain stereotypes and tagging schemas.</li>
+                    </ol>
+                </div>
+                <div class="card">
+                    <h3><span class="badge badge-alt">Behavioral Diagrams (7)</span></h3>
+                    <p>Focus on execution, processes, interactions, and state changes over time.</p>
+                    <ol>
+                        <li><strong>Use Case Diagram:</strong> Actors, interactions, and system scope.</li>
+                        <li><strong>Activity Diagram:</strong> Workflows modeling concurrent and parallel actions.</li>
+                        <li><strong>State Machine:</strong> Event-driven lifecycle transitions of a classifier.</li>
+                        <li><strong>Sequence Diagram:</strong> Chronological messages passed between lifelines.</li>
+                        <li><strong>Communication:</strong> Structural layout emphasizing message flow path.</li>
+                        <li><strong>Interaction Overview:</strong> Flowchart containing nested interaction loops.</li>
+                        <li><strong>Timing Diagram:</strong> Focuses on precise state durations on time axes.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
 
-<!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     MODULE 1
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-<section id="m1" class="module">
-<div class="module-header">
-  <div class="module-num">1</div>
-  <div><div class="module-title">Applied Math & ML Basics</div><div class="module-meta">7 hours · Linear Algebra · Probability · Gradient Optimization · Neural Network Intro · Activation Functions</div></div>
-</div>
+        <!-- SECTION 4: RULES -->
+        <section id="rules">
+            <h2>⚙️ Semantic Rules &amp; Extensibility</h2>
+            <p>Models achieve well-formedness by adhering to structural validation rules and incorporating standard extension properties.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Access Control Visibilities</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Marker</th>
+                                <th>Visibility Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>+</code></td>
+                                <td><strong>Public:</strong> Visible to all classes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>-</code></td>
+                                <td><strong>Private:</strong> Visible only inside the class.</td>
+                            </tr>
+                            <tr>
+                                <td><code>#</code></td>
+                                <td><strong>Protected:</strong> Accessible by derived subclasses.</td>
+                            </tr>
+                            <tr>
+                                <td><code>~</code></td>
+                                <td><strong>Package:</strong> Accessible inside the same package.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card">
+                    <h3>Extensibility Framework</h3>
+                    <ul>
+                        <li><strong>Stereotypes:</strong> Wrapped in guillemets <code>&lt;&lt;stereotype&gt;&gt;</code> to create custom vocabulary derived from base elements.</li>
+                        <li><strong>Tagged Values:</strong> Written inside braces <code>{key = value}</code> to append project metadata (author, version, target build).</li>
+                        <li><strong>Constraints:</strong> Set rules inside braces <code>{rule}</code> using natural language or Object Constraint Language (OCL).</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>Formal Multiplicity Boundaries:</strong><br>
+                        M = { x ∈ Z | lower &le; x &le; upper }<br>
+                        <em>Example limit constraint:</em> <code>{0 &le; invoiceCount &le; 10000}</code>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<!-- Linear Algebra -->
-<div class="topic" id="m1-linalg">
-<div class="topic-header"><span class="topic-num">1.1</span><span class="topic-title">Linear Algebra – Scalars, Vectors, Matrices, Tensors & Operations</span></div>
-<div class="topic-body">
+        <!-- SECTION 5: PRINCIPLES -->
+        <section id="principles">
+            <h2>💡 The Four Principles of Modeling</h2>
+            <p>These core tenets dictate how software-intensive systems should be systematically analyzed, abstracted, and constructed.</p>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>Principle 1: Choice of Model Impact</h3>
+                    <p>The choice of what models to create has a profound influence on how a problem is attacked and how a solution is shaped. Algorithmic vs. Object-Oriented styles produce completely different visual worlds.</p>
+                </div>
+                <div class="card">
+                    <h3>Principle 2: Flexible Precision</h3>
+                    <p>Every model may be expressed at different levels of precision. High-level maps align business stakeholders, while detailed specifications guide coders with exact attribute and signature details.</p>
+                </div>
+                <div class="card">
+                    <h3>Principle 3: Grounded in Reality</h3>
+                    <p>The best models are connected to reality. Simplified abstractions must preserve direct traceability and mapping to concrete, compilable execution classes, databases, and physical architectures.</p>
+                </div>
+                <div class="card">
+                    <h3>Principle 4: No Single Model is Sufficient</h3>
+                    <p>No single model is sufficient. Complex systems must be viewed through distinct, independent dimensions (e.g., the 5-View Architecture: Use Case, Design, Process, Implementation, and Deployment views).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: PATTERN -->
+        <section id="pattern">
+            <h2>🏆 Architectural Pattern: Strategy Design Pattern</h2>
+            <p>The blueprint below demonstrates how structural things, visibilities, relationships, metadata tags, and semantic constraints interact to form a clean system design.</p>
+            
+            <div class="sketch-box">
+================================================================================
+                    STRATEGY DESIGN PATTERN BLUEPRINT
+================================================================================
+
+ opic-body">
   <div class="key-grid">
     <div class="key-card"><h4>Scalar</h4><p>A single number. No shape. Example: learning rate η = 0.01</p></div>
     <div class="key-card"><h4>Vector</h4><p>1-D array of numbers. Shape (n,). Example: input feature x = [0.5, 0.8, 0.3]</p></div>
