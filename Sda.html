@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Design and Architecture - Detailed Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            border-bottom: 2px solid #34495e;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 40px;
+            border-bottom: 1px solid #bdc3c7;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #16a085;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .diagram-text {
+            background-color: #f4f6f7;
+            border: 1px dashed #7f8c8d;
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre;
+            overflow-x: auto;
+        }
+        strong {
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Software Design and Architecture Solutions</h1>
+
+    <h2>Module 1</h2>
+    
+    <h3>Q) Discuss various process of Design process & phases and an example of any case study?</h3>
+    <p>The software design process is a systematic series of steps that transform user requirements into a blueprint for constructing software. It bridges the gap between what the system needs to do (requirements) and how it will do it (implementation).</p>
+    <strong>Phases of the Design Process:</strong>
+    <ol>
+        <li><strong>Requirements Understanding:</strong> Analyzing the SRS (Software Requirements Specification) to understand functional and non-functional needs.</li>
+        <li><strong>Architectural Design (High-Level Design):</strong> Defining the overall structure of the system, identifying main components (subsystems/modules), and their interactions.</li>
+        <li><strong>Detailed Design (Low-Level Design):</strong> Refining the architectural components into detailed data structures, algorithms, and class-level interfaces.</li>
+        <li><strong>Interface Design:</strong> Designing internal interfaces between modules and external interfaces (UI and APIs).</li>
+        <li><strong>Database/Data Design:</strong> Structuring the data models, schemas, and file systems.</li>
+    </ol>
+    <strong>Case Study Example: ATM System</strong>
+    <ul>
+        <li><strong>Architectural Phase:</strong> The system is divided into a Client module (ATM machine interface), a Central Server module (transaction routing), and a Database module (Bank records).</li>
+        <li><strong>Detailed Phase:</strong> The Client module is further designed into PIN verification algorithms, cash counting logic, and UI flow.</li>
+        <li><strong>Interface Design:</strong> The UI screen flows for withdrawing cash are designed, alongside the network protocols for securely transmitting the PIN to the bank server.</li>
+    </ul>
+
+    <h3>Q) Explain about design viewpoints of software with a neat sketch diagram.</h3>
+    <p>Software architecture is too complex to be represented by a single diagram. Viewpoints are used to represent the system from the perspective of different stakeholders (e.g., developers, users, system administrators). The most standard model is <strong>Kruchten’s "4+1" View Model</strong>.</p>
+    <ul>
+        <li><strong>Logical View:</strong> Focuses on functional requirements. Represents the object-oriented breakdown of the system (Classes, Objects, Packages). <em>Stakeholders: End-users, Analysts.</em></li>
+        <li><strong>Process View:</strong> Focuses on dynamic aspects, runtime behavior, concurrency, and performance. <em>Stakeholders: System integrators, Developers.</em></li>
+        <li><strong>Development View (Implementation View):</strong> Focuses on the static organization of software modules, libraries, and files in the development environment. <em>Stakeholders: Programmers, Software Managers.</em></li>
+        <li><strong>Physical View (Deployment View):</strong> Focuses on how software components are mapped to hardware infrastructure (servers, networks, topologies). <em>Stakeholders: System Engineers, Operators.</em></li>
+        <li><strong>+1 (Scenarios / Use Case View):</strong> This view ties the other four together by illustrating architectural decisions through a small set of important use cases.</li>
+    </ul>
+    <div class="diagram-text">
+       [Logical View]  &lt;---&gt;  [Process View]
+             \                   /
+              \                 /
+               [ +1 Use Cases]
+              /                 \
+             /                   \
+[Development View] &lt;---&gt; [Physical View]
+    </div>
+
+    <h3>Q) Explain how quality attributes are measured and assessed in a Software design Model?</h3>
+    <p>Quality attributes (non-functional requirements) such as performance, security, reliability, and maintainability are crucial for software success. They are measured using specific metrics and assessed using structured evaluation methods.</p>
+    <strong>Measurement (Metrics):</strong>
+    <ul>
+        <li><strong>Performance:</strong> Measured via Response Time (milliseconds per request) and Throughput (transactions per second).</li>
+        <li><strong>Reliability:</strong> Measured via MTBF (Mean Time Between Failures) and MTTR (Mean Time To Repair).</li>
+        <li><strong>Maintainability:</strong> Measured via Cyclomatic Complexity (code paths), Lines of Code, and modular coupling/cohesion scores.</li>
+    </ul>
+    <strong>Assessment Methods:</strong>
+    <ul>
+        <li><strong>ATAM (Architecture Tradeoff Analysis Method):</strong> A structured process for evaluating architectures against quality attributes. It involves identifying architectural approaches, creating quality attribute utility trees, and analyzing tradeoffs (e.g., higher security might lower performance).</li>
+        <li><strong>CBAM (Cost Benefit Analysis Method):</strong> Builds on ATAM by adding economic analysis to the architectural decisions.</li>
+        <li><strong>Simulation and Prototyping:</strong> Building vertical slices of the architecture to benchmark performance or security under load.</li>
+        <li><strong>Expert Reviews:</strong> Peer reviews of design documents and UML models against known best practices.</li>
+    </ul>
+
+    <h2>Module 2</h2>
+    
+    <h3>Q) Explain the basic principles of Jackson structured programming (JSP).</h3>
+    <p>Jackson Structured Programming (JSP) is a method for structured programming developed by Michael A. Jackson. The core principle is that the structure of the program should match the structure of the data it processes.</p>
+    <strong>Basic Principles:</strong>
+    <ol>
+        <li><strong>Data-Driven Structure:</strong> The design begins by analyzing and mapping the input data structures and output data structures.</li>
+        <li><strong>Three Fundamental Constructs:</strong> JSP uses only three basic structures to model data and programs:
+            <ul>
+                <li><em>Sequence:</em> Execution of one part after another.</li>
+                <li><em>Iteration:</em> Repetition of a part (loops).</li>
+                <li><em>Selection:</em> Choosing between alternative parts (if-else).</li>
+            </ul>
+        </li>
+        <li><strong>Tree Diagrams:</strong> Both data and program structures are represented using hierarchical tree diagrams.</li>
+        <li><strong>Merging Structures:</strong> The program structure is derived by merging the input data tree and the output data tree to find structural correspondences. Discrepancies between input and output structures are known as "structure clashes" (e.g., order clash, boundary clash) and are resolved using techniques like program inversion.</li>
+    </ol>
+
+    <h3>Q) Summarize the overall process of Jackson System development (JSD).</h3>
+    <p>Jackson System Development (JSD) is an extension of JSP scaled up to entire system life-cycles. It is a linear process that focuses heavily on modeling the real-world domain before worrying about software functionality.</p>
+    <strong>Overall Process (Three Main Stages):</strong>
+    <ol>
+        <li><strong>Modeling Stage (The "What"):</strong> The real-world entities (objects) that the system must interact with are identified along with the actions (events) they perform or experience in time sequence. These are modeled using entity structure diagrams.</li>
+        <li><strong>Network Stage (The "How"):</strong> The system is modeled as a network of communicating sequential processes. Each real-world entity from the modeling stage becomes a software process. New processes are added to handle input collection, output generation, and internal interactions. The communication happens via data streams or state vector inspections.</li>
+        <li><strong>Implementation Stage (The "Execution"):</strong> The conceptual network of concurrent processes is transformed into a practical, executable system on standard hardware. This involves scheduling processes, transforming data streams into standard I/O, and writing the procedural code (often using JSP principles).</li>
+    </ol>
+
+    <h3>Q) Describe the how stepwise and incremental strategy are used in Software design.</h3>
+    <p>These two strategies are fundamental for managing complexity in software design.</p>
+    <ul>
+        <li><strong>Stepwise Refinement (Top-Down Design):</strong> Developed by Niklaus Wirth, this strategy starts with a high-level, abstract view of what the software must do. This major function is then repeatedly broken down (refined) into smaller, more detailed sub-functions. Each step adds more operational detail until the design is specific enough to be coded. It ensures that the overall architecture is sound before getting bogged down in low-level details.</li>
+        <li><strong>Incremental Strategy (Bottom-Up or Iterative):</strong> Instead of designing the whole system at once, the system is designed, implemented, and delivered in small, usable pieces (increments). The first increment provides core functionality. Subsequent increments add new features or improve existing ones based on feedback. This allows for early delivery of value, easier testing of smaller components, and flexibility in adapting to changing requirements.</li>
+    </ul>
+    <p><em>In practice, modern design often combines both:</em> using stepwise refinement to structure an individual increment, while using an incremental approach to build the overall system over time.</p>
+
+    <h2>Module 3</h2>
+
+    <h3>Q) Discuss about the software designing involving SSADM in detail?</h3>
+    <p>SSADM (Structured Systems Analysis and Design Method) is a traditional, rigorous, and highly document-driven waterfall method widely used in government and large enterprise systems.</p>
+    <p><strong>Design in SSADM involves several strict stages:</strong></p>
+    <ol>
+        <li><strong>Feasibility Study & Requirements Analysis:</strong> Understanding the current system and defining the required business functions.</li>
+        <li><strong>Business System Options (BSO):</strong> Exploring different ways the system could be implemented (e.g., centralized vs. distributed) and choosing the best option.</li>
+        <li><strong>Logical Data Design:</strong> Creating detailed Entity-Relationship Diagrams (ERDs) and normalizing the data structures to the 3rd Normal Form (3NF).</li>
+        <li><strong>Logical Process Design:</strong> Using Data Flow Diagrams (DFDs) to map how data moves through the system, and Entity Life Histories (ELHs) to map how specific data entities change state over time.</li>
+        <li><strong>Physical Design:</strong> The logical models are translated into specific database schemas, hardware requirements, and physical program specifications. This phase defines the exact files, database tables, and batch/online processing routines.</li>
+    </ol>
+    <p><em>Strengths:</em> Highly rigorous, excellent documentation, minimizes risks in large teams. <em>Weaknesses:</em> Very slow, inflexible to changing requirements, can result in "analysis paralysis."</p>
+
+    <h3>Q) Explain the use of structured analysis and design technique (SADT) for organizational design practices?</h3>
+    <p>SADT (Structured Analysis and Design Technique) is a systems engineering methodology used for describing systems as a hierarchy of functions. It is highly effective for organizational design because it maps both automated software processes and human business workflows.</p>
+    <strong>Key Uses in Organizational Design:</strong>
+    <ul>
+        <li><strong>Top-Down Decomposition:</strong> SADT allows organizations to start with a high-level view of the enterprise (e.g., "Manufacture Product") and systematically break it down into sub-functions (e.g., "Procure Materials", "Assemble", "Ship").</li>
+        <li><strong>ICOM Methodology:</strong> Every activity block in SADT is analyzed based on four arrows:
+            <ul>
+                <li><strong>Inputs:</strong> Raw materials or data entering the process.</li>
+                <li><strong>Controls:</strong> Rules, policies, or standards guiding the process (e.g., ISO standards, business rules).</li>
+                <li><strong>Outputs:</strong> The finished product or processed data.</li>
+                <li><strong>Mechanisms:</strong> The people, machines, or software systems performing the task.</li>
+            </ul>
+        </li>
+        <li><strong>Workflow Clarity:</strong> By mapping processes using SADT actigrams (activity diagrams) and datagrams (data diagrams), organizations can identify bottlenecks, redundant roles, and areas where automation can replace manual mechanisms.</li>
+    </ul>
+
+    <h3>Q) Summarize the key characteristics of component based design?</h3>
+    <p>Component-Based Software Engineering (CBSE) or Component-Based Design (CBD) focuses on building software systems by composing pre-existing, reusable software components rather than writing everything from scratch.</p>
+    <strong>Key Characteristics:</strong>
+    <ul>
+        <li><strong>Reusability:</strong> Components are built once and used across multiple projects (e.g., a standard login module, a payment processing library).</li>
+        <li><strong>Standardized Interfaces:</strong> Components interact exclusively through well-defined, published interfaces. The internal workings of the component are hidden (Encapsulation).</li>
+        <li><strong>Independent Deployability:</strong> A component can be updated, replaced, or deployed independently without requiring the entire system to be recompiled, as long as the interface remains the same.</li>
+        <li><strong>Composability:</strong> Components can be easily assembled and integrated (composed) to create complex applications.</li>
+        <li><strong>Third-Party Assembly:</strong> Organizations can purchase Commercial Off-The-Shelf (COTS) components from third-party vendors and plug them into their architecture, saving development time and cost.</li>
+    </ul>
+
+    <h2>Module 4</h2>
+
+    <h3>Q) Explain about the pipe and filter architecture style with real time examples?</h3>
+    <p>The Pipe and Filter architecture style is a data-flow architecture where data is processed in discrete, independent steps.</p>
+    <ul>
+        <li><strong>Filters (Components):</strong> Independent entities that read a stream of input data, transform or process it, and produce a stream of output data. Filters do not know the identity of upstream or downstream components.</li>
+        <li><strong>Pipes (Connectors):</strong> The conduits that route data streams from one filter to the next. They act as buffers and synchronize the data flow.</li>
+    </ul>
+    <strong>Advantages:</strong> High reusability, easy to add/remove filters, supports concurrent processing.
+    <br><br>
+    <strong>Real-Time Examples:</strong>
+    <ul>
+        <li><strong>Unix/Linux Shell Commands:</strong> <code>cat access.log | grep "ERROR" | sort | uniq -c</code>. Here, commands like <code>grep</code> and <code>sort</code> are filters, and the <code>|</code> symbol represents the pipe.</li>
+        <li><strong>Compilers:</strong> Lexical analysis (filter) &rarr; Token stream (pipe) &rarr; Syntax analysis (filter) &rarr; Abstract Syntax Tree (pipe) &rarr; Semantic analysis &rarr; Code generation.</li>
+        <li><strong>Audio/Video Processing:</strong> Multimedia frameworks (like GStreamer) process raw video by passing it through noise-reduction filters, compression filters, and rendering filters via memory pipes.</li>
+    </ul>
+
+    <h3>Q) Explain the repository architecture style with an exemplary scenario?</h3>
+    <p>The Repository (or Data-Centered) architecture style is built around a central data structure (the repository) and a collection of independent components that operate on that central data. The components interact through the repository rather than communicating directly with one another.</p>
+    <strong>Exemplary Scenario: Modern Integrated Development Environment (IDE)</strong>
+    <ul>
+        <li><strong>The Repository:</strong> The Abstract Syntax Tree (AST), symbol tables, and the source code files stored in memory.</li>
+        <li><strong>The Independent Components:</strong>
+            <ul>
+                <li><em>Text Editor:</em> Modifies the source code and updates the AST.</li>
+                <li><em>Compiler/Interpreter:</em> Reads the AST to generate executable code.</li>
+                <li><em>Syntax Highlighter:</em> Reads the AST to color-code variables and keywords on the UI.</li>
+                <li><em>Linter/Code Analyzer:</em> Reads the AST to flag errors or stylistic issues.</li>
+            </ul>
+        </li>
+    </ul>
+    <p><strong>Why it works here:</strong> If the editor communicates directly with the compiler, linter, and highlighter every time a key is pressed, the system becomes tightly coupled and unmanageable. With a repository, all components simply observe and react to changes in the central AST, ensuring loose coupling and data consistency.</p>
+
+    <h3>Q) Discuss the layered architecture style and its main advantages?</h3>
+    <p>The Layered Architecture (or n-tier architecture) organizes the system into a hierarchy of conceptual layers. Each layer provides services to the layer immediately above it and consumes services from the layer immediately below it. In a strict layered architecture, a layer cannot bypass the layer directly beneath it.</p>
+    <strong>Common Tiers:</strong> Presentation Layer (UI) &rarr; Business Logic Layer &rarr; Data Access Layer &rarr; Database Layer.
+    <br><br>
+    <strong>Main Advantages:</strong>
+    <ul>
+        <li><strong>Separation of Concerns:</strong> Different layers handle different responsibilities (e.g., UI designers can work on the presentation layer without touching database SQL).</li>
+        <li><strong>Maintainability:</strong> Changes are localized. If you switch from an Oracle database to PostgreSQL, you only need to update the Data Access Layer; the Business and UI layers remain unaffected.</li>
+        <li><strong>Reusability:</strong> Lower layers can be reused by multiple higher layers. For example, a single Business Logic layer can support a Web UI layer, a Mobile App UI layer, and an external API layer.</li>
+        <li><strong>Testability:</strong> Layers can be easily mocked and tested in isolation.</li>
+    </ul>
+
+    <h2>Module 5</h2>
+
+    <h3>Q) Discuss the main guidelines to consider and designing a user interface architecture. Design various user interface templates for online ticket booking 
