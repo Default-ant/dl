@@ -231,4 +231,86 @@
 
     <h2>Module 5</h2>
 
-    <h3>Q) Discuss the main guidelines to consider and designing a user interface architecture. Design various user interface templates for online ticket booking 
+    <h3>Q) Discuss the main guidelines to consider and designing a user interface architecture. Design various user interface templates for online ticket booking application?</h3>
+    <p><strong>Main Guidelines for UI Architecture:</strong></p>
+    <ul>
+        <li><strong>User-Centricity:</strong> Architecture must support the workflow of the end-user, minimizing cognitive load and keystrokes.</li>
+        <li><strong>Consistency:</strong> Maintain consistent navigation, typography, and control behaviors across all screens.</li>
+        <li><strong>Separation of UI from Logic (MVC/MVVM):</strong> Ensure the UI architecture is decoupled from business logic so interface changes don't break the backend.</li>
+        <li><strong>Responsiveness and Feedback:</strong> The architecture must support asynchronous operations to keep the UI unblocked (e.g., showing a loading spinner while querying databases).</li>
+        <li><strong>Accessibility (a11y):</strong> Design architectural support for screen readers, keyboard navigation, and high-contrast modes.</li>
+    </ul>
+    
+    <p><strong>UI Templates for Online Ticket Booking Application:</strong></p>
+    <ol>
+        <li><strong>Home/Search Template:</strong> Contains the main branding, navigation bar, and a prominent search widget (Source, Destination, Date, Number of Passengers) with a "Search" call-to-action.</li>
+        <li><strong>Search Results Template:</strong> Displays a list/grid of available options (flights, buses, movies). Includes filtering/sorting sidebars (by price, duration, time) and summary cards for each option.</li>
+        <li><strong>Seat Selection Template:</strong> A graphical, interactive map of the layout (plane seating, theatre layout) allowing users to click available seats, with a real-time price calculator docked at the bottom.</li>
+        <li><strong>Passenger/User Details Template:</strong> A form-based template to collect names, contact info, and special requests. Includes form validation and error state displays.</li>
+        <li><strong>Payment & Checkout Template:</strong> A secure layout summarizing the itinerary and cost breakdown, accompanied by various payment gateway integrations (Credit Card, UPI, Wallets).</li>
+        <li><strong>Confirmation Template:</strong> A post-transaction screen displaying the PNR/Booking ID, QR code for scanning, and options to download or email the ticket.</li>
+    </ol>
+
+    <h3>Q) List out the various design rules for the user interface architecture.</h3>
+    <p>The standard design rules for UI architecture are largely derived from <strong>Ben Shneiderman’s Eight Golden Rules of Interface Design</strong>:</p>
+    <ol>
+        <li><strong>Strive for consistency:</strong> Consistent sequences of actions, identical terminology, and consistent color/layout should be used throughout.</li>
+        <li><strong>Enable frequent users to use shortcuts:</strong> Provide abbreviations, function keys, and hidden commands (like Ctrl+C/Ctrl+V) for expert users to increase pace of interaction.</li>
+        <li><strong>Offer informative feedback:</strong> For every operator action, there should be some system feedback (e.g., button click animation, success toast message).</li>
+        <li><strong>Design dialog to yield closure:</strong> Sequences of actions should be organized into groups with a beginning, middle, and end (e.g., checkout process with a clear "Success" final page).</li>
+        <li><strong>Offer simple error handling:</strong> Design the system so the user cannot make a serious error. If an error is made, the system should detect it and offer simple, comprehensible instructions for recovery.</li>
+        <li><strong>Permit easy reversal of actions:</strong> Features like "Undo" relieve anxiety and encourage exploration of unfamiliar options.</li>
+        <li><strong>Support internal locus of control:</strong> Make users the initiators of actions rather than the responders. Users should feel they are in charge of the system.</li>
+        <li><strong>Reduce short-term memory load:</strong> Keep displays simple, consolidate multiple pages, and do not force the user to remember information from one screen to the next.</li>
+    </ol>
+
+    <h3>Q) Explain the architecture structures used for shared information systems.</h3>
+    <p>Shared information systems (like enterprise databases, cloud storage, or collaborative tools) require architectures that can handle multiple concurrent users while maintaining data consistency and integrity.</p>
+    <strong>Key Architectural Structures:</strong>
+    <ul>
+        <li><strong>Client-Server Architecture:</strong> The most common structure. Data is centralized on a powerful server (or server cluster), and multiple thin or thick clients request access. The server manages concurrency locks, transactions, and security policies.</li>
+        <li><strong>Peer-to-Peer (P2P) Architecture:</strong> Data is distributed across all nodes in the network. There is no central server. Systems use consensus algorithms or distributed hash tables (DHT) to locate and share information. Useful for file sharing and blockchain.</li>
+        <li><strong>Blackboard Architecture:</strong> Used for complex, non-deterministic problem-solving. A central "blackboard" holds the shared data state. Various independent "knowledge sources" (specialized modules) watch the blackboard and update it when they have new information (e.g., speech recognition systems).</li>
+        <li><strong>Publish-Subscribe (Event-Driven) Architecture:</strong> Data producers (publishers) push information to an event bus or message broker. Consumers (subscribers) who are interested in that data receive it asynchronously. Excellent for real-time shared information (like stock tickers or chat apps).</li>
+        <li><strong>Database-Centric / Shared-Nothing Architecture:</strong> In high-scale systems, the shared information structure uses sharding or replication (Shared-Nothing) where nodes have their own memory and disk, communicating only via high-speed networks to ensure high availability and partition tolerance (CAP theorem considerations).</li>
+    </ul>
+
+    <h2>Module 6</h2>
+
+    <h3>Q) Describe architectural design patterns and their purpose.</h3>
+    <p><strong>Architectural Design Patterns</strong> are proven, reusable solutions to common, recurring problems in software architecture. Unlike lower-level software design patterns (like Gang of Four patterns which deal with class/object structures), architectural patterns dictate the high-level structural organization of the entire system.</p>
+    <strong>Purpose:</strong>
+    <ul>
+        <li><strong>Standardization:</strong> They provide a common vocabulary for developers. Saying "We are using an MVC architecture" instantly communicates the system's structure to other engineers.</li>
+        <li><strong>Risk Reduction:</strong> Using battle-tested structures reduces the likelihood of catastrophic systemic failures regarding scalability, performance, or security.</li>
+        <li><strong>Speed of Development:</strong> Patterns provide templates and guidelines, preventing teams from "reinventing the wheel."</li>
+        <li><strong>Meeting Quality Attributes:</strong> Specific patterns are chosen to guarantee specific non-functional requirements. (e.g., Microservices pattern is chosen for high scalability and fault tolerance).</li>
+    </ul>
+
+    <h3>Q) Discuss common industrial applications of software architecture and design rules.</h3>
+    <p>Software architecture principles are applied across various industries to meet highly specialized domain requirements:</p>
+    <ul>
+        <li><strong>E-commerce and Retail (e.g., Amazon):</strong> Utilizes <em>Microservices Architecture</em>. This allows different teams to independently scale and deploy the shopping cart, inventory management, and payment gateways without bringing down the entire store.</li>
+        <li><strong>Automotive and Aerospace (e.g., Tesla, Boeing):</strong> Utilizes <em>Real-Time and Embedded Architectures</em>. Emphasizes strict timing constraints, fault-tolerance, and hardware redundancy to ensure critical systems (like brake deployment) never fail or lag.</li>
+        <li><strong>Banking and Finance:</strong> Utilizes <em>Event-Driven and Mainframe/Layered Architectures</em>. Focuses heavily on ACID compliance for transactions, security layers, and high-throughput messaging (like Apache Kafka) for high-frequency trading.</li>
+        <li><strong>Healthcare (e.g., Hospital Management Systems):</strong> Utilizes <em>Secure Layered Architectures</em>. The primary focus is on strict data privacy (HIPAA compliance), auditing, and interoperability standards (HL7/FHIR) between different medical sub-systems.</li>
+    </ul>
+
+    <h3>Q) Apply FACADE and decorator structural design patterns to online reservation systems.</h3>
+    <p>These two Gang of Four structural design patterns can vastly improve the design of an online reservation system.</p>
+    
+    <strong>1. Applying the FACADE Pattern:</strong>
+    <p><em>Problem:</em> To book a ticket, the client UI might have to interact with the InventorySystem (to lock a seat), PaymentGateway (to process credit cards), and NotificationService (to send an SMS). This creates tight coupling and complex client code.</p>
+    <p><em>Solution:</em> Create a <code>ReservationFacade</code> class. This class provides a single, simple method: <code>bookTicket(userDetails, paymentDetails, seatId)</code>. Internally, the Facade handles the complex choreography of contacting Inventory, Payment, and Notification. The client UI only interacts with the Facade, shielding it from subsystem complexity.</p>
+
+    <strong>2. Applying the DECORATOR Pattern:</strong>
+    <p><em>Problem:</em> A passenger can buy a basic ticket, or add various extras (Extra Luggage, Priority Boarding, In-Flight Meal, Insurance). Creating subclasses for every possible combination (e.g., <code>TicketWithMealAndLuggage</code>) causes a "class explosion."</p>
+    <p><em>Solution:</em> Use Decorators to add features dynamically at runtime. 
+        <br>1. Create a base <code>BasicTicket</code> object that implements a <code>Ticket</code> interface with a <code>getPrice()</code> method.
+        <br>2. Create decorator classes like <code>MealDecorator</code> and <code>LuggageDecorator</code> that wrap the base ticket. 
+        <br>3. When calculating the final price, the decorator calls the base <code>getPrice()</code> and adds its own fee.
+        <br><em>Result:</em> A single ticket object can be wrapped in multiple decorators at checkout dynamically, without altering the core <code>BasicTicket</code> class.
+    </p>
+
+</body>
+</html>
